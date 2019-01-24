@@ -812,7 +812,7 @@ def all_clients():
     LoggedInUser1 = usersInstance.checkUserRights(LoggedInUser)
     theReturnedClients = custInstance.get_all_clients()
     if g.username:
-        return render_template('view_clients.html', allTheClients=theReturnedClients,currentUser=LoggedInUser1)
+        return render_template('all_clients.html', allTheClients=theReturnedClients,currentUser=LoggedInUser1)
     return redirect(url_for('index'))
 
 @app.route('/all_the_clients/<int:client_id>', methods=['GET','DELETE'])
