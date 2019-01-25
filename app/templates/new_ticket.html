@@ -34,167 +34,201 @@
 <!-- Site wrapper -->
 <div class="wrapper">
 
-  <header class="main-header">
-    <!-- Logo -->
-    <a href="../../index2.html" class="logo">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>Zub</b>U</span>
-      <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Zubacx </b</span>
-    </a>
-    <!-- Header Navbar: style can be found in header.less -->
-    <nav class="navbar navbar-static-top">
-      <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </a>
+    <header class="main-header">
 
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-          <!-- User Account: style can be found in dropdown.less -->
-          <li class="dropdown user user-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs">Alexander Pierce</span>
-            </a>
-            <ul class="dropdown-menu">
-              <!-- User image -->
-              <li class="user-header">
-                <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
-                <p>
-                  Alexander Pierce - Web Developer
-                </p>
-              </li>
-              <!-- Menu Footer-->
-              <li class="user-footer">
-                <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
-                </div>
-                <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                </div>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </header>
+        <!-- Logo -->
+        <a href="../../index2.html" class="logo">
+         <!-- mini logo for sidebar mini 50x50 pixels -->
+         <span class="logo-mini"><b>Zub</b>U</span>
+         <!-- logo for regular state and mobile devices -->
+         <span class="logo-lg">
+           <img src="{{ url_for('static',filename='dist/img/ZubaCx_Logo.png') }}" height="40px" alt="">
+         </span>
+       </a>
+     
+         <!-- Header Navbar: style can be found in header.less -->
+         <nav class="navbar navbar-static-top">
+           <!-- Sidebar toggle button-->
+           <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+             <span class="sr-only">Toggle navigation</span>
+           </a>
+           <!-- Navbar Right Menu -->
+           <div class="navbar-custom-menu">
+             <ul class="nav navbar-nav">
+               <!-- User Account: style can be found in dropdown.less -->
+               <li class="dropdown user user-menu">
+                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                   <img src="{{ url_for('static',filename='dist/img/user2-160x160.jpg') }}" class="user-image" alt="User Image">
+                   <span class="hidden-xs">{{currentUser[3]}}</span>
+                 </a>
+                 <ul class="dropdown-menu">
+                   <!-- User image -->
+                   <li class="user-header">
+                     <img src="{{ url_for('static',filename='dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
+     
+                     <p>
+                         {{currentUser[3]}} - ({{currentUser[1]}} {{currentUser[2]}})
+                     </p>
+                   </li>
+                   <!-- Menu Footer-->
+                   <li class="user-footer">
+                     <div class="pull-left">
+                       <a href="#" class="btn btn-default btn-flat">Profile</a>
+                     </div>
+                     <div class="pull-right">
+                       <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                     </div>
+                   </li>
+                 </ul>
+               </li>
+             </ul>
+           </div>
+     
+         </nav>
+       </header>
 
   <!-- =============================================== -->
 
   <!-- Left side column. contains the sidebar -->
   <aside class="main-sidebar">
-    <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
-      <!-- Sidebar user panel -->
-      <div class="user-panel">
-        <div class="pull-left image">
-          <img src="{{ url_for('static',filename='dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
+      <!-- sidebar: style can be found in sidebar.less -->
+      <section class="sidebar">
+        <!-- Sidebar user panel -->
+        <div class="user-panel">
+          <div class="pull-left image">
+            <img src="{{ url_for('static',filename='dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
+          </div>
+          <div class="pull-left info">
+            <p>{{currentUser[3]}}</p>
+            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+          </div>
         </div>
-        <div class="pull-left info">
-          <p>Alexander Pierce</p>
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-        </div>
-      </div>
-
-      <!-- sidebar menu: : style can be found in sidebar.less -->
-      <ul class="sidebar-menu" data-widget="tree">
-        <li class="active">
-          <a href="{{ url_for('dashboard') }}">
-            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-          </a>
-        </li>
-                <li class="treeview">
-          <a href="#">
-            <i class="fa fa-hacker-news"></i>
-            <span>New</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-              <small class="label pull-right bg-green">new</small>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="{{ url_for('new_users') }}"><i class="fa fa-circle-o"></i> Add New User</a></li>
-            <li><a href="{{ url_for('new_ticket') }}"><i class="fa fa-circle-o"></i> Add New Ticket</a></li>
-            <li><a href="{{ url_for('new_customer') }}"><i class="fa fa-circle-o"></i> Add New Customer</a></li>
-            <li><a href="{{ url_for('new_engineer') }}"><i class="fa fa-circle-o"></i> Add New Engineer</a></li>
-            <li><a href="{{ url_for('new_equipment') }}"><i class="fa fa-circle-o"></i> Add New Equipment</a></li>
-            <li><a href="{{ url_for('new_workorder') }}"><i class="fa fa-circle-o"></i> Add New Work Order</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-street-view"></i>
-            <span>Views</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-              <small class="label pull-right bg-primary">views</small>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="/all_open_and_overdue_tickets"><i class="fa fa-circle-o"></i> All Tickets</a></li>
-            <li><a href="/open_and_overdue_tickets"><i class="fa fa-circle-o"></i> Open Tickets</a></li>
-            <li><a href="/closed_and_overdue_tickets"><i class="fa fa-circle-o"></i> Closed Tickets</a></li>
-            <li><a href="/low_priority_and_overdue_tickets"><i class="fa fa-circle-o"></i> Overdue Tickets</a></li>
-            <li><a href="/all_my_open_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Tickets</a></li>
-            <li><a href="/my_open_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Open Tickets</a></li>
-            <li><a href="/my_closed_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Closed Tickets</a></li>
-            <li><a href="/my_low_priority_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Overdue Tickets</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="{{ url_for('dashboard') }}">
-            <i class="fa fa-ticket"></i> <span>Tickets</span>
-          </a>
-        </li>
-        <li class="treeview">
-          <a href="/all_clients">
-            <i class="fa fa-user-o"></i> <span>Customers</span>
-          </a>
-        </li>
-        <li class="treeview">
-          <a href="/tasks">
-            <i class="fa fa-tasks"></i> <span>Tasks</span>
-          </a>
-        </li>
-        <li class="treeview">
-          <a href="/reports">
-            <i class="fa fa-file-pdf-o"></i> <span>Reports</span>
-          </a>
-        </li>
-        <li class="treeview">
-          <a href="{{ url_for('new_ticket') }}">
-            <i class="fa fa-ticket"></i> <span>Open Tickets</span>
-          </a>
-        </li>
-        <li>
-          <a href="pages/calendar.html">
-            <i class="fa fa-calendar"></i> <span>Calendar</span>
-            <span class="pull-right-container">
-              <small class="label pull-right bg-red">3</small>
-              <small class="label pull-right bg-blue">17</small>
-            </span>
-          </a>
-        </li>
-        <li>
-          <a href="pages/mailbox/mailbox.html">
-            <i class="fa fa-envelope"></i> <span>Mailbox</span>
-            <span class="pull-right-container">
-              <small class="label pull-right bg-yellow">12</small>
-              <small class="label pull-right bg-green">16</small>
-              <small class="label pull-right bg-red">5</small>
-            </span>
-          </a>
-        </li>
-      </ul>
-    </section>
-    <!-- /.sidebar -->
-  </aside>
+  
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        <ul class="sidebar-menu" data-widget="tree">
+          <li class="active">
+            <a href="{{ url_for('dashboard') }}">
+              <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+            </a>
+          </li>
+                  <li class="treeview">
+            <a href="#">
+              <i class="fa fa-hacker-news"></i>
+              <span>New</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+                <small class="label pull-right bg-green">new</small>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+                {% if currentUser[9] ==0:%} {% else:%}
+              <li><a href="{{ url_for('new_users') }}"><i class="fa fa-circle-o"></i> Add New User</a></li>
+              {%endif%} {% if currentUser[13] ==0:%} {% else:%}
+              <li><a href="{{ url_for('new_ticket') }}"><i class="fa fa-circle-o"></i> Add New Ticket</a></li>
+              {%endif%} {% if currentUser[23] ==0:%} {% else:%}
+              <li><a href="{{ url_for('new_customer') }}"><i class="fa fa-circle-o"></i> Add New Customer</a></li>
+              {%endif%} {% if currentUser[24] ==0:%} {% else:%}
+              <li><a href="{{ url_for('new_engineer') }}"><i class="fa fa-circle-o"></i> Add New Engineer</a></li>
+              {%endif%} {% if currentUser[25] ==0:%} {% else:%}
+              <li><a href="{{ url_for('new_equipment') }}"><i class="fa fa-circle-o"></i> Add New Equipment</a></li>
+              {%endif%} {% if currentUser[26] ==0:%} {% else:%}
+              <li><a href="{{ url_for('new_workorder') }}"><i class="fa fa-circle-o"></i> Add New Work Order</a></li>
+              {%endif%}
+            </ul>
+          </li>
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-street-view"></i>
+              <span>Views</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+                <small class="label pull-right bg-primary">views</small>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+                {% if currentUser[16] ==1:%}
+              <li><a href="/all_open_and_overdue_tickets"><i class="fa fa-circle-o"></i> All Tickets</a></li>
+              <li><a href="/open_and_overdue_tickets"><i class="fa fa-circle-o"></i> Open Tickets</a></li>
+              <li><a href="/closed_and_overdue_tickets"><i class="fa fa-circle-o"></i> Closed Tickets</a></li>
+              <li><a href="/low_priority_and_overdue_tickets"><i class="fa fa-circle-o"></i> Overdue Tickets</a></li>
+              <li><a href="/all_my_open_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Tickets</a></li>
+              <li><a href="/my_open_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Open Tickets</a></li>
+              <li><a href="/my_closed_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Closed Tickets</a></li>
+              <li><a href="/my_low_priority_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Overdue Tickets</a></li>
+              {% else:%} {% if currentUser[13] ==1:%}
+              <li><a href="/all_my_open_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Tickets</a></li>
+              <li><a href="/my_open_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Open Tickets</a></li>
+              <li><a href="/my_closed_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Closed Tickets</a></li>
+              <li><a href="/my_low_priority_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Overdue Tickets</a></li>
+              {% else:%} {%endif%} {%endif%}
+            </ul>
+          </li>
+          <li class="">
+            <a href="{{ url_for('view_all_tickets') }}">
+              <i class="fa fa-ticket"></i> <span>Tickets</span>
+            </a>
+          </li>
+          {% if currentUser[23] ==0:%}
+          <li class="">
+            <a href="/robot">
+              <i class="fa fa-user-o"></i> <span>Customers</span>
+            </a>
+            
+          </li>
+          {% else:%}
+          <li class="">
+              <a href="/all_clients">
+                <i class="fa fa-user-o"></i> <span>Customers</span>
+              </a>
+              
+            </li>
+            {% endif%}
+          <li class="">
+            <a href="/tasks">
+              <i class="fa fa-tasks"></i> <span>Tasks</span>
+            </a>
+          </li>
+          <li class="">
+            <a href="/reports">
+              <i class="fa fa-file-pdf-o"></i> <span>Reports</span>
+            </a>
+          </li>
+          {% if currentUser[13] ==0:%}
+          <li class="">
+            <a href="/robot">
+              <i class="fa fa-ticket"></i> <span>Open Tickets</span>
+            </a>
+          </li>
+          {% else:%}
+          <li class="">
+              <a href="{{ url_for('new_ticket') }}">
+                <i class="fa fa-ticket"></i> <span>Open Tickets</span>
+              </a>
+            </li>
+          {% endif%}
+          <li>
+            <a href="pages/calendar.html">
+              <i class="fa fa-calendar"></i> <span>Calendar</span>
+              <span class="pull-right-container">
+                <small class="label pull-right bg-red">3</small>
+                <small class="label pull-right bg-blue">17</small>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="pages/mailbox/mailbox.html">
+              <i class="fa fa-envelope"></i> <span>Mailbox</span>
+              <span class="pull-right-container">
+                <small class="label pull-right bg-yellow">12</small>
+                <small class="label pull-right bg-green">16</small>
+                <small class="label pull-right bg-red">5</small>
+              </span>
+            </a>
+          </li>
+        </ul>
+      </section>
+      <!-- /.sidebar -->
+    </aside>
 
   <!-- =============================================== -->
 
@@ -220,25 +254,25 @@
           <h3 class="box-title">New Ticket Information</h3>
         </div>
         <div class="box-body">
-          <form role="form">
+            {% include '_messages.html' %}
+          <form role="form" action="/add_ticket" method="POST">
             <div class="box-body">
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="CustomerFirstName">Ticket Assigned To</label>
-                    <select class="form-control">
-                      <option>option 1</option>
-                      <option>option 2</option>
-                      <option>option 3</option>
-                      <option>option 4</option>
-                      <option>option 5</option>
+                    <select class="form-control" name="ticket_assigned_to">
+                        <option selected>-None-</option>
+                        {% for eachEngineer in theEngineers%}
+                        <option>{{eachEngineer[0]}}</option>
+                        {% endfor%}
                     </select>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="CustomerLastName">Ticket Status</label>
-                    <select class="form-control">
+                    <select class="form-control" name="ticket_status">
                       <option>Open</option>
                       <option>Closed</option>
                       <option>Pending</option>
@@ -250,19 +284,18 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="CustomerProduct">Client Name</label>
-                    <select class="form-control">
-                      <option>option 1</option>
-                      <option>option 2</option>
-                      <option>option 3</option>
-                      <option>option 4</option>
-                      <option>option 5</option>
+                    <select class="form-control" name="ticket_client">
+                        <option selected>-None-</option>
+                        {% for eachClient in theClients%}
+                        <option>{{eachClient[0]}}</option>
+                        {% endfor%}
                     </select>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="SiteID">Site ID</label>
-                    <input type="text" class="form-control" placeholder="Enter Site ID">
+                    <input type="text" name="ticket_site_id" class="form-control" placeholder="Enter Site ID">
                   </div>
                 </div>
               </div>
@@ -270,18 +303,17 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="PONumber">PO Number</label>
-                    <input type="text" class="form-control" placeholder="Enter PO Number">
+                    <input type="text" name="ticket_po_number" class="form-control" placeholder="Enter PO Number">
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="CustomerAddress">Work Order Type</label>
-                    <select class="form-control">
-                      <option>option 1</option>
-                      <option>option 2</option>
-                      <option>option 3</option>
-                      <option>option 4</option>
-                      <option>option 5</option>
+                    <select class="form-control" name="ticket_wo_type">
+                        <option selected>-None-</option>
+                        {% for eachWorkOrderType in theWorkOrderTypes%}
+                        <option>{{eachWorkOrderType[0]}}</option>
+                        {% endfor%}
                     </select>
                   </div>
                 </div>
@@ -291,7 +323,7 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="CustomerProduct">Ticket Priority</label>
-                    <select class="form-control">
+                    <select class="form-control" name="ticket_priority">
                       <option>High</option>
                       <option>Medium</option>
                       <option>Low</option>
@@ -301,7 +333,7 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="TicketExpiresAfter">Ticket Expires After (Hours):</label>
-                    <input type="text" class="form-control" placeholder="Enter Ticket Expires After (Hours)">
+                    <input type="text" name="hours_to_add" class="form-control" placeholder="Enter Ticket Expires After (Hours)">
                   </div>
                 </div>
               </div>
@@ -310,7 +342,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="TicketReason">Ticket Reason</label>
-                    <textarea name="" id="" cols="30" rows="4" class="form-control"></textarea>
+                    <textarea name="ticket_reason" id="ticket_reason" cols="30" rows="4" class="form-control"></textarea>
                   </div>
                 </div>
               </div>
@@ -323,7 +355,7 @@
                       <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                       </div>
-                      <input type="text" class="form-control pull-right" id="datepicker1">
+                      <input type="text" name="ticket_planned_visit_date" class="form-control pull-right" id="datepicker1">
                     </div>
                   </div>
                 </div>
@@ -334,7 +366,7 @@
                       <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                       </div>
-                      <input type="text" class="form-control pull-right" id="datepicker2">
+                      <input type="text" name="ticket_actual_visit_date" class="form-control pull-right" id="datepicker2">
                     </div>
                   </div>
                 </div>
@@ -345,25 +377,25 @@
                       <div class="row">
                         <div class="col-md-3">
                           <label>
-                            <input type="checkbox">
+                            <input type="checkbox" name="ATM">
                             ATM
                           </label>
                         </div>
                         <div class="col-md-3">
                           <label>
-                            <input type="checkbox">
+                            <input type="checkbox" name="airport">
                             AIRPORT
                           </label>
                         </div>
                         <div class="col-md-3">
                           <label>
-                            <input type="checkbox">
+                            <input type="checkbox" name="telecom">
                             TELECOM
                           </label>
                         </div>
                         <div class="col-md-3">
                           <label>
-                            <input type="checkbox">
+                            <input type="checkbox" name="fleet">
                             FLEET
                           </label>
                         </div>
@@ -381,10 +413,7 @@
                   <button type="submit" class="btn btn-success btn-block">Submit</button>
                 </div>
                 <div class="col-md-3">
-                  <button type="submit" class="btn btn-primary btn-block">Submit & Add New</button>
-                </div>
-                <div class="col-md-3">
-                  <button type="submit" class="btn btn-dark btn-block">Cancel</button>
+                  <button type="submit" class="btn btn-dark btn-block" formaction="/dashboard" formnovalidate>Cancel</button>
                 </div>
               </div>
             </div>

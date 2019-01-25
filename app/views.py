@@ -244,7 +244,7 @@ def view_all_tickets():
     allTheTickets = ticketInstance.view_all_tickets()
     myTickets = ticketInstance.view_all_my_tickets(LoggedInUser)
     if g.username:
-        return render_template('dashboard.html', allTheTickets=allTheTickets, currentUser=LoggedInUser1,myTickets=myTickets)
+        return render_template('all_tickets.html', allTheTickets=allTheTickets, currentUser=LoggedInUser1,myTickets=myTickets)
     return redirect(url_for('index'))
 
 @app.route('/dashboard')
@@ -948,13 +948,10 @@ def get_tasks():
 def open_and_overdue_tickets():
     LoggedInUser = session['username']
     LoggedInUser1 = usersInstance.checkUserRights(LoggedInUser)
-    leftHeading = "Open Tickets"
-    rightHeading = "Due In 2 Hours"
     allMyLeftTickets = ticketInstance.view_all_closed_tickets(LoggedInUser)
-    allMyRightTickets = ticketInstance.view_all_tickets_due_in_2_hours(LoggedInUser)
     if g.username:
         return render_template('open_tickets.html', 
-        currentUser=LoggedInUser1,leftHead=leftHeading,rightHead=rightHeading, allMyLeftTickets=allMyLeftTickets,allMyRightTickets=allMyRightTickets)
+        currentUser=LoggedInUser1,allTheTickets=allMyLeftTickets)
     else:
         return render_template('index.html')
 
@@ -963,13 +960,10 @@ def open_and_overdue_tickets():
 def closed_and_overdue_tickets():
     LoggedInUser = session['username']
     LoggedInUser1 = usersInstance.checkUserRights(LoggedInUser)
-    leftHeading = "Closed Tickets"
-    rightHeading = "Due In 1 Hour"
     allMyLeftTickets = ticketInstance.view_all_closed_tickets(LoggedInUser)
-    allMyRightTickets = ticketInstance.view_all_tickets_due_in_1_hour(LoggedInUser)
     if g.username:
         return render_template('closed_tickets.html', 
-        currentUser=LoggedInUser1,leftHead=leftHeading,rightHead=rightHeading, allMyLeftTickets=allMyLeftTickets,allMyRightTickets=allMyRightTickets)
+        currentUser=LoggedInUser1, allMyLeftTickets=allMyLeftTickets)
     else:
         return render_template('index.html')
 
@@ -978,13 +972,10 @@ def closed_and_overdue_tickets():
 def low_priority_and_overdue_tickets():
     LoggedInUser = session['username']
     LoggedInUser1 = usersInstance.checkUserRights(LoggedInUser)
-    leftHeading = "Overdue Tickets"
-    rightHeading = "Low Priority Tickets"
     allMyLeftTickets = ticketInstance.view_all_overdue_tickets(LoggedInUser)
-    allMyRightTickets = ticketInstance.view_all_low_priority_tickets(LoggedInUser)
     if g.username:
         return render_template('overdue_tickets.html', 
-        currentUser=LoggedInUser1,leftHead=leftHeading,rightHead=rightHeading, allMyLeftTickets=allMyLeftTickets,allMyRightTickets=allMyRightTickets)
+        currentUser=LoggedInUser1,allTheTickets=allMyLeftTickets)
     else:
         return render_template('index.html')
 
@@ -993,13 +984,10 @@ def low_priority_and_overdue_tickets():
 def my_open_and_overdue_tickets():
     LoggedInUser = session['username']
     LoggedInUser1 = usersInstance.checkUserRights(LoggedInUser)
-    leftHeading = "My Open Tickets"
-    rightHeading = "My Tickets Due In 2 Hours"
     allMyLeftTickets = ticketInstance.view_all_my_open_tickets(LoggedInUser)
-    allMyRightTickets = ticketInstance.view_all_my_tickets_due_in_2_hours(LoggedInUser)
     if g.username:
         return render_template('my_open_tickets.html', 
-        currentUser=LoggedInUser1,leftHead=leftHeading,rightHead=rightHeading, allMyLeftTickets=allMyLeftTickets,allMyRightTickets=allMyRightTickets)
+        currentUser=LoggedInUser1,allTheTickets=allMyLeftTickets)
     else:
         return render_template('index.html')
 
@@ -1008,13 +996,10 @@ def my_open_and_overdue_tickets():
 def my_closed_and_overdue_tickets():
     LoggedInUser = session['username']
     LoggedInUser1 = usersInstance.checkUserRights(LoggedInUser)
-    leftHeading = "My Closed Tickets"
-    rightHeading = "My Tickets Due In 1 Hour"
     allMyLeftTickets = ticketInstance.view_all_my_closed_tickets(LoggedInUser)
-    allMyRightTickets = ticketInstance.view_all_my_tickets_due_in_1_hour(LoggedInUser)
     if g.username:
         return render_template('my_closed_tickets.html', 
-        currentUser=LoggedInUser1,leftHead=leftHeading,rightHead=rightHeading, allMyLeftTickets=allMyLeftTickets,allMyRightTickets=allMyRightTickets)
+        currentUser=LoggedInUser1,allTheTickets=allMyLeftTickets)
     else:
         return render_template('index.html')
 
@@ -1023,13 +1008,10 @@ def my_closed_and_overdue_tickets():
 def my_low_priority_and_overdue_tickets():
     LoggedInUser = session['username']
     LoggedInUser1 = usersInstance.checkUserRights(LoggedInUser)
-    leftHeading = "My Overdue Tickets"
-    rightHeading = "My Low Priority Tickets"
     allMyLeftTickets = ticketInstance.view_all_my_overdue_tickets(LoggedInUser)
-    allMyRightTickets = ticketInstance.view_all_my_low_priority_tickets(LoggedInUser)
     if g.username:
         return render_template('my_overdue_tickets.html', 
-        currentUser=LoggedInUser1,leftHead=leftHeading,rightHead=rightHeading, allMyLeftTickets=allMyLeftTickets,allMyRightTickets=allMyRightTickets)
+        currentUser=LoggedInUser1,allTheTickets=allMyLeftTickets)
     else:
         return render_template('index.html')
 
@@ -1038,13 +1020,10 @@ def my_low_priority_and_overdue_tickets():
 def all_open_and_overdue_tickets():
     LoggedInUser = session['username']
     LoggedInUser1 = usersInstance.checkUserRights(LoggedInUser)
-    leftHeading = "All Open Tickets"
-    rightHeading = "All Closed Tickets"
     allMyLeftTickets = ticketInstance.view_all_closed_tickets(LoggedInUser)
-    allMyRightTickets = ticketInstance.view_all_open_tickets(LoggedInUser)
     if g.username:
         return render_template('all_tickets.html', 
-        currentUser=LoggedInUser1,leftHead=leftHeading,rightHead=rightHeading, allMyLeftTickets=allMyLeftTickets,allMyRightTickets=allMyRightTickets)
+        currentUser=LoggedInUser1,allTheTickets=allMyLeftTickets)
     else:
         return render_template('index.html')
 
@@ -1052,13 +1031,10 @@ def all_open_and_overdue_tickets():
 def all_my_open_and_overdue_tickets():
     LoggedInUser = session['username']
     LoggedInUser1 = usersInstance.checkUserRights(LoggedInUser)
-    leftHeading = "All My Open Tickets"
-    rightHeading = "All My Tickets Due In 2 Hours"
     allMyLeftTickets = ticketInstance.view_all_my_open_tickets(LoggedInUser)
-    allMyRightTickets = ticketInstance.view_all_my_closed_tickets(LoggedInUser)
     if g.username:
         return render_template('my_tickets.html', 
-        currentUser=LoggedInUser1,leftHead=leftHeading,rightHead=rightHeading, allMyLeftTickets=allMyLeftTickets,allMyRightTickets=allMyRightTickets)
+        currentUser=LoggedInUser1,allTheTickets=allMyLeftTickets)
     else:
         return render_template('index.html')
 
