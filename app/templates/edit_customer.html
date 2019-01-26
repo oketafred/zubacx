@@ -454,7 +454,7 @@
                     <div class="col-md-3">
                       <button
                         type="submit"
-                        class="btn btn-dark btn-block"
+                        class="btn btn-default btn-block"
                         formaction="/dashboard"
                         formnovalidate
                       >
@@ -491,7 +491,8 @@
     <script src="../../bower_components/fastclick/lib/fastclick.js"></script>
     <!-- AdminLTE App -->
     <script src="../../dist/js/adminlte.min.js"></script>
-
+    <!-- Parsely JS -->
+    <script src="{{ url_for('static',filename='parsley/parsley.min.js') }}"></script>
     <script>
       $(document).ready(function() {
         $(".sidebar-menu").tree();
