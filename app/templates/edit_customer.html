@@ -52,58 +52,74 @@
   <body class="hold-transition fixed skin-blue sidebar-mini">
     <!-- Site wrapper -->
     <div class="wrapper">
-        <header class="main-header">
+      <header class="main-header">
+        <!-- Logo -->
+        <a href="../../index2.html" class="logo">
+          <!-- mini logo for sidebar mini 50x50 pixels -->
+          <span class="logo-mini"><b>Zub</b>U</span>
+          <!-- logo for regular state and mobile devices -->
+          <span class="logo-lg">
+            <img
+              src="{{ url_for('static',filename='dist/img/ZubaCx_Logo.png') }}"
+              height="40px"
+              alt=""
+            />
+          </span>
+        </a>
 
-            <!-- Logo -->
-            <a href="../../index2.html" class="logo">
-             <!-- mini logo for sidebar mini 50x50 pixels -->
-             <span class="logo-mini"><b>Zub</b>U</span>
-             <!-- logo for regular state and mobile devices -->
-             <span class="logo-lg">
-               <img src="{{ url_for('static',filename='dist/img/ZubaCx_Logo.png') }}" height="40px" alt="">
-             </span>
-           </a>
-         
-             <!-- Header Navbar: style can be found in header.less -->
-             <nav class="navbar navbar-static-top">
-               <!-- Sidebar toggle button-->
-               <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-                 <span class="sr-only">Toggle navigation</span>
-               </a>
-               <!-- Navbar Right Menu -->
-               <div class="navbar-custom-menu">
-                 <ul class="nav navbar-nav">
-                   <!-- User Account: style can be found in dropdown.less -->
-                   <li class="dropdown user user-menu">
-                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                       <img src="{{ url_for('static',filename='dist/img/user2-160x160.jpg') }}" class="user-image" alt="User Image">
-                       <span class="hidden-xs">{{currentUser[3]}}</span>
-                     </a>
-                     <ul class="dropdown-menu">
-                       <!-- User image -->
-                       <li class="user-header">
-                         <img src="{{ url_for('static',filename='dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
-         
-                         <p>
-                             {{currentUser[3]}} - ({{currentUser[1]}} {{currentUser[2]}})
-                         </p>
-                       </li>
-                       <!-- Menu Footer-->
-                       <li class="user-footer">
-                         <div class="pull-left">
-                           <a href="#" class="btn btn-default btn-flat">Profile</a>
-                         </div>
-                         <div class="pull-right">
-                           <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                         </div>
-                       </li>
-                     </ul>
-                   </li>
-                 </ul>
-               </div>
-         
-             </nav>
-           </header>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top">
+          <!-- Sidebar toggle button-->
+          <a
+            href="#"
+            class="sidebar-toggle"
+            data-toggle="push-menu"
+            role="button"
+          >
+            <span class="sr-only">Toggle navigation</span>
+          </a>
+          <!-- Navbar Right Menu -->
+          <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+              <!-- User Account: style can be found in dropdown.less -->
+              <li class="dropdown user user-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <img
+                    src="{{ url_for('static',filename='dist/img/user2-160x160.jpg') }}"
+                    class="user-image"
+                    alt="User Image"
+                  />
+                  <span class="hidden-xs">{{ currentUser[3] }}</span>
+                </a>
+                <ul class="dropdown-menu">
+                  <!-- User image -->
+                  <li class="user-header">
+                    <img
+                      src="{{ url_for('static',filename='dist/img/user2-160x160.jpg') }}"
+                      class="img-circle"
+                      alt="User Image"
+                    />
+
+                    <p>
+                      {{ currentUser[3] }} - ({{ currentUser[1] }}
+                      {{ currentUser[2] }})
+                    </p>
+                  </li>
+                  <!-- Menu Footer-->
+                  <li class="user-footer">
+                    <div class="pull-left">
+                      <a href="#" class="btn btn-default btn-flat">Profile</a>
+                    </div>
+                    <div class="pull-right">
+                      <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
 
       <!-- =============================================== -->
 
@@ -343,79 +359,77 @@
               <h3 class="box-title">Edit Customer Information</h3>
             </div>
             <div class="box-body">
-                {% include '_messages.html'%}
-              <form action="/edit_client/{{allTheClients[0]}}" method="POST">
+              {% include '_messages.html'%}
+              <form action="/edit_client/{{ allTheClients[0] }}" method="POST">
                 <div class="box-body">
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label for="CustomerName"
-                          >Customer Name</label
-                        >
+                        <label for="CustomerName">Customer Name</label>
                         <input
                           type="text"
                           class="form-control"
-                          name="customer_name_edit" 
-                          value="{{allTheClients[1]}}"
+                          name="customer_name_edit"
+                          value="{{ allTheClients[1] }}"
                           placeholder="Enter Customer Name"
                         />
                       </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="CustomerProduct">Customer Product</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              name="customer_product_edit" 
-                              value="{{allTheClients[2]}}"
-                              placeholder="Enter Customer Product"
-                            />
-                          </div>
+                      <div class="form-group">
+                        <label for="CustomerProduct">Customer Product</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="customer_product_edit"
+                          value="{{ allTheClients[2] }}"
+                          placeholder="Enter Customer Product"
+                        />
+                      </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="CustomerProduct"
-                              >Customer Physical Address</label
-                            >
-                            <input
-                              type="text"
-                              class="form-control"
-                              name="customer_address_edit" 
-                              value="{{allTheClients[3]}}"
-                              placeholder="Enter Customer Physical Address"
-                            />
-                          </div>
+                      <div class="form-group">
+                        <label for="CustomerProduct"
+                          >Customer Physical Address</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="customer_address_edit"
+                          value="{{ allTheClients[3] }}"
+                          placeholder="Enter Customer Physical Address"
+                        />
+                      </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="CustomerProduct">Customer Phone</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              name="customer_phone_edit" 
-                              value="{{allTheClients[5]}}"
-                              placeholder="Enter Customer Phone"
-                            />
-                          </div>
+                      <div class="form-group">
+                        <label for="CustomerProduct">Customer Phone</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="customer_phone_edit"
+                          value="{{ allTheClients[5] }}"
+                          placeholder="Enter Customer Phone"
+                        />
+                      </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="CustomerAddress"
-                              >Customer Email Address</label
-                            >
-                            <input
-                              type="email"
-                              class="form-control"
-                              name="customer_email_edit" 
-                              value="{{allTheClients[4]}}"
-                              placeholder="Enter Customer Email Address"
-                            />
-                          </div>
+                      <div class="form-group">
+                        <label for="CustomerAddress"
+                          >Customer Email Address</label
+                        >
+                        <input
+                          type="email"
+                          class="form-control"
+                          name="customer_email_edit"
+                          value="{{ allTheClients[4] }}"
+                          placeholder="Enter Customer Email Address"
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -428,12 +442,22 @@
                       </button>
                     </div>
                     <div class="col-md-3">
-                      <button type="submit" class="btn btn-danger btn-block" formnovalidate formaction="/all_the_clients/{{allTheClients[0]}}">
+                      <button
+                        type="submit"
+                        class="btn btn-danger btn-block"
+                        formnovalidate
+                        formaction="/all_the_clients/{{ allTheClients[0] }}"
+                      >
                         Delete
                       </button>
                     </div>
                     <div class="col-md-3">
-                      <button type="submit" class="btn btn-dark btn-block" formaction="/dashboard" formnovalidate>
+                      <button
+                        type="submit"
+                        class="btn btn-dark btn-block"
+                        formaction="/dashboard"
+                        formnovalidate
+                      >
                         Cancel
                       </button>
                     </div>
