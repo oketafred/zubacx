@@ -426,6 +426,12 @@
                                 eachTicket[5]
                               }}</span>
                             </td>
+                            {% elif eachTicket[5] =="Open":%}
+                            <td>
+                              <span class="label label-warning">{{
+                                eachTicket[5]
+                              }}</span>
+                            </td>
                             {% else:%}
                             <td>
                               <span class="label label-danger">{{
