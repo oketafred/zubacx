@@ -295,8 +295,18 @@
             </li>
             {% else:%}
             <li class="">
-              <a href="/all_Engineers">
+              <a href="/all_clients">
                 <i class="fa fa-user-o"></i> <span>Customers</span>
+              </a>
+            </li>
+            <li class="">
+              <a href="/all_engineers">
+                <i class="fa fa-user-o"></i> <span>Engineers</span>
+              </a>
+            </li>
+            <li class="">
+              <a href="/all_users">
+                <i class="fa fa-user-o"></i> <span>System Users</span>
               </a>
             </li>
             {% endif%}
@@ -405,75 +415,70 @@
                         <tbody>
                           {% for eachEngineer in allTheEngineers%}
                           <tr>
-                            <td>{{ eachEngineer[0] }} </td>
+                            <td>{{ eachEngineer[0] }}</td>
                             <td>{{ eachEngineer[1] }} {{ eachEngineer[2] }}</td>
                             <td>{{ eachEngineer[3] }}</td>
                             <td>{{ eachEngineer[4] }}</td>
                             <td>{{ eachEngineer[8] }}</td>
                             <td>
-                                {% if eachEngineer[5] == 1: %}
-                                <label>
-                                    <input
-                                        type="checkbox"
-                                        name="engineer_field_ATM"
-                                        checked
-                                        disabled
-                                    />
-                                    ATM
-                                </label>
-                                {% else: %}
-                                <label>
-                                    <input
-                                        type="checkbox"
-                                        name="engineer_field_ATM"
-                                        disabled
-                                    />
-                                    ATM
-                                </label>
-                                {% endif %}
-                            
-                                {% if eachEngineer[6] == 1: %}
-                                <label>
-                                    <input
-                                        type="checkbox"
-                                        name="engineer_field_ATM"
-                                        checked
-                                        disabled
-                                    />
-                                    Airport
-                                </label>
-                                {% else: %}
-                                <label>
-                                    <input
-                                        type="checkbox"
-                                        name="engineer_field_ATM"
-                                        disabled
-                                    />
-                                    ATM
-                                </label>
-                                {% endif %}
-                                
-                                {% if eachEngineer[7] == 1: %}
-                                <label>
-                                    <input
-                                        type="checkbox"
-                                        name="engineer_field_ATM"
-                                        checked
-                                        disabled
-                                    />
-                                    Telecom
-                                </label>
-                                {% else: %}
-                                <label>
-                                    <input
-                                        type="checkbox"
-                                        name="engineer_field_ATM"
-                                        disabled
-                                    />
-                                    Telecom
-                                </label>
-                                {% endif %}
-
+                              {% if eachEngineer[5] == 1: %}
+                              <label>
+                                <input
+                                  type="checkbox"
+                                  name="engineer_field_ATM"
+                                  checked
+                                  disabled
+                                />
+                                ATM
+                              </label>
+                              {% else: %}
+                              <label>
+                                <input
+                                  type="checkbox"
+                                  name="engineer_field_ATM"
+                                  disabled
+                                />
+                                ATM
+                              </label>
+                              {% endif %} {% if eachEngineer[6] == 1: %}
+                              <label>
+                                <input
+                                  type="checkbox"
+                                  name="engineer_field_ATM"
+                                  checked
+                                  disabled
+                                />
+                                Airport
+                              </label>
+                              {% else: %}
+                              <label>
+                                <input
+                                  type="checkbox"
+                                  name="engineer_field_ATM"
+                                  disabled
+                                />
+                                Airport
+                              </label>
+                              {% endif %} {% if eachEngineer[7] == 1: %}
+                              <label>
+                                <input
+                                  type="checkbox"
+                                  name="engineer_field_ATM"
+                                  checked
+                                  disabled
+                                />
+                                Telecom
+                              </label>
+                              {% else: %}
+                              <label>
+                                <input
+                                  type="checkbox"
+                                  name="engineer_field_ATM"
+                                  disabled
+                                />
+                                Telecom
+                              </label>
+                              {% endif %}
                             </td>
                             <td>
                               <a

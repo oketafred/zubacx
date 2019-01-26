@@ -190,7 +190,7 @@
                 {%endif%} {% if currentUser[24] ==0:%} {% else:%}
                 <li>
                   <a href="{{ url_for('new_engineer') }}"
-                    ><i class="fa fa-circle-o"></i> Add New User</a
+                    ><i class="fa fa-circle-o"></i> Add New Engineer</a
                   >
                 </li>
                 {%endif%} {% if currentUser[25] ==0:%} {% else:%}
@@ -294,6 +294,16 @@
               </a>
             </li>
             {% else:%}
+            <li class="">
+              <a href="/all_clients">
+                <i class="fa fa-user-o"></i> <span>Customers</span>
+              </a>
+            </li>
+            <li class="">
+              <a href="/all_engineers">
+                <i class="fa fa-user-o"></i> <span>Engineers</span>
+              </a>
+            </li>
             <li class="">
               <a href="/all_users">
                 <i class="fa fa-user-o"></i> <span>System Users</span>
@@ -405,7 +415,7 @@
                         <tbody>
                           {% for eachUser in allTheUsers%}
                           <tr>
-                            <td>{{ eachUser[0] }} </td>
+                            <td>{{ eachUser[0] }}</td>
                             <td>{{ eachUser[1] }} {{ eachUser[2] }}</td>
                             <td>{{ eachUser[3] }}</td>
                             <td>{{ eachUser[4] }}</td>
