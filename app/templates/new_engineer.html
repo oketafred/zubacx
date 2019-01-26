@@ -311,7 +311,7 @@
             </div>
             <div class="box-body">
               {% include '_messages.html' %}
-              <form action="/add_engineer" method="POST" data-parsley-validate>
+              <form action="/add_engineer" method="POST" enctype="multipart/form-data" data-parsley-validate>
                 <div class="box-body">
                   <div class="row">
                     <div class="col-md-6">
@@ -427,23 +427,49 @@
                 <div class="box-footer">
                   <div class="row">
                     <div class="col-md-3">
-                      <button type="submit" class="btn btn-success btn-block">
+                      <button type="submit" class="btn btn-success btn-block btn-lg">
                         Submit
                       </button>
                     </div>
+
                     <div class="col-md-3">
                       <button
                         type="submit"
-                        class="btn btn-dark btn-block"
+                        class="btn btn-default btn-block btn-lg"
                         formnovalidate
                         formaction="/dashboard"
                       >
                         Cancel
                       </button>
                     </div>
+
+                    <div class="col-md-6">
+                        <form class="form-group" action="#" enctype="multipart/form-data">
+                          <div class="row">
+                            <div class="col-md-6">
+                                <div class="file-field">
+                                    <div class="btn btn-info btn-sm float-left">
+                                        <!-- <span>Choose File To Upload</span> -->
+                                        <input type="file" class="form-control" name="engineers" multiple>
+                                    </div>
+          
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-success btn-block btn-lg" formnovalidate formaction="/upload/engineers">Save Upload
+                                </div>
+                            </div>
+                          </div>
+                      </form>
+                    </div>
+
                   </div>
                 </div>
               </form>
+
+            
+
             </div>
             <!-- /.box-body -->
           </div>
