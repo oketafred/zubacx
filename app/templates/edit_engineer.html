@@ -435,7 +435,7 @@
                             </div>
                             {% else: %}
                             <div class="checkbox">
-                              <label> <input type="checkbox" name="engineer_field_ATM_edit" /> ATM </label>
+                              <label> <input type="checkbox" name="engineer_field_ATM_edit" checked /> ATM </label>
                             </div>
                             {% endif %}
                           </div>
@@ -446,7 +446,7 @@
                             </div>
                             {% else: %}
                             <div class="checkbox">
-                              <label> <input type="checkbox" name="engineer_field_AIR_edit"/> Airport </label>
+                              <label> <input type="checkbox" name="engineer_field_AIR_edit" checked/> Airport </label>
                             </div>
                             {% endif %}
                           </div>
@@ -457,7 +457,7 @@
                             </div>
                             {% else: %}
                             <div class="checkbox">
-                              <label> <input type="checkbox" name="engineer_field_TEL_edit"/> Telecom </label>
+                              <label> <input type="checkbox" name="engineer_field_TEL_edit" checked/> Telecom </label>
                             </div>
                             {% endif %}
                           </div>
@@ -475,12 +475,19 @@
                       </button>
                     </div>
                     <div class="col-md-3">
-                      <button type="submit" class="btn btn-primary btn-block">
-                        Submit & Add New
+                      <button 
+                      type="submit" 
+                      class="btn btn-danger btn-block"
+                      formaction="/all_the_engineers/{{allTheEngineers[0]}}"
+                      formnovalidate>
+                        Delete
                       </button>
                     </div>
                     <div class="col-md-3">
-                      <button type="submit" class="btn btn-dark btn-block">
+                      <button type="submit" 
+                      class="btn btn-dark btn-block"
+                      formnovalidate 
+                      formaction="/dashboard">
                         Cancel
                       </button>
                     </div>
