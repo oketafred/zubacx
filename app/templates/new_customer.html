@@ -35,6 +35,11 @@
       rel="stylesheet"
       href="{{ url_for('static',filename='dist/css/skins/_all-skins.min.css') }}"
     />
+    <!-- Parsley CSS -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static',filename='parsley/parsley.css') }}"
+    />
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -359,15 +364,18 @@
               <h3 class="box-title">New Customer Information</h3>
             </div>
             <div class="box-body">
-                {% include '_messages.html'%}
-              <form role="form" action="/add_client" method="POST">
+              {% include '_messages.html'%}
+              <form
+                role="form"
+                action="/add_client"
+                method="POST"
+                data-parsley-validate
+              >
                 <div class="box-body">
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label for="CustomerName"
-                          >Customer Name</label
-                        >
+                        <label for="CustomerName">Customer Name</label>
                         <input
                           type="text"
                           class="form-control"
@@ -377,54 +385,54 @@
                       </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="CustomerProduct">Customer Product</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              name="customer_product" 
-                              placeholder="Enter Customer Product"
-                            />
-                          </div>
+                      <div class="form-group">
+                        <label for="CustomerProduct">Customer Product</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="customer_product"
+                          placeholder="Enter Customer Product"
+                        />
+                      </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="CustomerProduct"
-                              >Customer Physical Address</label
-                            >
-                            <input
-                              type="text"
-                              class="form-control"
-                              name="customer_address" 
-                              placeholder="Enter Customer Physical Address"
-                            />
-                          </div>
+                      <div class="form-group">
+                        <label for="CustomerProduct"
+                          >Customer Physical Address</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="customer_address"
+                          placeholder="Enter Customer Physical Address"
+                        />
+                      </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="CustomerProduct">Customer Phone</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              name="customer_phone" 
-                              placeholder="Enter Customer Phone"
-                            />
-                          </div>
+                      <div class="form-group">
+                        <label for="CustomerProduct">Customer Phone</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="customer_phone"
+                          placeholder="Enter Customer Phone"
+                        />
+                      </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="CustomerAddress"
-                              >Customer Email Address</label
-                            >
-                            <input
-                              type="text"
-                              class="form-control"
-                              name="customer_email"
-                              placeholder="Enter Customer Email Address"
-                            />
-                          </div>
+                      <div class="form-group">
+                        <label for="CustomerAddress"
+                          >Customer Email Address</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="customer_email"
+                          placeholder="Enter Customer Email Address"
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -437,7 +445,12 @@
                       </button>
                     </div>
                     <div class="col-md-3">
-                      <button type="submit" class="btn btn-dark btn-block" formnovalidate formaction="/dashboard">
+                      <button
+                        type="submit"
+                        class="btn btn-dark btn-block"
+                        formnovalidate
+                        formaction="/dashboard"
+                      >
                         Cancel
                       </button>
                     </div>
@@ -471,7 +484,8 @@
     <script src="{{ url_for('static',filename='vendor/fastclick/lib/fastclick.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ url_for('static',filename='dist/js/adminlte.min.js') }}"></script>
-
+    <!-- Parsely JS -->
+    <script src="{{ url_for('static',filename='parsley/parsley.min.js') }}"></script>
     <script>
       $(document).ready(function() {
         $(".sidebar-menu").tree();

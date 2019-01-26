@@ -41,6 +41,11 @@
       rel="stylesheet"
       href="{{ url_for('static',filename='vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}"
     />
+    <!-- Parsley CSS -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static',filename='parsley/parsley.css') }}"
+    />
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -365,8 +370,8 @@
               <h3 class="box-title">New Engineer Information</h3>
             </div>
             <div class="box-body">
-                {% include '_messages.html' %}
-              <form action="/add_engineer" method="POST">
+              {% include '_messages.html' %}
+              <form action="/add_engineer" method="POST" data-parsley-validate>
                 <div class="box-body">
                   <div class="row">
                     <div class="col-md-6">
@@ -528,7 +533,8 @@
 
     <!-- bootstrap Date picker -->
     <script src="{{ url_for('static',filename='vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
-
+    <!-- Parsely JS -->
+    <script src="{{ url_for('static',filename='parsley/parsley.min.js') }}"></script>
     <script>
       $(document).ready(function() {
         $(".sidebar-menu").tree();

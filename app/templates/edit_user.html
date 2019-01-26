@@ -252,19 +252,20 @@
           <h3 class="box-title">Edit User Information</h3>
         </div>
         <div class="box-body">
-          <form role="form" action="/add_user" method="POST">
+            {% include '_messages.html'%}
+          <form role="form" action="/edit_user/{{allTheUsers[0]}}" method="POST">
             <div class="box-body">
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="FirstName">First Name</label>
-                    <input type="text" name="user_first_name" class="form-control" placeholder="Enter First Name">
+                    <input type="text" value="{{allTheUsers[1]}}" name="user_first_name_edit" class="form-control" placeholder="Enter First Name">
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="LastName">Last Name</label>
-                    <input type="text" name="user_last_name" class="form-control" placeholder="Enter Last Name">
+                    <input type="text" value="{{allTheUsers[2]}}" name="user_last_name_edit" class="form-control" placeholder="Enter Last Name">
                   </div>
                 </div>
               </div>
@@ -272,13 +273,13 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="EmailAddress">Email Address</label>
-                    <input type="text" name="user_email" class="form-control" placeholder="Enter Email Address">
+                    <input type="text" value="{{allTheUsers[4]}}" name="user_email_edit" class="form-control" placeholder="Enter Email Address">
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="PhysicalAddress">Physical Address</label>
-                    <input type="text" class="form-control" name="user_physical_address" placeholder="Enter Physical Address">
+                    <input type="text" class="form-control" value="{{allTheUsers[8]}}" name="user_address_edit" placeholder="Enter Physical Address">
                   </div>
                 </div>
               </div>
@@ -286,13 +287,13 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="PhoneNumber">Phone Number</label>
-                    <input type="text" class="form-control" name="user_phone" placeholder="Enter Phone Number">
+                    <input type="text" class="form-control" value="{{allTheUsers[6]}}" name="user_phone_edit" placeholder="Enter Phone Number">
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="Username">Username</label>
-                    <input type="text" class="form-control" name="user_name" placeholder="Enter Username">
+                    <input type="text" class="form-control" value="{{allTheUsers[3]}}" name="user_name_edit" placeholder="Enter Username">
                   </div>
                 </div>
               </div>
@@ -300,156 +301,310 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="Password">Password</label>
-                    <input type="password" class="form-control" name="user_password" placeholder="Password">
+                    <input type="password" class="form-control" name="user_password_edit" placeholder="Password">
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="ConfirmPassword">Confirm Password</label>
-                    <input type="password" class="form-control" name="user_confirm_password" placeholder="Confirm Password">
+                    <input type="password" class="form-control" name="user_confirm_password_edit" placeholder="Confirm Password">
                   </div>
                 </div>
               </div>
 
               <div class="row">
-                <div class="form-row">
-                    <div class="col-md-4">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="can_add_user" class="custom-control-input" id="customCheck1">
-                            <label class="custom-control-label text-info" for="customCheck1">Can Add User</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="can_delete_user" class="custom-control-input" id="customCheck2">
-                            <label class="custom-control-label text-info" for="customCheck2">Can Delete User</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="can_edit_user" class="custom-control-input" id="customCheck3">
-                            <label class="custom-control-label text-info" for="customCheck3">Can Edit User</label>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="form-row">
-                    <div class="col-md-4">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="can_edit_his_info" class="custom-control-input" id="customCheck4">
-                            <label class="custom-control-label text-info" for="customCheck4">Can Edit His/Her Info</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="can_open_tickets" class="custom-control-input" id="customCheck5">
-                            <label class="custom-control-label text-info" for="customCheck5">Can Open Tickets</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="can_edit_tickets" class="custom-control-input" id="customCheck6">
-                            <label class="custom-control-label text-info" for="customCheck6">Can Edit Tickets</label>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="form-row">
-                    <div class="col-md-4">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="can_delete_tickets" class="custom-control-input" id="customCheck7">
-                            <label class="custom-control-label text-info" for="customCheck7">Can delete Ticket</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="can_view_all_tickets" class="custom-control-input" id="customCheck8">
-                            <label class="custom-control-label text-info" for="customCheck8">Can View All Tickets</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="can_view_his_tickets" class="custom-control-input" id="customCheck9">
-                            <label class="custom-control-label text-info" for="customCheck9">Can View His/Her Tickets</label>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="form-row">
-                    <div class="col-md-4">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="can_edit_his_tickets" class="custom-control-input" id="customCheck10">
-                            <label class="custom-control-label text-info" for="customCheck10">Can Edit His/Her Tickets</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="can_view_his_tasks" class="custom-control-input" id="customCheck11">
-                            <label class="custom-control-label text-info" for="customCheck11">Can View His/Her Tasks</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="can_view_all_tasks" class="custom-control-input" id="customCheck12">
-                            <label class="custom-control-label text-info" for="customCheck12">Can View All Tasks</label>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="form-row">
-                    <div class="col-md-4">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="can_view_reports" class="custom-control-input" id="customCheck13">
-                            <label class="custom-control-label text-info" for="customCheck13">Can View His/Her Reports</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="can_view_all_reports" class="custom-control-input" id="customCheck14">
-                            <label class="custom-control-label text-info" for="customCheck14">Can View All Reports</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="can_add_delete_edit_clients" class="custom-control-input" id="customCheck15">
-                            <label class="custom-control-label text-info" for="customCheck15">Can Add,Delete,Edit Clients</label>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="form-row">
-                    <div class="col-md-4">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="can_add_delete_edit_engineers" class="custom-control-input" id="customCheck16">
-                            <label class="custom-control-label text-info" for="customCheck16">Can Add,Delete,Edit Engineers</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="can_add_delete_edit_equipment" class="custom-control-input" id="customCheck17">
-                            <label class="custom-control-label text-info" for="customCheck17">Can Add,Delete,Edit Equipment</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="can_add_delete_edit_workorder" class="custom-control-input" id="customCheck18">
-                            <label class="custom-control-label text-info" for="customCheck18">Can Add,Delete,Edit Work Order</label>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="form-row">
-                    <div class="col-md-4">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="can_receive_email_alerts" class="custom-control-input" id="can_receive_email_alerts">
-                            <label class="custom-control-label text-info" for="can_receive_email_alerts">Can Receive Email Alerts</label>
-                        </div>
-                    </div>
-                </div>
+                  <div class="form-row">
+                      <div class="col-md-4">
+                          {% if allTheUsers[9] == 0:%}
+                          <div class="custom-control custom-checkbox">
+                              <input type="checkbox" name="can_add_user_edit" class="custom-control-input" id="customCheck1">
+                              <label class="custom-control-label text-info" for="customCheck1">Can Add User</label>
+                          </div>
+                          {% else:%}
+                          <div class="custom-control custom-checkbox">
+                              <input type="checkbox" name="can_add_user_edit" class="custom-control-input" id="customCheck1" checked>
+                              <label class="custom-control-label text-info" for="customCheck1">Can Add User</label>
+                          </div>
+                          {% endif%}
+  
+                      </div>
+                      <div class="col-md-4">
+                          {% if allTheUsers[10] == 0:%}
+                          <div class="custom-control custom-checkbox">
+                              <input type="checkbox" name="can_delete_user_edit" class="custom-control-input" id="customCheck2">
+                              <label class="custom-control-label text-info" for="customCheck2">Can Delete User</label>
+                          </div>
+                          {% else:%}
+                          <div class="custom-control custom-checkbox">
+                              <input type="checkbox" name="can_delete_user_edit" class="custom-control-input" id="customCheck2" checked>
+                              <label class="custom-control-label text-info" for="customCheck2">Can Delete User</label>
+                          </div>
+                          {% endif%}
+  
+                      </div>
+                      <div class="col-md-4">
+                          {% if allTheUsers[11] == 0:%}
+                          <div class="custom-control custom-checkbox">
+                              <input type="checkbox" name="can_edit_user_edit" class="custom-control-input" id="customCheck3">
+                              <label class="custom-control-label text-info" for="customCheck3">Can Edit User</label>
+                          </div>
+                          {% else:%}
+                          <div class="custom-control custom-checkbox">
+                              <input type="checkbox" name="can_edit_user_edit" class="custom-control-input" id="customCheck3" checked>
+                              <label class="custom-control-label text-info" for="customCheck3">Can Edit User</label>
+                          </div>
+                          {% endif%}
+  
+                      </div>
+  
+                  </div>
+  
+                  <div class="form-row">
+                      <div class="col-md-4">
+                          {% if allTheUsers[12] == 0:%}
+                          <div class="custom-control custom-checkbox">
+                              <input type="checkbox" name="can_edit_his_info_edit" class="custom-control-input" id="customCheck4">
+                              <label class="custom-control-label text-info" for="customCheck4">Can Edit His/Her Info</label>
+                          </div>
+                          {% else:%}
+                          <div class="custom-control custom-checkbox">
+                              <input type="checkbox" name="can_edit_his_info_edit" class="custom-control-input" id="customCheck4" checked>
+                              <label class="custom-control-label text-info" for="customCheck4">Can Edit His/Her Info</label>
+                          </div>
+                          {% endif%}
+  
+                      </div>
+                      <div class="col-md-4">
+                          {% if allTheUsers[13] == 0:%}
+                          <div class="custom-control custom-checkbox">
+                              <input type="checkbox" name="can_open_tickets_edit" class="custom-control-input" id="customCheck5">
+                              <label class="custom-control-label text-info" for="customCheck5">Can Open Tickets</label>
+                          </div>
+                          {% else:%}
+                          <div class="custom-control custom-checkbox">
+                              <input type="checkbox" name="can_open_tickets_edit" class="custom-control-input" id="customCheck5" checked>
+                              <label class="custom-control-label text-info" for="customCheck5">Can Open Tickets</label>
+                          </div>
+                          {% endif%}
+  
+                      </div>
+                      <div class="col-md-4">
+                          {% if allTheUsers[14] == 0:%}
+                          <div class="custom-control custom-checkbox">
+                              <input type="checkbox" name="can_edit_tickets_edit" class="custom-control-input" id="customCheck6">
+                              <label class="custom-control-label text-info" for="customCheck6">Can Edit Tickets</label>
+                          </div>
+                          {% else:%}
+                          <div class="custom-control custom-checkbox">
+                              <input type="checkbox" name="can_edit_tickets_edit" class="custom-control-input" id="customCheck6" checked>
+                              <label class="custom-control-label text-info" for="customCheck6">Can Edit Tickets</label>
+                          </div>
+                          {% endif%}
+  
+                      </div>
+  
+                  </div>
+  
+                  <div class="form-row">
+                      <div class="col-md-4">
+                          {% if allTheUsers[15] == 0:%}
+                          <div class="custom-control custom-checkbox">
+                              <input type="checkbox" name="can_delete_tickets_edit" class="custom-control-input" id="customCheck7">
+                              <label class="custom-control-label text-info" for="customCheck7">Can delete Ticket</label>
+                          </div>
+                          {% else:%}
+                          <div class="custom-control custom-checkbox">
+                              <input type="checkbox" name="can_delete_tickets_edit" class="custom-control-input" id="customCheck7" checked>
+                              <label class="custom-control-label text-info" for="customCheck7">Can delete Ticket</label>
+                          </div>
+                          {% endif%}
+  
+                      </div>
+                      <div class="col-md-4">
+                          {% if allTheUsers[16] == 0:%}
+                          <div class="custom-control custom-checkbox">
+                              <input type="checkbox" name="can_view_all_tickets_edit" class="custom-control-input" id="customCheck8">
+                              <label class="custom-control-label text-info" for="customCheck8">Can View All Tickets</label>
+                          </div>
+                          {% else:%}
+                          <div class="custom-control custom-checkbox">
+                              <input type="checkbox" name="can_view_all_tickets_edit" class="custom-control-input" id="customCheck8" checked>
+                              <label class="custom-control-label text-info" for="customCheck8">Can View All Tickets</label>
+                          </div>
+                          {% endif%}
+  
+                      </div>
+                      <div class="col-md-4">
+                          {% if allTheUsers[17] == 0:%}
+                          <div class="custom-control custom-checkbox">
+                              <input type="checkbox" name="can_view_his_tickets_edit" class="custom-control-input" id="customCheck9">
+                              <label class="custom-control-label text-info" for="customCheck9">Can View His/Her Tickets</label>
+                          </div>
+                          {% else:%}
+                          <div class="custom-control custom-checkbox">
+                              <input type="checkbox" name="can_view_his_tickets_edit" class="custom-control-input" id="customCheck9" checked>
+                              <label class="custom-control-label text-info" for="customCheck9">Can View His/Her Tickets</label>
+                          </div>
+                          {% endif%}
+  
+                      </div>
+  
+                  </div>
+  
+                  <div class="form-row">
+                      <div class="col-md-4">
+                          {% if allTheUsers[18] == 0:%}
+                          <div class="custom-control custom-checkbox">
+                              <input type="checkbox" name="can_edit_his_tickets_edit" class="custom-control-input" id="customCheck10">
+                              <label class="custom-control-label text-info" for="customCheck10">Can Edit His/Her Tickets</label>
+                          </div>
+                          {% else:%}
+                          <div class="custom-control custom-checkbox">
+                              <input type="checkbox" name="can_edit_his_tickets_edit" class="custom-control-input" id="customCheck10" checked>
+                              <label class="custom-control-label text-info" for="customCheck10">Can Edit His/Her Tickets</label>
+                          </div>
+                          {% endif%}
+  
+                      </div>
+                      <div class="col-md-4">
+                          {% if allTheUsers[19] == 0:%}
+                          <div class="custom-control custom-checkbox">
+                              <input type="checkbox" name="can_view_his_tasks_edit" class="custom-control-input" id="customCheck11">
+                              <label class="custom-control-label text-info" for="customCheck11">Can View His/Her Tasks</label>
+                          </div>
+                          {% else:%}
+                          <div class="custom-control custom-checkbox">
+                              <input type="checkbox" name="can_view_his_tasks_edit" class="custom-control-input" id="customCheck11" checked>
+                              <label class="custom-control-label text-info" for="customCheck11">Can View His/Her Tasks</label>
+                          </div>
+                          {% endif%}
+  
+                      </div>
+                      <div class="col-md-4">
+                          {% if allTheUsers[20] == 0:%}
+                          <div class="custom-control custom-checkbox">
+                              <input type="checkbox" name="can_view_all_tasks_edit" class="custom-control-input" id="customCheck12">
+                              <label class="custom-control-label text-info" for="customCheck12">Can View All Tasks</label>
+                          </div>
+                          {% else:%}
+                          <div class="custom-control custom-checkbox">
+                              <input type="checkbox" name="can_view_all_tasks_edit" class="custom-control-input" id="customCheck12" checked>
+                              <label class="custom-control-label text-info" for="customCheck12">Can View All Tasks</label>
+                          </div>
+                          {% endif%}
+  
+                      </div>
+  
+                  </div>
+                  <div class="form-row">
+                      <div class="col-md-4">
+                          {% if allTheUsers[22] == 0:%}
+                          <div class="custom-control custom-checkbox">
+                              <input type="checkbox" name="can_view_his_reports_edit" class="custom-control-input" id="customCheck13">
+                              <label class="custom-control-label text-info" for="customCheck13">Can View His/Her Reports</label>
+                          </div>
+                          {% else:%}
+                          <div class="custom-control custom-checkbox">
+                              <input type="checkbox" name="can_view_his_reports_edit" class="custom-control-input" id="customCheck13" checked>
+                              <label class="custom-control-label text-info" for="customCheck13">Can View His/Her Reports</label>
+                          </div>
+                          {% endif%}
+  
+                      </div>
+                      <div class="col-md-4">
+                          {% if allTheUsers[21] == 0:%}
+                          <div class="custom-control custom-checkbox">
+                              <input type="checkbox" name="can_view_all_reports_edit" class="custom-control-input" id="customCheck14">
+                              <label class="custom-control-label text-info" for="customCheck14">Can View All Reports</label>
+                          </div>
+                          {% else:%}
+                          <div class="custom-control custom-checkbox">
+                              <input type="checkbox" name="can_view_all_reports_edit" class="custom-control-input" id="customCheck14" checked>
+                              <label class="custom-control-label text-info" for="customCheck14">Can View All Reports</label>
+                          </div>
+                          {% endif%}
+  
+                      </div>
+                      <div class="col-md-4">
+                          {% if allTheUsers[23] == 0:%}
+                          <div class="custom-control custom-checkbox">
+                              <input type="checkbox" name="can_add_delete_edit_clients_edit" class="custom-control-input" id="customCheck15">
+                              <label class="custom-control-label text-info" for="customCheck15">Can Add,Delete,Edit Clients</label>
+                          </div>
+                          {% else:%}
+                          <div class="custom-control custom-checkbox">
+                              <input type="checkbox" name="can_add_delete_edit_clients_edit" class="custom-control-input" id="customCheck15" checked>
+                              <label class="custom-control-label text-info" for="customCheck15">Can Add,Delete,Edit Clients</label>
+                          </div>
+                          {% endif%}
+  
+                      </div>
+  
+                  </div>
+  
+                  <div class="form-row">
+                      <div class="col-md-4">
+                          {% if allTheUsers[24] == 0:%}
+                          <div class="custom-control custom-checkbox">
+                              <input type="checkbox" name="can_add_delete_edit_engineers_edit" class="custom-control-input" id="customCheck16">
+                              <label class="custom-control-label text-info" for="customCheck16">Can Add,Delete,Edit Engineers</label>
+                          </div>
+                          {% else:%}
+                          <div class="custom-control custom-checkbox">
+                              <input type="checkbox" name="can_add_delete_edit_engineers_edit" class="custom-control-input" id="customCheck16" checked>
+                              <label class="custom-control-label text-info" for="customCheck16">Can Add,Delete,Edit Engineers</label>
+                          </div>
+                          {% endif%}
+  
+                      </div>
+                      <div class="col-md-4">
+                          {% if allTheUsers[25] == 0:%}
+                          <div class="custom-control custom-checkbox">
+                              <input type="checkbox" name="can_add_delete_edit_equipment_edit" class="custom-control-input" id="customCheck17">
+                              <label class="custom-control-label text-info" for="customCheck17">Can Add,Delete,Edit Equipment</label>
+                          </div>
+                          {% else:%}
+                          <div class="custom-control custom-checkbox">
+                              <input type="checkbox" name="can_add_delete_edit_equipment_edit" class="custom-control-input" id="customCheck17" checked>
+                              <label class="custom-control-label text-info" for="customCheck17">Can Add,Delete,Edit Equipment</label>
+                          </div>
+                          {% endif%}
+  
+                      </div>
+                      <div class="col-md-4">
+                          {% if allTheUsers[26] == 0:%}
+                          <div class="custom-control custom-checkbox">
+                              <input type="checkbox" name="can_add_delete_edit_workorder_edit" class="custom-control-input" id="customCheck18">
+                              <label class="custom-control-label text-info" for="customCheck18">Can Add,Delete,Edit Work Order</label>
+                          </div>
+                          {% else:%}
+                          <div class="custom-control custom-checkbox">
+                              <input type="checkbox" name="can_add_delete_edit_workorder_edit" class="custom-control-input" id="customCheck18" checked>
+                              <label class="custom-control-label text-info" for="customCheck18">Can Add,Delete,Edit Work Order</label>
+                          </div>
+                          {% endif%}
+  
+                      </div>
+  
+                  </div>
+  
+                  <div class="form-row">
+                      {% if allTheUsers[28] == 0:%}
+                      <div class="col-md-4">
+                          <div class="custom-control custom-checkbox">
+                              <input type="checkbox" name="can_receive_email_alerts" class="custom-control-input" id="can_receive_email_alerts">
+                              <label class="custom-control-label text-info" for="can_receive_email_alerts">Can Receive Email Alerts</label>
+                          </div>
+                      </div>
+                      {% else:%}
+                      <div class="col-md-4">
+                          <div class="custom-control custom-checkbox">
+                              <input type="checkbox" name="can_receive_email_alerts" class="custom-control-input" id="can_receive_email_alerts" checked>
+                              <label class="custom-control-label text-info" for="can_receive_email_alerts">Can Receive Email Alerts</label>
+                          </div>
+                      </div>
+                      {% endif%}
+                  </div>
               </div>
 
             </div>
@@ -460,7 +615,10 @@
                   <button type="submit" class="btn btn-success btn-block">Submit</button>
                 </div>
                 <div class="col-md-3">
-                  <button type="submit" class="btn btn-dark btn-block" formnovalidate formaction="/dashboard">Cancel</button>
+                    <button type="submit" class="btn btn-danger btn-block" formnovalidate formaction="/all_the_users/{{allTheUsers[0]}}">Delete</button>
+                  </div>
+                <div class="col-md-3">
+                  <button type="submit" class="btn btn-default btn-block" formnovalidate formaction="/dashboard">Cancel</button>
                 </div>
               </div>
             </div>

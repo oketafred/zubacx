@@ -571,7 +571,7 @@ def all_ordinary_users():
         return render_template('view_users.html', allTheUsers=theReturnedUsers,currentUser=LoggedInUser1)
     return redirect(url_for('index'))
 
-@app.route('/all_the_users/<int:user_id>', methods=['GET','DELETE'])
+@app.route('/all_the_users/<int:user_id>', methods=['GET','DELETE', 'POST'])
 def delete_user(user_id):
     LoggedInUser = session['username']
     LoggedInUser1 = usersInstance.checkUserRights(LoggedInUser)
@@ -590,7 +590,7 @@ def get_user_by_Id(user_id):
         return render_template('new_users.html', allTheUsers=theReturnedUser,currentUser=LoggedInUser1)
     return redirect(url_for('index'))
 
-@app.route('/edit_the_user/<int:user_id>', methods=['GET'])
+@app.route('/edit_the_user/<int:user_id>', methods=['GET', 'POST'])
 def get_user_details_for_edit(user_id):
     LoggedInUser = session['username']
     LoggedInUser1 = usersInstance.checkUserRights(LoggedInUser)

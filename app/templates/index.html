@@ -1,93 +1,136 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Zubacx | Login Page</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="{{ url_for('static',filename='vendor/bootstrap/dist/css/bootstrap.min.css') }}">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="{{ url_for('static',filename='font-awesome/css/font-awesome.min.css') }}">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="{{ url_for('static',filename='Ionicons/css/ionicons.min.css') }}">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="{{ url_for('static',filename='dist/css/AdminLTE.min.css') }}">
-  <!-- iCheck -->
-  <link rel="stylesheet" href="{{ url_for('static',filename='dist/plugins/iCheck/square/blue.css') }}">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Zubacx | Login Page</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+      name="viewport"
+    />
+    <!-- Bootstrap 3.3.7 -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static',filename='vendor/bootstrap/dist/css/bootstrap.min.css') }}"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static',filename='font-awesome/css/font-awesome.min.css') }}"
+    />
+    <!-- Ionicons -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static',filename='Ionicons/css/ionicons.min.css') }}"
+    />
+    <!-- Theme style -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static',filename='dist/css/AdminLTE.min.css') }}"
+    />
+    <!-- iCheck -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static',filename='dist/plugins/iCheck/square/blue.css') }}"
+    />
+    <!-- Parsley CSS -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static',filename='parsley/parsley.css') }}"
+    />
 
-  <style>
-    body {height:0vh !important}
-  </style>
+    <style>
+      body {
+        height: 0vh !important;
+      }
+    </style>
 
-  <!-- Google Font -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-</head>
-<body class="hold-transition login-page">
-<div class="login-box">
-  <div class="login-logo">
-    <a href="#"><b>Zubacx </b></a>
-  </div>
-  <!-- /.login-logo -->
-  <div class="login-box-body">
-    <p class="login-box-msg">Sign in to start your session</p>
-
-    {% include '_messages.html'%}
-
-    <form action="/index" method="post">
-      <div class="form-group has-feedback">
-        <input type="text" name="username" class="form-control" placeholder="Username">
-        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+    <!-- Google Font -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"
+    />
+  </head>
+  <body class="hold-transition login-page">
+    <div class="login-box">
+      <div class="login-logo">
+        <a href="#"><b>Zubacx </b></a>
       </div>
-      <div class="form-group has-feedback">
-        <input type="password" name="password" class="form-control" placeholder="Password">
-        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-      </div>
-      <div class="row">
-        <div class="col-xs-12">
-          <button type="submit" class="btn btn-success btn-block btn-flat">Sign In</button>
-        </div>
-      </div>
+      <!-- /.login-logo -->
+      <div class="login-box-body">
+        <p class="login-box-msg">Sign in to start your session</p>
 
-      <div class="row" style="padding-top: 20px">
-        <div class="col-xs-6">
-          <div class="checkbox icheck">
-            <label>
-              <input type="checkbox"> Remember Me
-            </label>
+        {% include '_messages.html'%}
+
+        <form action="/index" method="post" data-parsley-validate>
+          <div class="form-group has-feedback">
+            <input
+              type="text"
+              name="username"
+              class="form-control"
+              placeholder="Username"
+              required
+            />
+            <span
+              class="glyphicon glyphicon-envelope form-control-feedback"
+            ></span>
           </div>
-        </div>
-        <!-- /.col -->
-        <div class="col-xs-6">
-          <div class="checkbox icheck">
-            <label>
-              <a href="#">I forgot my password</a>
-            </label>
+          <div class="form-group has-feedback">
+            <input
+              type="password"
+              name="password"
+              class="form-control"
+              placeholder="Password"
+              min="2"
+              required
+            />
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
-        </div>
-        <!-- /.col -->
-      </div>
-    </form>
-  </div>
-  <!-- /.login-box-body -->
-</div>
-<!-- /.login-box -->
+          <div class="row">
+            <div class="col-xs-12">
+              <button type="submit" class="btn btn-success btn-block btn-flat">
+                Sign In
+              </button>
+            </div>
+          </div>
 
-<!-- jQuery 3 -->
-<script src="{{ url_for('static',filename='vendor/jquery/dist/jquery.min.js') }}"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="{{ url_for('static',filename='vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-<!-- iCheck -->
-<script src="{{ url_for('static',filename='dist/plugins/iCheck/icheck.min.js') }}"></script>
-<script>
-  $(function () {
-    $('input').iCheck({
-      checkboxClass: 'icheckbox_square-blue',
-      radioClass: 'iradio_square-blue',
-      increaseArea: '20%' /* optional */
-    });
-  });
-</script>
-</body>
+          <div class="row" style="padding-top: 20px">
+            <div class="col-xs-6">
+              <div class="checkbox icheck">
+                <label> <input type="checkbox" /> Remember Me </label>
+              </div>
+            </div>
+            <!-- /.col -->
+            <div class="col-xs-6">
+              <div class="checkbox icheck">
+                <label> <a href="#">I forgot my password</a> </label>
+              </div>
+            </div>
+            <!-- /.col -->
+          </div>
+        </form>
+      </div>
+      <!-- /.login-box-body -->
+    </div>
+    <!-- /.login-box -->
+
+    <!-- jQuery 3 -->
+    <script src="{{ url_for('static',filename='vendor/jquery/dist/jquery.min.js') }}"></script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="{{ url_for('static',filename='vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <!-- iCheck -->
+    <script src="{{ url_for('static',filename='dist/plugins/iCheck/icheck.min.js') }}"></script>
+    <!-- Parsely JS -->
+    <script src="{{ url_for('static',filename='parsley/parsley.min.js') }}"></script>
+    <script>
+      $(function() {
+        $("input").iCheck({
+          checkboxClass: "icheckbox_square-blue",
+          radioClass: "iradio_square-blue",
+          increaseArea: "20%" /* optional */
+        });
+      });
+    </script>
+  </body>
 </html>
