@@ -269,19 +269,19 @@
         </div>
         <div class="box-body">
             {% include '_messages.html'%}
-          <form role="form" action="/edit_user/{{allTheUsers[0]}}" method="POST">
+          <form role="form" action="/edit_user/{{allTheUsers[0]}}" method="POST" data-parsley-validate>
             <div class="box-body">
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="FirstName">First Name</label>
-                    <input type="text" value="{{allTheUsers[1]}}" name="user_first_name_edit" class="form-control" placeholder="Enter First Name">
+                    <input type="text" required value="{{allTheUsers[1]}}" name="user_first_name_edit" class="form-control" placeholder="Enter First Name">
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="LastName">Last Name</label>
-                    <input type="text" value="{{allTheUsers[2]}}" name="user_last_name_edit" class="form-control" placeholder="Enter Last Name">
+                    <input type="text" required value="{{allTheUsers[2]}}" name="user_last_name_edit" class="form-control" placeholder="Enter Last Name">
                   </div>
                 </div>
               </div>
@@ -289,13 +289,13 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="EmailAddress">Email Address</label>
-                    <input type="text" value="{{allTheUsers[4]}}" name="user_email_edit" class="form-control" placeholder="Enter Email Address">
+                    <input type="text" required value="{{allTheUsers[4]}}" name="user_email_edit" class="form-control" placeholder="Enter Email Address">
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="PhysicalAddress">Physical Address</label>
-                    <input type="text" class="form-control" value="{{allTheUsers[8]}}" name="user_address_edit" placeholder="Enter Physical Address">
+                    <input type="text" required class="form-control" value="{{allTheUsers[8]}}" name="user_address_edit" placeholder="Enter Physical Address">
                   </div>
                 </div>
               </div>
@@ -303,13 +303,13 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="PhoneNumber">Phone Number</label>
-                    <input type="text" class="form-control" value="{{allTheUsers[6]}}" name="user_phone_edit" placeholder="Enter Phone Number">
+                    <input type="text" required data-parsley-type="number" class="form-control" value="{{allTheUsers[6]}}" name="user_phone_edit" placeholder="Enter Phone Number">
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="Username">Username</label>
-                    <input type="text" class="form-control" value="{{allTheUsers[3]}}" name="user_name_edit" placeholder="Enter Username">
+                    <input type="text" required class="form-control" value="{{allTheUsers[3]}}" name="user_name_edit" placeholder="Enter Username">
                   </div>
                 </div>
               </div>
@@ -317,13 +317,13 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="Password">Password</label>
-                    <input type="password" class="form-control" name="user_password_edit" placeholder="Password">
+                    <input type="password" required id="mypassword" class="form-control" name="user_password_edit" placeholder="Password">
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="ConfirmPassword">Confirm Password</label>
-                    <input type="password" class="form-control" name="user_confirm_password_edit" placeholder="Confirm Password">
+                    <input type="password" required data-parsley-equalto="#mypassword" class="form-control" name="user_confirm_password_edit" placeholder="Confirm Password">
                   </div>
                 </div>
               </div>
