@@ -35,7 +35,11 @@
       rel="stylesheet"
       href="{{ url_for('static',filename='dist/css/skins/_all-skins.min.css') }}"
     />
-
+    <!-- Parsley CSS -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static',filename='parsley/parsley.css') }}"
+    />
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -360,14 +364,18 @@
             </div>
             <div class="box-body">
               {% include '_messages.html'%}
-              <form action="/edit_client/{{ allTheClients[0] }}" method="POST" data-parsley-validate>
+              <form
+                action="/edit_client/{{ allTheClients[0] }}"
+                method="POST"
+                data-parsley-validate
+              >
                 <div class="box-body">
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="CustomerName">Customer Name</label>
                         <input
-                          type="text" 
+                          type="text"
                           required
                           class="form-control"
                           name="customer_name_edit"
@@ -380,7 +388,7 @@
                       <div class="form-group">
                         <label for="CustomerProduct">Customer Product</label>
                         <input
-                          type="text" 
+                          type="text"
                           required
                           class="form-control"
                           name="customer_product_edit"
@@ -397,7 +405,7 @@
                           >Customer Physical Address</label
                         >
                         <input
-                          type="text" 
+                          type="text"
                           required
                           class="form-control"
                           name="customer_address_edit"
@@ -410,7 +418,7 @@
                       <div class="form-group">
                         <label for="CustomerProduct">Customer Phone</label>
                         <input
-                          type="text" 
+                          type="text"
                           required
                           class="form-control"
                           name="customer_phone_edit"
@@ -487,15 +495,15 @@
     <!-- ./wrapper -->
 
     <!-- jQuery 3 -->
-    <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="{{ url_for('static',filename='vendor/jquery/dist/jquery.min.js') }}"></script>
     <!-- Bootstrap 3.3.7 -->
-    <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static',filename='vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <!-- SlimScroll -->
-    <script src="../../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="{{ url_for('static',filename='vendor/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
     <!-- FastClick -->
-    <script src="../../bower_components/fastclick/lib/fastclick.js"></script>
+    <script src="{{ url_for('static',filename='vendor/fastclick/lib/fastclick.js') }}"></script>
     <!-- AdminLTE App -->
-    <script src="../../dist/js/adminlte.min.js"></script>
+    <script src="{{ url_for('static',filename='dist/js/adminlte.min.js') }}"></script>
     <!-- Parsely JS -->
     <script src="{{ url_for('static',filename='parsley/parsley.min.js') }}"></script>
     <script>
