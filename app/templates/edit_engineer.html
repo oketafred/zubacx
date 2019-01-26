@@ -298,6 +298,16 @@
                 <i class="fa fa-user-o"></i> <span>Customers</span>
               </a>
             </li>
+            <li class="">
+              <a href="/all_engineers">
+                <i class="fa fa-user-o"></i> <span>Engineers</span>
+              </a>
+            </li>
+            <li class="">
+              <a href="/all_users">
+                <i class="fa fa-user-o"></i> <span>System Users</span>
+              </a>
+            </li>
             {% endif%}
             <li class="">
               <a href="/tasks">
@@ -372,6 +382,7 @@
               <form
                 action="/edit_engineer/{{ allTheEngineers[0] }}"
                 method="POST"
+                data-parsley-validate
               >
                 <div class="box-body">
                   <div class="row">
@@ -382,6 +393,7 @@
                         >
                         <input
                           type="text"
+                          required
                           class="form-control"
                           value="{{ allTheEngineers[1] }}"
                           name="engineer_first_name_edit"
@@ -394,6 +406,7 @@
                         <label for="EngineerLastName">Engineer Last Name</label>
                         <input
                           type="text"
+                          required
                           class="form-control"
                           value="{{ allTheEngineers[2] }}"
                           name="engineer_last_name_edit"
@@ -409,7 +422,8 @@
                           >Engineer Email Address</label
                         >
                         <input
-                          type="text"
+                          type="email"
+                          required
                           class="form-control"
                           value="{{ allTheEngineers[3] }}"
                           name="engineer_email_edit"
@@ -424,6 +438,7 @@
                         >
                         <input
                           type="text"
+                          required
                           class="form-control"
                           value="{{ allTheEngineers[8] }}"
                           name="engineer_address_edit"
@@ -438,6 +453,7 @@
                         <label for="EngineerPhone">Engineer Phone</label>
                         <input
                           type="text"
+                          required
                           class="form-control"
                           value="{{ allTheEngineers[4] }}"
                           name="engineer_phone_edit"
