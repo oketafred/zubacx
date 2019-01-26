@@ -360,14 +360,15 @@
             </div>
             <div class="box-body">
               {% include '_messages.html'%}
-              <form action="/edit_client/{{ allTheClients[0] }}" method="POST">
+              <form action="/edit_client/{{ allTheClients[0] }}" method="POST" data-parsley-validate>
                 <div class="box-body">
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="CustomerName">Customer Name</label>
                         <input
-                          type="text"
+                          type="text" 
+                          required
                           class="form-control"
                           name="customer_name_edit"
                           value="{{ allTheClients[1] }}"
@@ -379,7 +380,8 @@
                       <div class="form-group">
                         <label for="CustomerProduct">Customer Product</label>
                         <input
-                          type="text"
+                          type="text" 
+                          required
                           class="form-control"
                           name="customer_product_edit"
                           value="{{ allTheClients[2] }}"
@@ -395,7 +397,8 @@
                           >Customer Physical Address</label
                         >
                         <input
-                          type="text"
+                          type="text" 
+                          required
                           class="form-control"
                           name="customer_address_edit"
                           value="{{ allTheClients[3] }}"
@@ -407,7 +410,8 @@
                       <div class="form-group">
                         <label for="CustomerProduct">Customer Phone</label>
                         <input
-                          type="text"
+                          type="text" 
+                          required
                           class="form-control"
                           name="customer_phone_edit"
                           value="{{ allTheClients[5] }}"
@@ -424,6 +428,7 @@
                         >
                         <input
                           type="email"
+                          required
                           class="form-control"
                           name="customer_email_edit"
                           value="{{ allTheClients[4] }}"
