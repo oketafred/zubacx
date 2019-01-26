@@ -324,6 +324,7 @@
                           name="engineer_first_name"
                           class="form-control"
                           placeholder="Enter Engineer First Name"
+                          required
                         />
                       </div>
                     </div>
@@ -335,6 +336,7 @@
                           name="engineer_last_name"
                           class="form-control"
                           placeholder="Enter Engineer Last Name"
+                          required
                         />
                       </div>
                     </div>
@@ -346,10 +348,11 @@
                           >Engineer Email Address</label
                         >
                         <input
-                          type="text"
+                          type="email"
                           name="engineer_email"
                           class="form-control"
                           placeholder="Enter Email Address"
+                          required
                         />
                       </div>
                     </div>
@@ -363,6 +366,7 @@
                           name="engineer_address"
                           class="form-control"
                           placeholder="Enter Engineer Physical Address"
+                          required
                         />
                       </div>
                     </div>
@@ -376,6 +380,7 @@
                           name="engineer_phone"
                           class="form-control"
                           placeholder="Enter Engineer Phone"
+                          required
                         />
                       </div>
                     </div>
@@ -391,6 +396,7 @@
                                 <input
                                   type="checkbox"
                                   name="engineer_field_ATM"
+                                  data-parsley-mincheck="1"
                                 />
                                 ATM
                               </label>
