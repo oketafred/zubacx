@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Zubacx | New Engineer Page</title>
+    <title>Zubacx | New Equipments Page</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta
       content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
@@ -58,58 +58,74 @@
   <body class="hold-transition fixed skin-blue sidebar-mini">
     <!-- Site wrapper -->
     <div class="wrapper">
-        <header class="main-header">
+      <header class="main-header">
+        <!-- Logo -->
+        <a href="../../index2.html" class="logo">
+          <!-- mini logo for sidebar mini 50x50 pixels -->
+          <span class="logo-mini"><b>Zub</b>U</span>
+          <!-- logo for regular state and mobile devices -->
+          <span class="logo-lg">
+            <img
+              src="{{ url_for('static',filename='dist/img/ZubaCx_Logo.png') }}"
+              height="40px"
+              alt=""
+            />
+          </span>
+        </a>
 
-            <!-- Logo -->
-            <a href="../../index2.html" class="logo">
-             <!-- mini logo for sidebar mini 50x50 pixels -->
-             <span class="logo-mini"><b>Zub</b>U</span>
-             <!-- logo for regular state and mobile devices -->
-             <span class="logo-lg">
-               <img src="{{ url_for('static',filename='dist/img/ZubaCx_Logo.png') }}" height="40px" alt="">
-             </span>
-           </a>
-         
-             <!-- Header Navbar: style can be found in header.less -->
-             <nav class="navbar navbar-static-top">
-               <!-- Sidebar toggle button-->
-               <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-                 <span class="sr-only">Toggle navigation</span>
-               </a>
-               <!-- Navbar Right Menu -->
-               <div class="navbar-custom-menu">
-                 <ul class="nav navbar-nav">
-                   <!-- User Account: style can be found in dropdown.less -->
-                   <li class="dropdown user user-menu">
-                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                       <img src="{{ url_for('static',filename='dist/img/user2-160x160.jpg') }}" class="user-image" alt="User Image">
-                       <span class="hidden-xs">{{currentUser[3]}}</span>
-                     </a>
-                     <ul class="dropdown-menu">
-                       <!-- User image -->
-                       <li class="user-header">
-                         <img src="{{ url_for('static',filename='dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
-         
-                         <p>
-                             {{currentUser[3]}} - ({{currentUser[1]}} {{currentUser[2]}})
-                         </p>
-                       </li>
-                       <!-- Menu Footer-->
-                       <li class="user-footer">
-                         <div class="pull-left">
-                           <a href="#" class="btn btn-default btn-flat">Profile</a>
-                         </div>
-                         <div class="pull-right">
-                           <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                         </div>
-                       </li>
-                     </ul>
-                   </li>
-                 </ul>
-               </div>
-         
-             </nav>
-           </header>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top">
+          <!-- Sidebar toggle button-->
+          <a
+            href="#"
+            class="sidebar-toggle"
+            data-toggle="push-menu"
+            role="button"
+          >
+            <span class="sr-only">Toggle navigation</span>
+          </a>
+          <!-- Navbar Right Menu -->
+          <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+              <!-- User Account: style can be found in dropdown.less -->
+              <li class="dropdown user user-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <img
+                    src="{{ url_for('static',filename='dist/img/user2-160x160.jpg') }}"
+                    class="user-image"
+                    alt="User Image"
+                  />
+                  <span class="hidden-xs">{{ currentUser[3] }}</span>
+                </a>
+                <ul class="dropdown-menu">
+                  <!-- User image -->
+                  <li class="user-header">
+                    <img
+                      src="{{ url_for('static',filename='dist/img/user2-160x160.jpg') }}"
+                      class="img-circle"
+                      alt="User Image"
+                    />
+
+                    <p>
+                      {{ currentUser[3] }} - ({{ currentUser[1] }}
+                      {{ currentUser[2] }})
+                    </p>
+                  </li>
+                  <!-- Menu Footer-->
+                  <li class="user-footer">
+                    <div class="pull-left">
+                      <a href="#" class="btn btn-default btn-flat">Profile</a>
+                    </div>
+                    <div class="pull-right">
+                      <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
 
       <!-- =============================================== -->
 
@@ -349,7 +365,8 @@
               <h3 class="box-title">New Engineer Information</h3>
             </div>
             <div class="box-body">
-              <form>
+                {% include '_messages.html' %}
+              <form action="/add_engineer" method="POST">
                 <div class="box-body">
                   <div class="row">
                     <div class="col-md-6">
@@ -361,11 +378,16 @@
                           type="text"
                           name="engineer_first_name"
                           class="form-control"
-                          />
+                          placeholder="Enter Engineer First Name"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
                       <div class="form-group">
                         <label for="EngineerLastName">Engineer Last Name</label>
                         <input
                           type="text"
+                          name="engineer_last_name"
                           class="form-control"
                           placeholder="Enter Engineer Last Name"
                         />
@@ -380,6 +402,7 @@
                         >
                         <input
                           type="text"
+                          name="engineer_email"
                           class="form-control"
                           placeholder="Enter Email Address"
                         />
@@ -392,6 +415,7 @@
                         >
                         <input
                           type="text"
+                          name="engineer_address"
                           class="form-control"
                           placeholder="Enter Engineer Physical Address"
                         />
@@ -404,6 +428,7 @@
                         <label for="EngineerPhone">Engineer Phone</label>
                         <input
                           type="text"
+                          name="engineer_phone"
                           class="form-control"
                           placeholder="Enter Engineer Phone"
                         />
@@ -417,17 +442,35 @@
                         <div class="row">
                           <div class="col-md-4">
                             <div class="checkbox">
-                              <label> <input type="checkbox" /> ATM </label>
+                              <label>
+                                <input
+                                  type="checkbox"
+                                  name="engineer_field_ATM"
+                                />
+                                ATM
+                              </label>
                             </div>
                           </div>
                           <div class="col-md-4">
                             <div class="checkbox">
-                              <label> <input type="checkbox" /> Airport </label>
+                              <label>
+                                <input
+                                  type="checkbox"
+                                  name="engineer_field_AIR"
+                                />
+                                Airport
+                              </label>
                             </div>
                           </div>
                           <div class="col-md-4">
                             <div class="checkbox">
-                              <label> <input type="checkbox" /> Telecom </label>
+                              <label>
+                                <input
+                                  type="checkbox"
+                                  name="engineer_field_TEL"
+                                />
+                                Telecom
+                              </label>
                             </div>
                           </div>
                         </div>
@@ -444,12 +487,12 @@
                       </button>
                     </div>
                     <div class="col-md-3">
-                      <button type="submit" class="btn btn-primary btn-block">
-                        Submit & Add New
-                      </button>
-                    </div>
-                    <div class="col-md-3">
-                      <button type="submit" class="btn btn-dark btn-block">
+                      <button
+                        type="submit"
+                        class="btn btn-dark btn-block"
+                        formnovalidate
+                        formaction="/dashboard"
+                      >
                         Cancel
                       </button>
                     </div>
