@@ -38,8 +38,7 @@ class Users:
         try:
             conn = dbInstance.connectToDatabase()
             cur = conn.cursor()
-            sql = """SELECT user_first_name,user_last_name,user_email,user_name,
-            CASE WHEN user_status =1 THEN 'Admin' WHEN user_status=0 THEN 'Ordinary' ELSE 'Unknown' END AS Status,user_id FROM users
+            sql = """SELECT * FROM users
             """
             cur.execute(sql)
             self.theUsers = cur.fetchall()

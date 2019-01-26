@@ -869,7 +869,7 @@ def all_engineers():
         return render_template('view_engineers.html', allTheEngineers=theReturnedEngineers,currentUser=LoggedInUser1)
     return redirect(url_for('index'))
 
-@app.route('/all_the_engineers/<int:engineer_id>', methods=['GET','DELETE'])
+@app.route('/all_the_engineers/<int:engineer_id>', methods=['GET','DELETE', 'POST'])
 def delete_engineer(engineer_id):
     LoggedInUser = session['username']
     LoggedInUser1 = usersInstance.checkUserRights(LoggedInUser)
