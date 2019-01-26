@@ -254,25 +254,25 @@
           <h3 class="box-title">New Ticket Information</h3>
         </div>
         <div class="box-body">
-          <form role="form">
+            {% include '_messages.html' %}
+          <form role="form" action="/add_ticket" method="POST">
             <div class="box-body">
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="CustomerFirstName">Ticket Assigned To</label>
-                    <select class="form-control">
-                      <option>option 1</option>
-                      <option>option 2</option>
-                      <option>option 3</option>
-                      <option>option 4</option>
-                      <option>option 5</option>
+                    <select class="form-control" name="ticket_assigned_to">
+                        <option selected>-None-</option>
+                        {% for eachEngineer in theEngineers%}
+                        <option>{{eachEngineer[0]}}</option>
+                        {% endfor%}
                     </select>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="CustomerLastName">Ticket Status</label>
-                    <select class="form-control">
+                    <select class="form-control" name="ticket_status">
                       <option>Open</option>
                       <option>Closed</option>
                       <option>Pending</option>
@@ -284,19 +284,18 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="CustomerProduct">Client Name</label>
-                    <select class="form-control">
-                      <option>option 1</option>
-                      <option>option 2</option>
-                      <option>option 3</option>
-                      <option>option 4</option>
-                      <option>option 5</option>
+                    <select class="form-control" name="ticket_client">
+                        <option selected>-None-</option>
+                        {% for eachClient in theClients%}
+                        <option>{{eachClient[0]}}</option>
+                        {% endfor%}
                     </select>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="SiteID">Site ID</label>
-                    <input type="text" class="form-control" placeholder="Enter Site ID">
+                    <input type="text" name="ticket_site_id" class="form-control" placeholder="Enter Site ID">
                   </div>
                 </div>
               </div>
@@ -304,18 +303,17 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="PONumber">PO Number</label>
-                    <input type="text" class="form-control" placeholder="Enter PO Number">
+                    <input type="text" name="ticket_po_number" class="form-control" placeholder="Enter PO Number">
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="CustomerAddress">Work Order Type</label>
-                    <select class="form-control">
-                      <option>option 1</option>
-                      <option>option 2</option>
-                      <option>option 3</option>
-                      <option>option 4</option>
-                      <option>option 5</option>
+                    <select class="form-control" name="ticket_wo_type">
+                        <option selected>-None-</option>
+                        {% for eachWorkOrderType in theWorkOrderTypes%}
+                        <option>{{eachWorkOrderType[0]}}</option>
+                        {% endfor%}
                     </select>
                   </div>
                 </div>
@@ -325,7 +323,7 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="CustomerProduct">Ticket Priority</label>
-                    <select class="form-control">
+                    <select class="form-control" name="ticket_priority">
                       <option>High</option>
                       <option>Medium</option>
                       <option>Low</option>
@@ -335,7 +333,7 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="TicketExpiresAfter">Ticket Expires After (Hours):</label>
-                    <input type="text" class="form-control" placeholder="Enter Ticket Expires After (Hours)">
+                    <input type="text" name="hours_to_add" class="form-control" placeholder="Enter Ticket Expires After (Hours)">
                   </div>
                 </div>
               </div>
@@ -344,7 +342,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="TicketReason">Ticket Reason</label>
-                    <textarea name="" id="" cols="30" rows="4" class="form-control"></textarea>
+                    <textarea name="ticket_reason" id="ticket_reason" cols="30" rows="4" class="form-control"></textarea>
                   </div>
                 </div>
               </div>
@@ -357,7 +355,7 @@
                       <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                       </div>
-                      <input type="text" class="form-control pull-right" id="datepicker1">
+                      <input type="text" name="ticket_planned_visit_date" class="form-control pull-right" id="datepicker1">
                     </div>
                   </div>
                 </div>
@@ -368,7 +366,7 @@
                       <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                       </div>
-                      <input type="text" class="form-control pull-right" id="datepicker2">
+                      <input type="text" name="ticket_actual_visit_date" class="form-control pull-right" id="datepicker2">
                     </div>
                   </div>
                 </div>
@@ -379,25 +377,25 @@
                       <div class="row">
                         <div class="col-md-3">
                           <label>
-                            <input type="checkbox">
+                            <input type="checkbox" name="ATM">
                             ATM
                           </label>
                         </div>
                         <div class="col-md-3">
                           <label>
-                            <input type="checkbox">
+                            <input type="checkbox" name="airport">
                             AIRPORT
                           </label>
                         </div>
                         <div class="col-md-3">
                           <label>
-                            <input type="checkbox">
+                            <input type="checkbox" name="telecom">
                             TELECOM
                           </label>
                         </div>
                         <div class="col-md-3">
                           <label>
-                            <input type="checkbox">
+                            <input type="checkbox" name="fleet">
                             FLEET
                           </label>
                         </div>
@@ -415,10 +413,7 @@
                   <button type="submit" class="btn btn-success btn-block">Submit</button>
                 </div>
                 <div class="col-md-3">
-                  <button type="submit" class="btn btn-primary btn-block">Submit & Add New</button>
-                </div>
-                <div class="col-md-3">
-                  <button type="submit" class="btn btn-dark btn-block">Cancel</button>
+                  <button type="submit" class="btn btn-dark btn-block" formaction="/dashboard" formnovalidate>Cancel</button>
                 </div>
               </div>
             </div>
