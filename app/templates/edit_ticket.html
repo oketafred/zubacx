@@ -1,466 +1,309 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title> Zubacz Uganda | Edit Ticket</title>
-    <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static',filename='css/styles.css') }}">
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Zubacx | New Ticket Page</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.7 -->
+  <link rel="stylesheet" href="{{ url_for('static',filename='vendor/bootstrap/dist/css/bootstrap.min.css') }}">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{{ url_for('static',filename='vendor/font-awesome/css/font-awesome.min.css') }}">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="{{ url_for('static',filename='vendor/Ionicons/css/ionicons.min.css') }}">
+  <!-- Bootstrap datepicker -->
+  <link rel="stylesheet" href="{{ url_for('static',filename='vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{{ url_for('static',filename='dist/css/AdminLTE.min.css') }}">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="{{ url_for('static',filename='dist/css/skins/_all-skins.min.css') }}">
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  <!-- Google Font -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
+<body class="hold-transition fixed skin-blue sidebar-mini">
+<!-- Site wrapper -->
+<div class="wrapper">
 
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <!-- <a class="navbar-brand" href="#">Navbar</a> -->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
-	    <span class="navbar-toggler-icon"></span>
-	  </button>
+    <header class="main-header">
 
-        <div class="collapse navbar-collapse" id="navbarColor03">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{ url_for('dashboard') }}">TICKETS <span class="sr-only">(current)</span></a>
-                </li>
-                {% if currentUser[23] ==0:%}
-                <li class="nav-item">
-                    <a class="nav-link" href="/robot">CUSTOMERS</a>
-                </li>
-                {% else:%}
-                <li class="nav-item">
-                    <a class="nav-link" href="/all_clients">CUSTOMERS</a>
-                </li>
-                {% endif%}
-                <li class="nav-item">
-                    <a class="nav-link" href="/tasks">TASKS</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/reports">REPORT</a>
-                </li>
+        <!-- Logo -->
+        <a href="../../index2.html" class="logo">
+         <!-- mini logo for sidebar mini 50x50 pixels -->
+         <span class="logo-mini"><b>Zub</b>U</span>
+         <!-- logo for regular state and mobile devices -->
+         <span class="logo-lg">
+           <img src="{{ url_for('static',filename='dist/img/ZubaCx_Logo.png') }}" height="40px" alt="">
+         </span>
+       </a>
+     
+         <!-- Header Navbar: style can be found in header.less -->
+         <nav class="navbar navbar-static-top">
+           <!-- Sidebar toggle button-->
+           <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+             <span class="sr-only">Toggle navigation</span>
+           </a>
+           <!-- Navbar Right Menu -->
+           <div class="navbar-custom-menu">
+             <ul class="nav navbar-nav">
+               <!-- User Account: style can be found in dropdown.less -->
+               <li class="dropdown user user-menu">
+                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                   <img src="{{ url_for('static',filename='dist/img/user2-160x160.jpg') }}" class="user-image" alt="User Image">
+                   <span class="hidden-xs">{{currentUser[3]}}</span>
+                 </a>
+                 <ul class="dropdown-menu">
+                   <!-- User image -->
+                   <li class="user-header">
+                     <img src="{{ url_for('static',filename='dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
+     
+                     <p>
+                         {{currentUser[3]}} - ({{currentUser[1]}} {{currentUser[2]}})
+                     </p>
+                   </li>
+                   <!-- Menu Footer-->
+                   <li class="user-footer">
+                     <div class="pull-left">
+                       <a href="#" class="btn btn-default btn-flat">Profile</a>
+                     </div>
+                     <div class="pull-right">
+                       <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                     </div>
+                   </li>
+                 </ul>
+               </li>
+             </ul>
+           </div>
+     
+         </nav>
+       </header>
 
-                {% if currentUser[13] ==0:%}
-                <li class="nav-item">
-                    <a class="nav-link" href="robot">OPEN TICKETS</a>
-                </li>
-                {% else:%}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('new_ticket') }}">OPEN TICKETS</a>
-                </li>
-                {% endif%}
-            </ul>
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link ml-3" href="#">Zubacz Uganda <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item ml-3">
-                    <a class="nav-link" href="#"><i class="fas fa-search"></i></a>
-                </li>
-                <li class="nav-item ml-3">
-                    <a class="nav-link" href="#"><i class="fas fa-plus"></i></a>
-                </li>
-                <li class="nav-item ml-3">
-                    <a class="nav-link" href="#"><i class="fas fa-bell"></i></a>
-                </li>
-                <li class="nav-item ml-3">
-                    <a class="nav-link" href="#"><i class="fas fa-cog"></i></a>
-                </li>
-                <li class="nav-item ml-3">
-                    <a class="nav-link" href="#"><i class="fas fa-user-circle" style="font-size: 25px"></i></a>
-                </li>
-            </ul>
+  <!-- =============================================== -->
+
+  <!-- Left side column. contains the sidebar -->
+  <aside class="main-sidebar">
+      <!-- sidebar: style can be found in sidebar.less -->
+      <section class="sidebar">
+        <!-- Sidebar user panel -->
+        <div class="user-panel">
+          <div class="pull-left image">
+            <img src="{{ url_for('static',filename='dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
+          </div>
+          <div class="pull-left info">
+            <p>{{currentUser[3]}}</p>
+            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+          </div>
         </div>
-    </nav>
-
-    <!-- Side -->
-    <div class="wrapper">
-        <!-- Sidebar  -->
-        <nav id="sidebar">
-            <ul class="list-unstyled components">
-                <li class="mt-2 mb-2">
-                    <a href="#"><i class="fas fa-building"></i> Entries</a>
-                </li>
-                <li class="active mt-2 mb-2" data-spy="scroll">
-                    <a href="#homeSubmenu1" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle"><i class="fas fa-folder-open"></i> New</a>
-                    <ul class="collapse list-unstyled" id="homeSubmenu1">
-                        {% if currentUser[9] ==0:%} {% else:%}
-                        <li>
-                            <a href="{{ url_for('new_users') }}">Add New User</a>
-                        </li>
-                        {%endif%} {% if currentUser[13] ==0:%} {% else:%}
-                        <li>
-                            <a href="{{ url_for('new_ticket') }}">Add New Ticket</a>
-                        </li>
-                        {%endif%} {% if currentUser[23] ==0:%} {% else:%}
-                        <li>
-                            <a href="{{ url_for('new_customer') }}">Add New Client</a>
-                        </li>
-
-                        {%endif%} {% if currentUser[24] ==0:%} {% else:%}
-                        <li>
-                            <a href="{{ url_for('new_engineer') }}">Add New Engineer</a>
-                        </li>
-                        {%endif%} {% if currentUser[25] ==0:%} {% else:%}
-                        <li>
-                            <a href="{{ url_for('new_equipment') }}">Add New Equipment</a>
-                        </li>
-                        {%endif%} {% if currentUser[26] ==0:%} {% else:%}
-                        <li>
-                            <a href="{{ url_for('new_workorder') }}">Add New Work Order</a>
-                        </li>
-                        {%endif%}
-                    </ul>
-                </li>
-                <li class="mt-2 mb-2">
-                    <a href="#"><i class="fas fa-wifi"></i> Ticket Feeds</a>
-                </li>
-
-                <li class="active mt-2 mb-2" data-spy="scroll">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle"><i class="fas fa-folder-open"></i> Views</a>
-                    <ul class="collapse list-unstyled" id="homeSubmenu">
-                        {% if currentUser[16] ==1:%}
-                        <li>
-                            <a href="/all_open_and_overdue_tickets">All Tickets</a>
-                        </li>
-
-                        <li>
-                            <a href="/open_and_overdue_tickets">Open Tickets</a>
-                        </li>
-                        <li>
-                            <a href="/closed_and_overdue_tickets">Closed Tickets</a>
-                        </li>
-                        <li>
-                            <a href="/low_priority_and_overdue_tickets">Overdue Tickets</a>
-                        </li>
-
-                        <li>
-                            <a href="/all_my_open_and_overdue_tickets">My Tickets</a>
-                        </li>
-                        <li>
-                            <a href="/my_open_and_overdue_tickets">My Open Tickets</a>
-                        </li>
-                        <li>
-                            <a href="/my_closed_and_overdue_tickets">My Closed Tickets</a>
-                        </li>
-                        <li>
-                            <a href="/my_low_priority_and_overdue_tickets">My Overdue Tickets</a>
-                        </li>
-
-                        {% else:%} {% if currentUser[13] ==1:%}
-
-                        <li>
-                            <a href="/all_my_open_and_overdue_tickets">My Tickets</a>
-                        </li>
-                        <li>
-                            <a href="/my_open_and_overdue_tickets">My Open Tickets</a>
-                        </li>
-                        <li>
-                            <a href="/my_closed_and_overdue_tickets">My Closed Tickets</a>
-                        </li>
-                        <li>
-                            <a href="/my_low_priority_and_overdue_tickets">My Overdue Tickets</a>
-                        </li>{% else:%} {%endif%} {%endif%}
-                    </ul>
-                </li>
+  
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        <ul class="sidebar-menu" data-widget="tree">
+          <li class="active">
+            <a href="{{ url_for('dashboard') }}">
+              <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+            </a>
+          </li>
+                  <li class="treeview">
+            <a href="#">
+              <i class="fa fa-hacker-news"></i>
+              <span>New</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+                <small class="label pull-right bg-green">new</small>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+                {% if currentUser[9] ==0:%} {% else:%}
+              <li><a href="{{ url_for('new_users') }}"><i class="fa fa-circle-o"></i> Add New User</a></li>
+              {%endif%} {% if currentUser[13] ==0:%} {% else:%}
+              <li><a href="{{ url_for('new_ticket') }}"><i class="fa fa-circle-o"></i> Add New Ticket</a></li>
+              {%endif%} {% if currentUser[23] ==0:%} {% else:%}
+              <li><a href="{{ url_for('new_customer') }}"><i class="fa fa-circle-o"></i> Add New Customer</a></li>
+              {%endif%} {% if currentUser[24] ==0:%} {% else:%}
+              <li><a href="{{ url_for('new_engineer') }}"><i class="fa fa-circle-o"></i> Add New Engineer</a></li>
+              {%endif%} {% if currentUser[25] ==0:%} {% else:%}
+              <li><a href="{{ url_for('new_equipment') }}"><i class="fa fa-circle-o"></i> Add New Equipment</a></li>
+              {%endif%} {% if currentUser[26] ==0:%} {% else:%}
+              <li><a href="{{ url_for('new_workorder') }}"><i class="fa fa-circle-o"></i> Add New Work Order</a></li>
+              {%endif%}
             </ul>
-        </nav>
-        <!-- Page Content  -->
-        <div id="content" class="mt-5">
+          </li>
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-street-view"></i>
+              <span>Views</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+                <small class="label pull-right bg-primary">views</small>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+                {% if currentUser[16] ==1:%}
+              <li><a href="/all_open_and_overdue_tickets"><i class="fa fa-circle-o"></i> All Tickets</a></li>
+              <li><a href="/open_and_overdue_tickets"><i class="fa fa-circle-o"></i> Open Tickets</a></li>
+              <li><a href="/closed_and_overdue_tickets"><i class="fa fa-circle-o"></i> Closed Tickets</a></li>
+              <li><a href="/low_priority_and_overdue_tickets"><i class="fa fa-circle-o"></i> Overdue Tickets</a></li>
+              <li><a href="/all_my_open_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Tickets</a></li>
+              <li><a href="/my_open_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Open Tickets</a></li>
+              <li><a href="/my_closed_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Closed Tickets</a></li>
+              <li><a href="/my_low_priority_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Overdue Tickets</a></li>
+              {% else:%} {% if currentUser[13] ==1:%}
+              <li><a href="/all_my_open_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Tickets</a></li>
+              <li><a href="/my_open_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Open Tickets</a></li>
+              <li><a href="/my_closed_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Closed Tickets</a></li>
+              <li><a href="/my_low_priority_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Overdue Tickets</a></li>
+              {% else:%} {%endif%} {%endif%}
+            </ul>
+          </li>
+          <li class="">
+            <a href="{{ url_for('view_all_tickets') }}">
+              <i class="fa fa-ticket"></i> <span>Tickets</span>
+            </a>
+          </li>
+          {% if currentUser[23] ==0:%}
+          <li class="">
+            <a href="/robot">
+              <i class="fa fa-user-o"></i> <span>Customers</span>
+            </a>
+            
+          </li>
+          {% else:%}
+          <li class="">
+              <a href="/all_clients">
+                <i class="fa fa-user-o"></i> <span>Customers</span>
+              </a>
+              
+            </li>
+            {% endif%}
+          <li class="">
+            <a href="/tasks">
+              <i class="fa fa-tasks"></i> <span>Tasks</span>
+            </a>
+          </li>
+          <li class="">
+            <a href="/reports">
+              <i class="fa fa-file-pdf-o"></i> <span>Reports</span>
+            </a>
+          </li>
+          {% if currentUser[13] ==0:%}
+          <li class="">
+            <a href="/robot">
+              <i class="fa fa-ticket"></i> <span>Open Tickets</span>
+            </a>
+          </li>
+          {% else:%}
+          <li class="">
+              <a href="{{ url_for('new_ticket') }}">
+                <i class="fa fa-ticket"></i> <span>Open Tickets</span>
+              </a>
+            </li>
+          {% endif%}
+          <li>
+            <a href="pages/calendar.html">
+              <i class="fa fa-calendar"></i> <span>Calendar</span>
+              <span class="pull-right-container">
+                <small class="label pull-right bg-red">3</small>
+                <small class="label pull-right bg-blue">17</small>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="pages/mailbox/mailbox.html">
+              <i class="fa fa-envelope"></i> <span>Mailbox</span>
+              <span class="pull-right-container">
+                <small class="label pull-right bg-yellow">12</small>
+                <small class="label pull-right bg-green">16</small>
+                <small class="label pull-right bg-red">5</small>
+              </span>
+            </a>
+          </li>
+        </ul>
+      </section>
+      <!-- /.sidebar -->
+    </aside>
 
-            <h4>Edit Ticket Template</h4>
-            <hr>
-            <h5>Ticket Information</h5>
+  <!-- =============================================== -->
 
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        New Ticket
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">New Ticket</li>
+      </ol>
+    </section>
 
-            {% include '_messages.html'%}
+    <!-- Main content -->
+    <section class="content">
 
-            <form class="mt-4" action="/edit_ticket/{{allTheTickets[0]}}" method="POST">
-                <div class="form-row">
-                    <div class="form-group col-md-4" id="trialImages">
-                        <label class="text-info" for="ticket_assigned_to">Ticket Assigned To</label>
-                        <select name="ticket_assigned_to_edit" id="inputState" class="form-control">
-                    
-                    {% for eachEngineer in theEngineers%}
-                    <option>{{eachEngineer[0]}}</option>
-                    {% endfor%}
-                    <option selected>{{allTheTickets[1]}}</option>
-                  </select>
-                    </div>
-                    <div class="form-group col-md-4" id="trialImages">
-                        <label class="text-info" for="ticket_status">Ticket Status</label>
-                        <select id="inputState" name="ticket_status_edit" class="form-control">
-                    <option selected>{{allTheTickets[2]}}</option>
-                    <option>Open</option>
-                    <option>Closed</option>
-                    <option>Pending</option>
-
-                  </select>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-4" id="trialImages">
-                        <label class="text-info" for="client_name">Client Name</label>
-                        <select id="inputState" name="ticket_client_edit" class="form-control">
-                      
-                      {% for eachClient in theClients%}
-                      <option>{{eachClient[0]}}</option>
-                      {% endfor%}
-                      <option selected>{{allTheTickets[6]}}</option>
-                    </select>
-                    </div>
-                    <div class="form-group col-md-4" id="trialImages">
-                        <label class="text-info" for="ticket_id">Site ID</label>
-                        <input id="ticket_site_id_edit" type="text" value="{{allTheTickets[23]}}" name="ticket_site_id_edit" class="form-control" placeholder="Site ID">
-                        <i class="fa fa-star fa-lg fa-fw" aria-hidden="true"></i>
-                        <div class="invalid-feedback">
-                            Id is invalid
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-4" id="trialImages">
-                        <label class="text-info" for="inputCity">PO Number</label>
-                        <input id="ticket_po_number_edit" type="text" value="{{allTheTickets[7]}}" name="ticket_po_number_edit" class="form-control" placeholder="PO Number">
-                        <i class="fa fa-book fa-lg fa-fw" aria-hidden="true"></i>
-                        <div class="invalid-feedback">
-                            PO is invalid
-                        </div>
-                    </div>
-                    <div class="form-group col-md-4" id="trialImages">
-                        <label class="text-info" for="inputZip">Work Order Type</label>
-                        <select id="inputState" name="ticket_wo_type_edit" class="form-control">
-                    <option selected>-None-</option>
-                    {% for eachWorkOrderType in theWorkOrderTypes%}
-                    <option>{{eachWorkOrderType[0]}}</option>
-                    {% endfor%}
-                    <option selected>{{allTheTickets[8]}}</option>
-                  </select>
-                    </div>
-                </div>
-
-
-                <div class="form-row">
-
-                    <div class="form-group col-md-4" id="trialImages">
-                        <label class="text-info" for="inputZip">Ticket Priority</label>
-                        <select id="inputState" name="ticket_priority_edit" class="form-control">
-                            <option>High</option>
-                            <option>Medium</option>
-                            <option>Low</option>
-                            <option selected>{{allTheTickets[13]}}</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-4" id="trialImages">
-                        <label class="text-info" for="inputCity">Ticket Expires After (Hours):</label>
-                        <input id="hours_to_add_edit" type="text" value="0" name="hours_to_add_edit" class="form-control" placeholder="Expires After (Hours)">
-                        <i class="fa fa-clock fa-lg fa-fw" aria-hidden="true"></i>
-                        <div class="invalid-feedback">
-                            Hours is invalid
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-8" id="trialImages">
-                        <label class="text-info" for="reason">Reason for Tickets</label>
-                        <textarea name="ticket_reason_edit" class="form-control" cols="30" rows="2">{{allTheTickets[9]}}</textarea>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-4" id="trialImages">
-                        <label class="text-info" for="inputCity">Planned Visit Date</label>
-                        <input type="date" name="ticket_planned_visit_date_edit" value="{{allTheTickets[11]}}" class="form-control">
-                    </div>
-                    <div class="form-group col-md-4" id="trialImages">
-                        <label class="text-info" for="inputZip">Actual Visit Date</label>
-                        <input type="date" name="ticket_actual_visit_date_edit" value="{{allTheTickets[12]}}" class="form-control">
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-2">
-                        {% if allTheTickets[25] == 1 %}
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="ATM_edit" class="custom-control-input" id="customCheck1" checked>
-                            <label class="custom-control-label text-info" for="customCheck1">ATM</label>
-                        </div>
-                        {% else %}
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="ATM_edit" class="custom-control-input" id="customCheck1">
-                            <label class="custom-control-label text-info" for="customCheck1">ATM</label>
-                        </div>
-                        {% endif %}
-                        
-                    </div>
-                    <div class="col-md-2">
-                        {% if allTheTickets[25] == 2 %}
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="airport_edit" class="custom-control-input" id="customCheck2" checked>
-                            <label class="custom-control-label text-info" for="customCheck2">AIRPORT</label>
-                        </div>
-                        {% else %}
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="airport_edit" class="custom-control-input" id="customCheck2">
-                            <label class="custom-control-label text-info" for="customCheck2">AIRPORT</label>
-                        </div>
-                        {% endif%}
-                       
-                    </div>
-                    <div class="col-md-2">
-                        {% if allTheTickets[25] == 3 %}
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="telecom_edit" class="custom-control-input" id="customCheck3" checked>
-                            <label class="custom-control-label text-info" for="customCheck3">TELECOM SITE</label>
-                        </div>
-                        {% else %}
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="telecom_edit" class="custom-control-input" id="customCheck3">
-                            <label class="custom-control-label text-info" for="customCheck3">TELECOM SITE</label>
-                        </div>
-                        {% endif%}
-                        
-                    </div>
-
-                    <div class="col-md-2">
-                        {% if allTheTickets[25] == 4 %}
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="fleet_edit" class="custom-control-input" id="customCheck4" checked>
-                            <label class="custom-control-label text-info" for="customCheck4">FLEET SITE</label>
-                        </div>
-                        {% else %}
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="fleet_edit" class="custom-control-input" id="customCheck4">
-                            <label class="custom-control-label text-info" for="customCheck4">FLEET SITE</label>
-                        </div>
-                        {% endif%}
-                        
-                    </div>
-                </div>
-
-
-                <div class="form-row">
-                    <div class="form-group col-md-8" id="trialImages">
-                        <label class="text-info" for="reason">Ticket Root Cause</label>
-                        <textarea name="ticket_root_cause_edit" value="#" class="form-control" cols="30" rows="2">{{allTheTickets[14]}}</textarea>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-8" id="trialImages">
-                        <label class="text-info" for="reason">Action taken</label>
-                        <textarea name="ticket_action_taken_edit" value="#" class="form-control" cols="30" rows="2">{{allTheTickets[15]}}</textarea>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group col-md-8" id="trialImages">
-                        <label class="text-info" for="reason_pending">Reason why the ticket is still pending(If applicable)</label>
-                        <textarea name="ticket_pending_reason_edit" value="#" class="form-control" cols="30" rows="2">{{allTheTickets[16]}}</textarea>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group col-md-8" id="trialImages">
-                        <label class="text-info" for="additional_note">Additional Note:</label>
-                        <textarea id="ticket_additional_note_edit" name="ticket_additional_note_edit" value="#" class="form-control" cols="30" rows="2">{{allTheTickets[22]}}</textarea>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group col-md-2">
-                        <label class="text-info" for="inputCity">Dispatch Time</label>
-                        <input type="time" value="{{allTheTickets[17]}}" name="ticket_dispatch_time" class="form-control">
-                    </div>
-                    <div class="form-group col-md-2">
-                        <label class="text-info" for="inputZip">Arrival Time</label>
-                        <input type="time" value="{{allTheTickets[18]}}" name="ticket_arrival_time" class="form-control">
-                    </div>
-                    <div class="form-group col-md-2">
-                        <label class="text-info" for="inputZip">Starting Time</label>
-                        <input type="time" value="{{allTheTickets[19]}}" name="ticket_start_time" class="form-control">
-                    </div>
-                    <div class="form-group col-md-2">
-                        <label class="text-info" for="inputZip">Completion Time</label>
-                        <input type="time" value="{{allTheTickets[20]}}" name="ticket_complete_time" class="form-control">
-                    </div>
-                    <div class="form-group col-md-2">
-                        <label class="text-info" for="inputZip">Return Time</label>
-                        <input type="time" value="{{allTheTickets[21]}}" name="ticket_return_time" class="form-control">
-                    </div>
-                </div>
-                <div class="form-row mt-3">
-                    <div class="form-group col-md-2">
-                        <button type="submit" class="btn btn-success btn-block">Submit</button>
-                    </div>
-                    <div class="form-group col-md-2">
-                        <button type="cancel" class="btn btn-secondary btn-block">Cancel</button>
-                    </div>
-                </div>
-            </form>
-
-            <hr>
-
+      <!-- Default box -->
+      <div class="box box-primary">
+        <div class="box-header with-border">
+          <h3 class="box-title">New Ticket Information</h3>
         </div>
+        <div class="box-body">
+          
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <footer class="main-footer">
+    <div class="pull-right hidden-xs">
+      <b>Version</b> 1.0
     </div>
+    <strong>Copyright &copy; 2018. Zubacx</strong> All rights
+    reserved.
+  </footer>
 
-    <!-- WYSIWYG Editor -->
-    <script src="https://cdn.ckeditor.com/4.10.0/standard/ckeditor.js"></script>
-    <script>
-        CKEDITOR.replace('additional_note');
-    </script>
+</div>
+<!-- ./wrapper -->
 
-    <script src="{{ url_for('static',filename='scripts/app.js') }}"></script>
+<!-- jQuery 3 -->
+<script src="{{ url_for('static',filename='vendor/jquery/dist/jquery.min.js') }}"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="{{ url_for('static',filename='vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+<!-- SlimScroll -->
+<script src="{{ url_for('static',filename='vendor/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
+<!-- Bootstrap DatePicker -->
+<script src="{{ url_for('static',filename='vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
+<!-- FastClick -->
+<script src="{{ url_for('static',filename='vendor/fastclick/lib/fastclick.js') }}"></script>
+<!-- AdminLTE App -->
+<script src="{{ url_for('static',filename='dist/js/adminlte.min.js') }}"></script>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script>
+  $(document).ready(function () {
+    $('.sidebar-menu').tree()
 
+    //Date picker 1
+    $('#datepicker1').datepicker({
+      autoclose: true
+    })
 
-    <script type="text/javascript">
-        document.getElementById('ticket_site_id_edit').addEventListener('blur', ticket_site_id_edit);
-        document.getElementById('ticket_po_number_edit').addEventListener('blur', ticket_po_number_edit);
-        document.getElementById('hours_to_add_edit').addEventListener('blur', hours_to_add_edit);
+    //Date picker 2
+    $('#datepicker2').datepicker({
+      autoclose: true
+    })
 
-        function ticket_site_id_edit() {
-            const ticket_site_id_edit = document.getElementById('ticket_site_id_edit');
-            const re_ticket_site_id_edit = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
-
-            if (!re_ticket_site_id_edit.test(ticket_site_id_edit.value)) {
-                ticket_site_id_edit.classList.add('is-invalid');
-            } else {
-                ticket_site_id_edit.classList.remove('is-invalid');
-            }
-
-        }
-
-
-
-        function ticket_po_number_edit() {
-            const ticket_po_number_edit = document.getElementById('ticket_po_number_edit');
-            const re_ticket_po_number_edit = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
-
-            if (!re_ticket_po_number_edit.test(ticket_po_number_edit.value)) {
-                ticket_po_number_edit.classList.add('is-invalid');
-            } else {
-                ticket_po_number_edit.classList.remove('is-invalid');
-            }
-
-        }
-
-
-        function hours_to_add_edit() {
-            const hours_to_add_edit = document.getElementById('hours_to_add_edit');
-            const re_hours_to_add_edit = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
-
-            if (!re_hours_to_add_edit.test(hours_to_add_edit.value)) {
-                hours_to_add_edit.classList.add('is-invalid');
-            } else {
-                hours_to_add_edit.classList.remove('is-invalid');
-            }
-
-        }
-    </script>
-
-
-
+  })
+</script>
 </body>
-
 </html>

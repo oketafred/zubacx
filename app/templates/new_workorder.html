@@ -257,21 +257,18 @@
           <h3 class="box-title">New Work Order Information</h3>
         </div>
         <div class="box-body">
-          <form role="form">
-            <div class="box-body">
-              <form action="">
-                <div class="row">
-                <div class="col-md-6 padding-vertical">
-                  <input type="text" class="form-control" placeholder="Enter Work Order Type">
-                </div>
-                <div class="col-md-3 padding-vertical">
-                  <button class="btn btn-success btn-block">Submit & Save</button>
-                </div>
-                <div class="col-md-3 padding-vertical">
-                  <button class="btn btn-dark btn-block">Cancel</button>
-                </div>
+            {% include '_messages.html'%}
+          <form role="form" action="/add_work_order" method="POST">
+            <div class="row">
+              <div class="col-md-6 padding-vertical">
+                <input type="text" name="work_order_type" class="form-control" placeholder="Enter Work Order Type">
               </div>
-              </form>
+              <div class="col-md-3 padding-vertical">
+                <button class="btn btn-success btn-block">Submit</button>
+              </div>
+              <div class="col-md-3 padding-vertical">
+                <button class="btn btn-dark btn-block" formaction="/dashboard" formnovalidate>Cancel</button>
+              </div>
             </div>
           </form>
         </div>

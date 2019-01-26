@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Zubac Uganda | New Customer Page</title>
+    <title>Zubac Uganda | Edit Customer Page</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta
       content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
@@ -326,12 +326,12 @@
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1>New Customer</h1>
+          <h1>Edit Customer</h1>
           <ol class="breadcrumb">
             <li>
               <a href="#"><i class="fa fa-dashboard"></i> Home</a>
             </li>
-            <li class="active">New Customer</li>
+            <li class="active">Edit Customer</li>
           </ol>
         </section>
 
@@ -340,11 +340,11 @@
           <!-- Default box -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">New Customer Information</h3>
+              <h3 class="box-title">Edit Customer Information</h3>
             </div>
             <div class="box-body">
                 {% include '_messages.html'%}
-              <form role="form" action="/add_client" method="POST">
+              <form action="/edit_client/{{allTheClients[0]}}" method="POST">
                 <div class="box-body">
                   <div class="row">
                     <div class="col-md-6">
@@ -355,7 +355,8 @@
                         <input
                           type="text"
                           class="form-control"
-                          name="customer_name"
+                          name="customer_name_edit" 
+                          value="{{allTheClients[1]}}"
                           placeholder="Enter Customer Name"
                         />
                       </div>
@@ -366,7 +367,8 @@
                             <input
                               type="text"
                               class="form-control"
-                              name="customer_product" 
+                              name="customer_product_edit" 
+                              value="{{allTheClients[2]}}"
                               placeholder="Enter Customer Product"
                             />
                           </div>
@@ -381,7 +383,8 @@
                             <input
                               type="text"
                               class="form-control"
-                              name="customer_address" 
+                              name="customer_address_edit" 
+                              value="{{allTheClients[3]}}"
                               placeholder="Enter Customer Physical Address"
                             />
                           </div>
@@ -392,7 +395,8 @@
                             <input
                               type="text"
                               class="form-control"
-                              name="customer_phone" 
+                              name="customer_phone_edit" 
+                              value="{{allTheClients[5]}}"
                               placeholder="Enter Customer Phone"
                             />
                           </div>
@@ -405,9 +409,10 @@
                               >Customer Email Address</label
                             >
                             <input
-                              type="text"
+                              type="email"
                               class="form-control"
-                              name="customer_email"
+                              name="customer_email_edit" 
+                              value="{{allTheClients[4]}}"
                               placeholder="Enter Customer Email Address"
                             />
                           </div>
@@ -423,7 +428,12 @@
                       </button>
                     </div>
                     <div class="col-md-3">
-                      <button type="submit" class="btn btn-dark btn-block" formnovalidate formaction="/dashboard">
+                      <button type="submit" class="btn btn-danger btn-block" formnovalidate formaction="/all_the_clients/{{allTheClients[0]}}">
+                        Delete
+                      </button>
+                    </div>
+                    <div class="col-md-3">
+                      <button type="submit" class="btn btn-dark btn-block" formaction="/dashboard" formnovalidate>
                         Cancel
                       </button>
                     </div>
