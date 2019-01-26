@@ -247,7 +247,7 @@ def view_all_tickets():
         return render_template('all_tickets.html', allTheTickets=allTheTickets, currentUser=LoggedInUser1,myTickets=myTickets)
     return redirect(url_for('index'))
 
-@app.route('/dashboard')
+@app.route('/dashboard', methods=['GET', 'POST'])
 def dashboard():
     LoggedInUser = session['username']
     LoggedInUser1 = usersInstance.checkUserRights(LoggedInUser)
@@ -815,14 +815,14 @@ def all_clients():
         return render_template('our_clients.html', allTheClients=theReturnedClients,currentUser=LoggedInUser1)
     return redirect(url_for('index'))
 
-@app.route('/all_the_clients/<int:client_id>', methods=['GET','DELETE'])
+@app.route('/all_the_clients/<int:client_id>', methods=['GET','DELETE', 'POST'])
 def delete_client(client_id):
     LoggedInUser = session['username']
     LoggedInUser1 = usersInstance.checkUserRights(LoggedInUser)
     custInstance.delete_a_client(client_id)
     theReturnedClients = custInstance.get_all_clients()
     if g.username:
-        return render_template('view_clients.html', allTheClients=theReturnedClients,currentUser=LoggedInUser1)
+        return render_template('our_clients.html', allTheClients=theReturnedClients,currentUser=LoggedInUser1)
     return redirect(url_for('index'))
 
 @app.route('/the_client/<int:client_id>', methods=['GET'])
@@ -840,7 +840,7 @@ def get_client_details_for_edit(client_id):
     LoggedInUser1 = usersInstance.checkUserRights(LoggedInUser)
     theReturnedClient = custInstance.get_client_by_Id(client_id)
     if g.username:
-        return render_template('edit_client.html', allTheClients=theReturnedClient,currentUser=LoggedInUser1)
+        return render_template('edit_customer.html', allTheClients=theReturnedClient,currentUser=LoggedInUser1)
     return redirect(url_for('index'))
 
 @app.route('/edit_client/<int:client_id>', methods=['POST'])
@@ -856,7 +856,7 @@ def edit_client(client_id):
     custInstance.edit_a_client(client_id,clientName, clientProduct,clientAddress,clientPhone,clientEmail)
     theReturnedClients = custInstance.get_all_clients()
     if g.username:
-        return render_template('view_clients.html', allTheClients=theReturnedClients,currentUser=LoggedInUser1)
+        return render_template('our_clients.html', allTheClients=theReturnedClients,currentUser=LoggedInUser1)
     return redirect(url_for('index'))
 # OUR ENGINEERS
 

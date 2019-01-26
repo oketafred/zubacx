@@ -3,11 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<<<<<<< HEAD
     <title>Zubacx | New Engineer Page</title>
-=======
-    <title>Zubacx | New Equipments Page</title>
->>>>>>> c2c73192de912d0b90430d67068c118773452a87
     <!-- Tell the browser to be responsive to screen width -->
     <meta
       content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
@@ -62,7 +58,6 @@
   <body class="hold-transition fixed skin-blue sidebar-mini">
     <!-- Site wrapper -->
     <div class="wrapper">
-<<<<<<< HEAD
         <header class="main-header">
 
             <!-- Logo -->
@@ -118,79 +113,6 @@
 
       <!-- =============================================== -->
 
-=======
-      <header class="main-header">
-        <!-- Logo -->
-        <a href="../../index2.html" class="logo">
-          <!-- mini logo for sidebar mini 50x50 pixels -->
-          <span class="logo-mini"><b>Zub</b>U</span>
-          <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg">
-            <img
-              src="{{ url_for('static',filename='dist/img/ZubaCx_Logo.png') }}"
-              height="40px"
-              alt=""
-            />
-          </span>
-        </a>
-
-        <!-- Header Navbar: style can be found in header.less -->
-        <nav class="navbar navbar-static-top">
-          <!-- Sidebar toggle button-->
-          <a
-            href="#"
-            class="sidebar-toggle"
-            data-toggle="push-menu"
-            role="button"
-          >
-            <span class="sr-only">Toggle navigation</span>
-          </a>
-          <!-- Navbar Right Menu -->
-          <div class="navbar-custom-menu">
-            <ul class="nav navbar-nav">
-              <!-- User Account: style can be found in dropdown.less -->
-              <li class="dropdown user user-menu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img
-                    src="{{ url_for('static',filename='dist/img/user2-160x160.jpg') }}"
-                    class="user-image"
-                    alt="User Image"
-                  />
-                  <span class="hidden-xs">{{ currentUser[3] }}</span>
-                </a>
-                <ul class="dropdown-menu">
-                  <!-- User image -->
-                  <li class="user-header">
-                    <img
-                      src="{{ url_for('static',filename='dist/img/user2-160x160.jpg') }}"
-                      class="img-circle"
-                      alt="User Image"
-                    />
-
-                    <p>
-                      {{ currentUser[3] }} - ({{ currentUser[1] }}
-                      {{ currentUser[2] }})
-                    </p>
-                  </li>
-                  <!-- Menu Footer-->
-                  <li class="user-footer">
-                    <div class="pull-left">
-                      <a href="#" class="btn btn-default btn-flat">Profile</a>
-                    </div>
-                    <div class="pull-right">
-                      <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                    </div>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </header>
-
-      <!-- =============================================== -->
-
->>>>>>> c2c73192de912d0b90430d67068c118773452a87
       <!-- Left side column. contains the sidebar -->
       <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
@@ -403,7 +325,6 @@
         </section>
         <!-- /.sidebar -->
       </aside>
-<<<<<<< HEAD
 
       <!-- =============================================== -->
 
@@ -420,24 +341,6 @@
           </ol>
         </section>
 
-=======
-
-      <!-- =============================================== -->
-
-      <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-          <h1>New Engineer</h1>
-          <ol class="breadcrumb">
-            <li>
-              <a href="#"><i class="fa fa-dashboard"></i> Home</a>
-            </li>
-            <li class="active">New Engineer</li>
-          </ol>
-        </section>
-
->>>>>>> c2c73192de912d0b90430d67068c118773452a87
         <!-- Main content -->
         <section class="content">
           <!-- Default box -->
@@ -446,12 +349,7 @@
               <h3 class="box-title">New Engineer Information</h3>
             </div>
             <div class="box-body">
-<<<<<<< HEAD
               <form>
-=======
-              {% include '_messages.html' %}
-              <form action="/add_engineer" method="POST">
->>>>>>> c2c73192de912d0b90430d67068c118773452a87
                 <div class="box-body">
                   <div class="row">
                     <div class="col-md-6">
@@ -461,24 +359,13 @@
                         >
                         <input
                           type="text"
-<<<<<<< HEAD
-=======
                           name="engineer_first_name"
->>>>>>> c2c73192de912d0b90430d67068c118773452a87
                           class="form-control"
-                          placeholder="Enter Engineer First Name"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-md-6">
+                          />
                       <div class="form-group">
                         <label for="EngineerLastName">Engineer Last Name</label>
                         <input
                           type="text"
-<<<<<<< HEAD
-=======
-                          name="engineer_last_name"
->>>>>>> c2c73192de912d0b90430d67068c118773452a87
                           class="form-control"
                           placeholder="Enter Engineer Last Name"
                         />
@@ -493,10 +380,6 @@
                         >
                         <input
                           type="text"
-<<<<<<< HEAD
-=======
-                          name="engineer_email"
->>>>>>> c2c73192de912d0b90430d67068c118773452a87
                           class="form-control"
                           placeholder="Enter Email Address"
                         />
@@ -509,7 +392,6 @@
                         >
                         <input
                           type="text"
-<<<<<<< HEAD
                           class="form-control"
                           placeholder="Enter Engineer Physical Address"
                         />
@@ -527,27 +409,6 @@
                         />
                       </div>
                     </div>
-=======
-                          name="engineer_address"
-                          class="form-control"
-                          placeholder="Enter Engineer Physical Address"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="EngineerPhone">Engineer Phone</label>
-                        <input
-                          type="text"
-                          name="engineer_phone"
-                          class="form-control"
-                          placeholder="Enter Engineer Phone"
-                        />
-                      </div>
-                    </div>
->>>>>>> c2c73192de912d0b90430d67068c118773452a87
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="EngineersExpertise"
@@ -556,47 +417,17 @@
                         <div class="row">
                           <div class="col-md-4">
                             <div class="checkbox">
-<<<<<<< HEAD
                               <label> <input type="checkbox" /> ATM </label>
-=======
-                              <label>
-                                <input
-                                  type="checkbox"
-                                  name="engineer_field_ATM"
-                                />
-                                ATM
-                              </label>
->>>>>>> c2c73192de912d0b90430d67068c118773452a87
                             </div>
                           </div>
                           <div class="col-md-4">
                             <div class="checkbox">
-<<<<<<< HEAD
                               <label> <input type="checkbox" /> Airport </label>
-=======
-                              <label>
-                                <input
-                                  type="checkbox"
-                                  name="engineer_field_AIR"
-                                />
-                                Airport
-                              </label>
->>>>>>> c2c73192de912d0b90430d67068c118773452a87
                             </div>
                           </div>
                           <div class="col-md-4">
                             <div class="checkbox">
-<<<<<<< HEAD
                               <label> <input type="checkbox" /> Telecom </label>
-=======
-                              <label>
-                                <input
-                                  type="checkbox"
-                                  name="engineer_field_TEL"
-                                />
-                                Telecom
-                              </label>
->>>>>>> c2c73192de912d0b90430d67068c118773452a87
                             </div>
                           </div>
                         </div>
@@ -613,21 +444,12 @@
                       </button>
                     </div>
                     <div class="col-md-3">
-<<<<<<< HEAD
                       <button type="submit" class="btn btn-primary btn-block">
                         Submit & Add New
                       </button>
                     </div>
                     <div class="col-md-3">
                       <button type="submit" class="btn btn-dark btn-block">
-=======
-                      <button
-                        type="submit"
-                        class="btn btn-dark btn-block"
-                        formnovalidate
-                        formaction="/dashboard"
-                      >
->>>>>>> c2c73192de912d0b90430d67068c118773452a87
                         Cancel
                       </button>
                     </div>
