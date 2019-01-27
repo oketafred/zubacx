@@ -8,7 +8,8 @@ class Tickets:
     def add_ticket(self,ticket_assigned_to,ticket_opening_time,
         ticket_status,ticket_overdue_time,ticket_planned_visit_date,ticket_actual_visit_date,
         ticket_client,ticket_po_number,ticket_wo_type,ticket_reason,
-        ticket_priority,username,ticket_type,ticket_site_id):
+        ticket_priority,username,ticket_type,ticket_part_used,ticket_revisited_value,
+        ticket_returned_part_value,ticket_site_id):
         try:
             conn = dbInstance.connectToDatabase()
             cur = conn.cursor()
@@ -16,13 +17,15 @@ class Tickets:
             INSERT INTO tickets(ticket_assigned_to,ticket_opening_time,
             ticket_status,ticket_overdue_time,ticket_planned_visit_date,ticket_actual_visit_date,
             ticket_client,ticket_po_number,ticket_wo_type,ticket_reason,
-            ticket_priority,username,ticket_type,ticket_site_id) VALUES(
-            %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
+            ticket_priority,username,ticket_type,ticket_part_used,
+            ticket_revisited,ticket_part_returned,ticket_site_id) VALUES(
+            %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
             """
             cur.execute(sql,(ticket_assigned_to,ticket_opening_time,
             ticket_status,ticket_overdue_time,ticket_planned_visit_date,ticket_actual_visit_date,
             ticket_client,ticket_po_number,ticket_wo_type,ticket_reason,
-            ticket_priority,username,ticket_type,ticket_site_id))
+            ticket_priority,username,ticket_type,ticket_part_used,ticket_revisited_value,
+            ticket_returned_part_value,ticket_site_id))
             conn.commit()
             flash('Ticket Opened Successfully','success')
         except(Exception, psycopg2.DatabaseError) as e:
@@ -118,7 +121,7 @@ class Tickets:
             conn = dbInstance.connectToDatabase()
             cur = conn.cursor()
             theSql = Tickets().sqlStatment()
-            cur.execute(theSql+' Where ticket_priority is not null ORDER BY ticket_id DESC')
+            cur.execute(theSql+' Where username=%s is not null ORDER BY ticket_id DESC',[current_user])
             self.theTickets = cur.fetchall()
             return self.theTickets
         except(Exception, psycopg2.DatabaseError) as e:
@@ -134,8 +137,9 @@ class Tickets:
             conn = dbInstance.connectToDatabase()
             cur = conn.cursor()
             theSql = Tickets().sqlStatment()
-            theWhere = " Where ticket_status is not null ORDER BY ticket_id DESC"
-            cur.execute(theSql+theWhere)
+            theWhere = " Where ticket_status=%s ORDER BY ticket_id DESC"
+            theStatus = "Closed"
+            cur.execute(theSql+theWhere,[theStatus])
             self.theTickets = cur.fetchall()
             return self.theTickets
         except(Exception, psycopg2.DatabaseError) as e:
@@ -147,8 +151,9 @@ class Tickets:
             conn = dbInstance.connectToDatabase()
             cur = conn.cursor()
             theSql = Tickets().sqlStatment()
-            theWhere = " Where ticket_status is not null ORDER BY ticket_id DESC"
-            cur.execute(theSql+theWhere)
+            theWhere = " Where ticket_status=%s AND username=%s ORDER BY ticket_id DESC"
+            theStatus = "Closed"
+            cur.execute(theSql+theWhere,[theStatus,current_user])
             self.theTickets = cur.fetchall()
             return self.theTickets
         except(Exception, psycopg2.DatabaseError) as e:
@@ -161,8 +166,9 @@ class Tickets:
             conn = dbInstance.connectToDatabase()
             cur = conn.cursor()
             theSql = Tickets().sqlStatment()
-            theWhere = " Where ticket_status is not null ORDER BY ticket_id DESC"
-            cur.execute(theSql+theWhere)
+            theWhere = " Where ticket_status=%s ORDER BY ticket_id DESC"
+            theStatus = "Open"
+            cur.execute(theSql+theWhere,[theStatus])
             self.theTickets = cur.fetchall()
             return self.theTickets
         except(Exception, psycopg2.DatabaseError) as e:
@@ -174,8 +180,9 @@ class Tickets:
             conn = dbInstance.connectToDatabase()
             cur = conn.cursor()
             theSql = Tickets().sqlStatment()
-            theWhere = " Where ticket_status is not null ORDER BY ticket_id DESC"
-            cur.execute(theSql+theWhere)
+            theWhere = " Where ticket_status=%s AND username=%s ORDER BY ticket_id DESC"
+            theStatus = "Open"
+            cur.execute(theSql+theWhere,[theStatus,current_user])
             self.theTickets = cur.fetchall()
             return self.theTickets
         except(Exception, psycopg2.DatabaseError) as e:
@@ -184,11 +191,10 @@ class Tickets:
 
     def view_all_tickets_due_in_2_hours(self,current_user):
         try:
-            # import MySQLdb
             conn = dbInstance.connectToDatabase()
             cur = conn.cursor()
             theSql = Tickets().sqlStatment()
-            theWhere = " Where ticket_status is not null ORDER BY ticket_id DESC"
+            theWhere = " Where DATE_PART('hour', ticket_overdue_time::timestamp - now()::timestamp)<2 AND DATE_PART('hour', ticket_overdue_time::timestamp - now()::timestamp)>0 ORDER BY ticket_id DESC"
             cur.execute(theSql+theWhere)
             self.theTickets = cur.fetchall()
             return self.theTickets
@@ -202,8 +208,8 @@ class Tickets:
             conn = dbInstance.connectToDatabase()
             cur = conn.cursor()
             theSql = Tickets().sqlStatment()
-            theWhere = " Where ticket_status is not null ORDER BY ticket_id DESC"
-            cur.execute(theSql+theWhere)
+            theWhere = " Where DATE_PART('hour', ticket_overdue_time::timestamp - now()::timestamp)<2 AND DATE_PART('hour', ticket_overdue_time::timestamp - now()::timestamp)>0 AND username=%s ORDER BY ticket_id DESC"
+            cur.execute(theSql+theWhere,[current_user])
             self.theTickets = cur.fetchall()
             return self.theTickets
         except(Exception, psycopg2.DatabaseError) as e:
@@ -215,7 +221,7 @@ class Tickets:
             conn = dbInstance.connectToDatabase()
             cur = conn.cursor()
             theSql = Tickets().sqlStatment()
-            theWhere = " Where ticket_status is not null"
+            theWhere = " Where DATE_PART('hour', ticket_overdue_time::timestamp - now()::timestamp)<1 AND DATE_PART('hour', ticket_overdue_time::timestamp - now()::timestamp)>0 ORDER BY ticket_id DESC"
             cur.execute(theSql+theWhere)
             self.theTickets = cur.fetchall()
             return self.theTickets
@@ -229,8 +235,8 @@ class Tickets:
             conn = dbInstance.connectToDatabase()
             cur = conn.cursor()
             theSql = Tickets().sqlStatment()
-            theWhere = " Where ticket_status is not null ORDER BY ticket_id DESC"
-            cur.execute(theSql+theWhere)
+            theWhere = " Where DATE_PART('hour', ticket_overdue_time::timestamp - now()::timestamp)<1 AND DATE_PART('hour', ticket_overdue_time::timestamp - now()::timestamp)>0 AND username=%s ORDER BY ticket_id DESC"
+            cur.execute(theSql+theWhere,[current_user])
             self.theTickets = cur.fetchall()
             return self.theTickets
         except(Exception, psycopg2.DatabaseError) as e:
@@ -243,7 +249,7 @@ class Tickets:
             conn = dbInstance.connectToDatabase()
             cur = conn.cursor()
             theSql = Tickets().sqlStatment()
-            theWhere = " Where ticket_status is not null ORDER BY ticket_id DESC"
+            theWhere = " Where DATE_PART('hour', ticket_overdue_time::timestamp - now()::timestamp)<0 AND ticket_complete_time IS NULL ORDER BY ticket_id DESC"
             cur.execute(theSql+theWhere)
             self.theTickets = cur.fetchall()
             return self.theTickets
@@ -256,8 +262,9 @@ class Tickets:
             conn = dbInstance.connectToDatabase()
             cur = conn.cursor()
             theSql = Tickets().sqlStatment()
-            theWhere = " Where ticket_status is not null ORDER BY ticket_id DESC"
-            cur.execute(theSql+theWhere)
+            theWhere = " Where ticket_priority=%s ORDER BY ticket_id DESC"
+            theLowPriority = "Low"
+            cur.execute(theSql+theWhere,[theLowPriority])
             self.theTickets = cur.fetchall()
             return self.theTickets
         except(Exception, psycopg2.DatabaseError) as e:
@@ -270,8 +277,8 @@ class Tickets:
             conn = dbInstance.connectToDatabase()
             cur = conn.cursor()
             theSql = Tickets().sqlStatment()
-            theWhere = " Where ticket_status is not null ORDER BY ticket_id DESC"
-            cur.execute(theSql+theWhere)
+            theWhere = " Where DATE_PART('hour', ticket_overdue_time::timestamp - now()::timestamp)<0 AND ticket_complete_time IS NULL AND username=%s ORDER BY ticket_id DESC"
+            cur.execute(theSql+theWhere,[current_user])
             self.theTickets = cur.fetchall()
             return self.theTickets
         except(Exception, psycopg2.DatabaseError) as e:
@@ -282,8 +289,9 @@ class Tickets:
             conn = dbInstance.connectToDatabase()
             cur = conn.cursor()
             theSql = Tickets().sqlStatment()
-            theWhere = " Where ticket_status is not null ORDER BY ticket_id DESC"
-            cur.execute(theSql+theWhere)
+            theWhere = " Where ticket_priority=%s AND username=%s ORDER BY ticket_id DESC"
+            theLowPriority = "Low"
+            cur.execute(theSql+theWhere,[theLowPriority,current_user])
             self.theTickets = cur.fetchall()
             return self.theTickets
         except(Exception, psycopg2.DatabaseError) as e:
@@ -332,6 +340,15 @@ class Tickets:
             flash('User Deleted Successfully','success')
         except:
             flash('Error deleteing user from database','danger')
+    def delete_a_ticket(self, ticket_id):
+        try:
+            conn = dbInstance.connectToDatabase()
+            cur = conn.cursor()
+            cur.execute("DELETE FROM tickets WHERE ticket_id=%s",[ticket_id])
+            conn.commit()
+            flash('Ticket Deleted Successfully','success')
+        except:
+            flash('Error deleteing ticket from database','danger')
 
     def get_ticket_by_Id(self, ticket_id):
         try:
@@ -489,5 +506,63 @@ class Tickets:
         WHEN ticket_type=4 THEN 'Fleet Product' ELSE 'Unknown Product' 
         END AS ticket_types,ticket_reason,ticket_root_cause,ticket_assigned_to,
         ticket_dispatch_time,ticket_arrival_time,ticket_start_time,ticket_complete_time,
-        ticket_return_time FROM tickets ORDER BY ticket_opening_time DESC""")
+        ticket_return_time,ticket_part_used,ticket_revisited,ticket_part_returned FROM tickets ORDER BY ticket_opening_time DESC""")
         return self.ticket_counts
+    def number_of_open_atm(self):
+        try:
+            # import MySQLdb
+            conn = dbInstance.connectToDatabase()
+            cur = conn.cursor()
+            ticket_status = "Open"
+            ticket_type = 1
+            theSql = "Select count(*) from tickets Where ticket_status=%s and ticket_type=%s"
+            cur.execute(theSql,[ticket_status, ticket_type])
+            self.theTickets = cur.fetchall()
+            return self.theTickets
+        except(Exception, psycopg2.DatabaseError) as e:
+            print(e)
+            flash('Error retrieving teh count of open tickets from database','danger')
+    def number_of_open_air(self):
+        try:
+            # import MySQLdb
+            conn = dbInstance.connectToDatabase()
+            cur = conn.cursor()
+            ticket_status = "Open"
+            ticket_type = 2
+            theSql = "Select count(*) from tickets Where ticket_status=%s and ticket_type=%s"
+            cur.execute(theSql,[ticket_status, ticket_type])
+            self.theTickets = cur.fetchall()
+            return self.theTickets
+        except(Exception, psycopg2.DatabaseError) as e:
+            print(e)
+            flash('Error retrieving teh count of open tickets from database','danger')
+    def number_of_open_tel(self):
+        try:
+            # import MySQLdb
+            conn = dbInstance.connectToDatabase()
+            cur = conn.cursor()
+            ticket_status = "Open"
+            ticket_type = 3
+            theSql = "Select count(*) from tickets Where ticket_status=%s and ticket_type=%s"
+            cur.execute(theSql,[ticket_status, ticket_type])
+            self.theTickets = cur.fetchall()
+            return self.theTickets
+        except(Exception, psycopg2.DatabaseError) as e:
+            print(e)
+            flash('Error retrieving teh count of open tickets from database','danger')
+
+    def number_of_open_fle(self):
+        try:
+            # import MySQLdb
+            conn = dbInstance.connectToDatabase()
+            cur = conn.cursor()
+            ticket_status = "Open"
+            ticket_type = 4
+            theSql = "Select count(*) from tickets Where ticket_status=%s and ticket_type=%s"
+            cur.execute(theSql,[ticket_status, ticket_type])
+            self.theTickets = cur.fetchall()
+            return self.theTickets
+        except(Exception, psycopg2.DatabaseError) as e:
+            print(e)
+            flash('Error retrieving teh count of open tickets from database','danger')
+    

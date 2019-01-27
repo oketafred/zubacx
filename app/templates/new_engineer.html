@@ -272,13 +272,18 @@
                   </span>
                 </a>
               </li>
-              <li>
-                <a href="pages/mailbox/mailbox.html">
-                  <i class="fa fa-envelope"></i> <span>Mailbox</span>
+              <li style="height:80px">
+                <a>
                   <span class="pull-right-container">
-                    <small class="label pull-right bg-yellow">12</small>
-                    <small class="label pull-right bg-green">16</small>
-                    <small class="label pull-right bg-red">5</small>
+                    <small style="width:60px" class="label pull-right bg-yellow">
+                      <h1 id="s">12</h1>
+                    </small>
+                    <small style="width:60px" class="label pull-right bg-green">
+                      <h1 id="m">34</h1>
+                    </small>
+                    <small style="width:60px" class="label pull-right bg-red">
+                      <h1 id="h">23</h1>
+                    </small>
                   </span>
                 </a>
               </li>
@@ -507,6 +512,7 @@
     <script src="{{ url_for('static',filename='vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
     <!-- Parsely JS -->
     <script src="{{ url_for('static',filename='parsley/parsley.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='time/time.js') }}"></script>
     <script>
       $(document).ready(function() {
         $(".sidebar-menu").tree();

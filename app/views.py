@@ -58,6 +58,7 @@ app.config['UPLOAD_FOLDER'] = '/Users/walternyeko/Desktop/Tests/uploads/'
 #         'Message': 'Missing Authorization Header'
 #     }), 401
 
+
 @app.before_request
 def before_request():
     g.username = None
@@ -69,6 +70,7 @@ def before_request():
 def index():
     return render_template('index.html')
 
+
 @app.route('/index', methods=['GET', 'POST'])
 def login():
     session.pop('username', None)
@@ -76,20 +78,32 @@ def login():
     password_candidate = request.form['password']
 
     conn = dbInstance.connectToDatabase()
-    cur =conn.cursor()
-    cur.execute("SELECT user_name,user_password from users WHERE user_name=%s", [username])
+    cur = conn.cursor()
+    cur.execute(
+        "SELECT user_name,user_password from users WHERE user_name=%s", [username])
 
     data = cur.fetchone()
     usernameDB = data[0]
     if usernameDB == username:
         password = data[1]
-        if sha256_crypt.verify(password_candidate,password):
+        if sha256_crypt.verify(password_candidate, password):
             session['username'] = username
             LoggedInUser1 = usersInstance.checkUserRights(username)
             allTheTickets = ticketInstance.view_all_tickets()
-            myTickets = ticketInstance.view_all_tickets()
-            return render_template('dashboard.html', allTheTickets=allTheTickets,currentUser=LoggedInUser1,allMyTickets=myTickets)
-            
+            myTickets = ticketInstance.view_all_my_tickets()
+            number_of_atm_open = ticketInstance.number_of_open_atm()
+            number_of_air_open = ticketInstance.number_of_open_air()
+            number_of_tel_open = ticketInstance.number_of_open_tel()
+            number_of_fle_open = ticketInstance.number_of_open_fle()
+            return render_template('dashboard.html',
+            allTheTickets=allTheTickets,
+            currentUser=LoggedInUser1,
+            allMyTickets=myTickets,
+            number_of_atm_open=number_of_atm_open,
+            number_of_air_open=number_of_air_open,
+            number_of_tel_open=number_of_tel_open,
+            number_of_fle_open=number_of_fle_open)
+
         else:
             
             flash('Invalid Password', 'danger')
@@ -265,8 +279,19 @@ def view_all_tickets():
     LoggedInUser1 = usersInstance.checkUserRights(LoggedInUser)
     allTheTickets = ticketInstance.view_all_tickets()
     myTickets = ticketInstance.view_all_my_tickets(LoggedInUser)
+    number_of_atm_open = ticketInstance.number_of_open_atm()
+    number_of_air_open = ticketInstance.number_of_open_air()
+    number_of_tel_open = ticketInstance.number_of_open_tel()
+    number_of_fle_open = ticketInstance.number_of_open_fle()
     if g.username:
-        return render_template('dashboard.html', allTheTickets=allTheTickets, currentUser=LoggedInUser1,myTickets=myTickets)
+        return render_template('dashboard.html', 
+        allTheTickets=allTheTickets, 
+        currentUser=LoggedInUser1,
+        myTickets=myTickets,
+        number_of_atm_open=number_of_atm_open,
+        number_of_air_open=number_of_air_open,
+        number_of_tel_open=number_of_tel_open,
+        number_of_fle_open=number_of_fle_open)
     return redirect(url_for('index'))
 
 @app.route('/delete_tickets/<int:ticket_id>', methods=['DELETE','POST'])
@@ -276,8 +301,20 @@ def delete_ticket(ticket_id):
     ticketInstance.delete_a_ticket(ticket_id)
     allTheTickets = ticketInstance.view_all_tickets()
     myTickets = ticketInstance.view_all_my_tickets(LoggedInUser)
+    number_of_atm_open = ticketInstance.number_of_open_atm()
+    number_of_air_open = ticketInstance.number_of_open_air()
+    number_of_tel_open = ticketInstance.number_of_open_tel()
+    number_of_fle_open = ticketInstance.number_of_open_fle()
     if g.username:
-        return render_template('dashboard.html', allTheTickets=allTheTickets, currentUser=LoggedInUser1,myTickets=myTickets)
+        return render_template('dashboard.html', 
+        allTheTickets=allTheTickets, 
+        currentUser=LoggedInUser1,
+        myTickets=myTickets,
+        number_of_atm_open=number_of_atm_open,
+        number_of_air_open=number_of_air_open,
+        number_of_tel_open=number_of_tel_open,
+        number_of_fle_open=number_of_fle_open
+        )
     return redirect(url_for('index'))
     
 
@@ -288,8 +325,20 @@ def dashboard():
     LoggedInUser1 = usersInstance.checkUserRights(LoggedInUser)
     allTheTickets = ticketInstance.view_all_tickets()
     myTickets = ticketInstance.view_all_tickets()
+    number_of_atm_open = ticketInstance.number_of_open_atm()
+    number_of_air_open = ticketInstance.number_of_open_air()
+    number_of_tel_open = ticketInstance.number_of_open_tel()
+    number_of_fle_open = ticketInstance.number_of_open_fle()
     if g.username:
-        return render_template('dashboard.html', allTheTickets=allTheTickets, currentUser=LoggedInUser1,myTickets=myTickets)
+        return render_template('dashboard.html', 
+        allTheTickets=allTheTickets, 
+        currentUser=LoggedInUser1,
+        myTickets=myTickets, 
+        number_of_atm_open=number_of_atm_open,
+        number_of_air_open=number_of_air_open,
+        number_of_tel_open=number_of_tel_open,
+        number_of_fle_open=number_of_fle_open
+        )
     return redirect(url_for('index'))
 
 @app.route('/reports')
@@ -1071,7 +1120,7 @@ def all_open_and_overdue_tickets():
 def all_my_open_and_overdue_tickets():
     LoggedInUser = session['username']
     LoggedInUser1 = usersInstance.checkUserRights(LoggedInUser)
-    allTheTickets = ticketInstance.view_all_tickets()
+    allTheTickets = ticketInstance.view_all_my_open_tickets(LoggedInUser1)
     if g.username:
         return render_template('my_tickets.html', 
         currentUser=LoggedInUser1, allTheTickets=allTheTickets,)

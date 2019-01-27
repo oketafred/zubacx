@@ -272,13 +272,18 @@
                   </span>
                 </a>
               </li>
-              <li>
-                <a href="pages/mailbox/mailbox.html">
-                  <i class="fa fa-envelope"></i> <span>Mailbox</span>
+              <li style="height:80px">
+                <a>
                   <span class="pull-right-container">
-                    <small class="label pull-right bg-yellow">12</small>
-                    <small class="label pull-right bg-green">16</small>
-                    <small class="label pull-right bg-red">5</small>
+                    <small style="width:60px" class="label pull-right bg-yellow">
+                      <h1 id="s">12</h1>
+                    </small>
+                    <small style="width:60px" class="label pull-right bg-green">
+                      <h1 id="m">34</h1>
+                    </small>
+                    <small style="width:60px" class="label pull-right bg-red">
+                      <h1 id="h">23</h1>
+                    </small>
                   </span>
                 </a>
               </li>
@@ -309,7 +314,14 @@
               <h3 class="box-title">New Equipment Information</h3>
             </div>
             <div class="box-body">
-              <form role="form" data-parsley-validate>
+                {% include '_messages.html' %}
+              <form
+                role="form"
+                action="/add_equipment"
+                enctype="multipart/form-data"
+                method="POST"
+                data-parsley-validate
+              >
                 <div class="box-body">
                   <div class="row">
                     <div class="col-md-6">
@@ -319,6 +331,8 @@
                         >
                         <input
                           type="text"
+                          required
+                          name="equipment_serial"
                           class="form-control"
                           placeholder="Equipment Serial Number"
                         />
@@ -329,6 +343,8 @@
                         <label for="EquipmentID">Equipment ID</label>
                         <input
                           type="text"
+                          required
+                          name="equipment_serial_id"
                           class="form-control"
                           placeholder="Equipment ID"
                         />
@@ -341,6 +357,8 @@
                         <label for="EquipmentClass">Equipment Class</label>
                         <input
                           type="text"
+                          required
+                          name="equipment_class"
                           class="form-control"
                           placeholder="Equipment Class"
                         />
@@ -351,6 +369,8 @@
                         <label for="EquipmentModel">Equipment Model</label>
                         <input
                           type="text"
+                          required
+                          name="equipment_model"
                           class="form-control"
                           placeholder="Equipment Model"
                         />
@@ -365,6 +385,8 @@
                         >
                         <input
                           type="text"
+                          required
+                          name="equipment_category"
                           class="form-control"
                           placeholder="Equipment Category"
                         />
@@ -375,6 +397,8 @@
                         <label for="EquipmentType">Equipment Type</label>
                         <input
                           type="text"
+                          required
+                          name="equipment_type"
                           class="form-control"
                           placeholder="Equipment Type"
                         />
@@ -389,6 +413,8 @@
                         >
                         <input
                           type="text"
+                          required
+                          name="equipment_resolution"
                           class="form-control"
                           placeholder="Equipment Resolution"
                         />
@@ -401,6 +427,8 @@
                         >
                         <input
                           type="text"
+                          required
+                          name="equipment_response"
                           class="form-control"
                           placeholder="Equipment Response"
                         />
@@ -419,6 +447,8 @@
                           </div>
                           <input
                             type="text"
+                            required
+                            name="equipment_installation_date"
                             class="form-control pull-right"
                             id="datepicker"
                           />
@@ -432,6 +462,8 @@
                         >
                         <input
                           type="text"
+                          required
+                          name="equipment_installation_address"
                           class="form-control"
                           placeholder="Equipment Installation Address"
                         />
@@ -446,6 +478,8 @@
                         >
                         <input
                           type="text"
+                          required
+                          name="equipment_installation_city"
                           class="form-control"
                           placeholder="Equipment Installation City"
                         />
@@ -458,6 +492,8 @@
                         >
                         <input
                           type="text"
+                          required
+                          name="equipment_supplier"
                           class="form-control"
                           placeholder="Equipment Supplier"
                         />
@@ -469,19 +505,41 @@
                 <div class="box-footer">
                   <div class="row">
                     <div class="col-md-3">
-                      <button type="submit" class="btn btn-success btn-block">
+                      <button type="submit" class="btn btn-success btn-block btn-lg">
                         Submit
                       </button>
                     </div>
+                    
                     <div class="col-md-3">
-                      <button type="submit" class="btn btn-primary btn-block">
-                        Submit & Add New
-                      </button>
-                    </div>
-                    <div class="col-md-3">
-                      <button type="submit" class="btn btn-dark btn-block">
+                      <button type="submit" class="btn btn-default btn-block btn-lg">
                         Cancel
                       </button>
+                    </div>
+
+                    <div class="col-md-6">
+                        <form class="form-group" action="#" enctype="multipart/form-data">
+                          <div class="row">
+                            <div class="col-md-6">
+                                <div class="file-field">
+                                    <div class="btn btn-info btn-sm float-left">
+                                        <!-- <span>Choose File To Upload</span> -->
+                                        <input type="file" class="form-control" name="engineers" multiple>
+                                    </div>
+          
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <button 
+                                    type="submit" 
+                                    class="btn btn-success btn-block btn-lg" 
+                                    formnovalidate 
+                                    formaction="/upload/equipments">
+                                    Save Upload
+                                </div>
+                            </div>
+                          </div>
+                      </form>
                     </div>
                   </div>
                 </div>
@@ -517,6 +575,7 @@
     <script src="{{ url_for('static',filename='vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
     <!-- Parsely JS -->
     <script src="{{ url_for('static',filename='parsley/parsley.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='time/time.js') }}"></script>
     <script>
       $(document).ready(function() {
         $(".sidebar-menu").tree();
