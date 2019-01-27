@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Zubacx | My Open Tickets</title>
+    <title>Zubacx | User Profile</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta
       content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
@@ -24,11 +24,6 @@
       rel="stylesheet"
       href="{{ url_for('static',filename='vendor/Ionicons/css/ionicons.min.css') }}"
     />
-    <!-- DataTables -->
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static',filename='vendor/datatables.net-bs/css/dataTables.bootstrap.min.css') }}"
-    />
     <!-- Theme style -->
     <link
       rel="stylesheet"
@@ -40,27 +35,12 @@
       rel="stylesheet"
       href="{{ url_for('static',filename='dist/css/skins/_all-skins.min.css') }}"
     />
-    <!-- iCheck -->
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static',filename='dist/plugins/iCheck/flat/blue.css') }}"
-    />
-    <!--Numbering CSS  -->
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static',filename='numbering/numbering.css') }}"
-    />
-    <!-- Custom CSS -->
-    <style>
-      #example1_filter {
-        display: none;
-      }
-    </style>
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js') }}"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js') }}"></script>
     <![endif]-->
 
     <!-- Google Font -->
@@ -69,7 +49,7 @@
       href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"
     />
   </head>
-  <body class="hold-transition fixed skin-blue sidebar-mini">
+  <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
       <header class="main-header">
         <!-- Logo -->
@@ -126,15 +106,13 @@
                   </li>
                   <!-- Menu Footer-->
                   <li class="user-footer">
-                    <div class="pull-left">
-                      <a href="/profile" class="btn bg-purple btn-flat"
-                        >Profile</a
-                      >
-                    </div>
-                    <div class="pull-right">
-                      <a href="#" class="btn bg-maroon btn-flat">Sign out</a>
-                    </div>
-                  </li>
+                        <div class="pull-left">
+                          <a href="/profile" class="btn bg-purple btn-flat">Profile</a>
+                        </div>
+                        <div class="pull-right">
+                          <a href="#" class="btn bg-maroon btn-flat">Sign out</a>
+                        </div>
+                      </li>
                 </ul>
               </li>
             </ul>
@@ -373,123 +351,174 @@
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1><i class="fa fa-ticket"></i> My Open Tickets</h1>
+          <h1>User Profile</h1>
           <ol class="breadcrumb">
             <li>
               <a href="#"><i class="fa fa-dashboard"></i> Home</a>
             </li>
-            <li class="active">My Open Tickets</li>
+            <li class="active">User profile</li>
           </ol>
         </section>
 
         <!-- Main content -->
         <section class="content">
           <div class="row">
-            <!-- /.col -->
-            <div class="col-md-12">
+            <div class="col-md-3">
+              <!-- Profile Image -->
               <div class="box box-primary">
-                <div class="box">
-                  <div class="box-header with-border">
-                    <h3 class="box-title">My Open Tickets</h3>
+                <div class="box-body box-profile">
+                  <img
+                    class="profile-user-img img-responsive img-circle"
+                    src="{{ url_for('static',filename='dist/img/user2-160x160.jpg') }}"
+                    alt="User profile picture"
+                  />
 
-                    <div class="box-tools pull-right">
-                      <div class="has-feedback">
-                        <input
-                          id="myInputTextFieldForSearch"
-                          type="text"
-                          class="form-control input-sm"
-                          placeholder="Search Tickets"
-                        />
-                        <span
-                          class="glyphicon glyphicon-search form-control-feedback"
-                        ></span>
+                  <h3 class="profile-username text-center">
+                    {{ currentUser[3] }} - ({{ currentUser[1] }}
+                    {{ currentUser[2] }})
+                  </h3>
+
+                  <p class="text-muted text-center">{{ currentUser[2] }}</p>
+
+                  <hr>
+
+                  <form class="form-group" action="#" enctype="multipart/form-data">
+                    <div class="row">
+                      <div class="col-md-12">
+                          <div class="file-field">
+                                  <!-- <span>Choose File To Upload</span> -->
+                                  <input type="file" class="form-control" name="engineers" multiple>
+                              
+    
+                          </div>
+                      </div>
+                      <div class="col-md-12" style="margin-top: 15px">
+                          <div class="form-group">
+                              <button type="submit" class="btn btn-success btn-block" formnovalidate formaction="/upload/engineers">Upload Profile Photo
+                          </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="box-body padding">
-                    <div class="table-responsive mailbox-messages">
-                      {% include '_messages.html'%}
-                      <table
-                        id="example1"
-                        class="table table-hover table-striped css-serial"
-                      >
-                        <thead>
-                          <tr>
-                            <th>#</th>
-                            <th></th>
-                            <th>Engineer's Name</th>
-                            <th>Ticket-Reason for Ticket</th>
-                            <th>Ticket Status</th>
-                            <th>Ticket Timestamp</th>
-                            <th>Ticket Type</th>
-                            <th></th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {% for eachTicket in allTheTickets %}
-                          <tr>
-                            <td></td>
-                            <td class="mailbox-star">
-                              <i class="fa fa-ticket text-yellow"></i>
-                            </td>
-                            <td class="mailbox-name">{{ eachTicket[2] }}</td>
-                            <td class="mailbox-subject">
-                              <b>{{ eachTicket[3] }}</b> - {{ eachTicket[1] }}
-                            </td>
-                            {% if "Closed" in eachTicket[5]:%}
-                            <td>
-                              <span class="label label-success">{{
-                                eachTicket[5]
-                              }}</span>
-                            </td>
-                            {% elif eachTicket[5] =="Pending":%}
-                            <td>
-                              <span class="label label-primary">{{
-                                eachTicket[5]
-                              }}</span>
-                            </td>
-                            {% elif eachTicket[5] =="Open":%}
-                            <td>
-                              <span class="label label-warning">{{
-                                eachTicket[5]
-                              }}</span>
-                            </td>
-                            {% else:%}
-                            <td>
-                              <span class="label label-danger">{{
-                                eachTicket[5]
-                              }}</span>
-                            </td>
-                            {% endif%}
-                            <td class="mailbox-date">{{ eachTicket[4] }}</td>
-                            <td>
-                              <span class="mailbox-name">{{
-                                eachTicket[7]
-                              }}</span>
-                            </td>
-                            {% if currentUser[14] ==1:%}
-                            <td>
-                              <a
-                                href="/edit_the_ticket/{{ eachTicket[0] }}"
-                                class="btn btn-primary btn-sm"
-                              >
-                                View Details
-                              </a>
-                            </td>
-                            {% else:%} {% endif%}
-                          </tr>
-                          {% endfor %}
-                        </tbody>
-                      </table>
-                      <!-- /.table -->
-                    </div>
-                    <!-- /.mail-box-messages -->
-                  </div>
+                </form>
                 </div>
                 <!-- /.box-body -->
-                <div class="box-footer no-padding"></div>
               </div>
-              <!-- /. box -->
+              <!-- /.box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-9">
+              <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                  <li><a href="#settings" data-toggle="tab">Settings</a></li>
+                </ul>
+                <div class="tab-content">
+                  <div class="tab-pane active" id="settings">
+                    <form class="form-horizontal">
+                      <div class="form-group">
+                        <label for="inputName" class="col-sm-2 control-label"
+                          >First Name</label
+                        >
+
+                        <div class="col-sm-10">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="inputName"
+                            placeholder="First Name"
+                            value="{{ currentUser[1] }}"
+                          />
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="inputName" class="col-sm-2 control-label"
+                          >Last Name</label
+                        >
+
+                        <div class="col-sm-10">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="inputName"
+                            placeholder="Last Name"
+                            value="{{ currentUser[2] }}"
+                          />
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="inputEmail" class="col-sm-2 control-label"
+                          >My Email</label
+                        >
+
+                        <div class="col-sm-10">
+                          <input
+                            type="email"
+                            class="form-control"
+                            id="inputEmail"
+                            placeholder="My Email"
+                            value="{{ currentUser[4] }}"
+                          />
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="inputName" class="col-sm-2 control-label"
+                          >Username</label
+                        >
+
+                        <div class="col-sm-10">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="inputName"
+                            placeholder="Name"
+                            value="{{ currentUser[3] }}"
+                          />
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="inputSkills" class="col-sm-2 control-label"
+                          >New Password</label
+                        >
+
+                        <div class="col-sm-10">
+                          <input
+                            type="password"
+                            class="form-control"
+                            id="inputSkills"
+                            placeholder="New Password"
+                          />
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="inputSkills" class="col-sm-2 control-label"
+                          >Confirm Password</label
+                        >
+
+                        <div class="col-sm-10">
+                          <input
+                            type="password"
+                            class="form-control"
+                            id="inputSkills"
+                            placeholder="Confirm Password"
+                          />
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-4">
+                          <button
+                            type="submit"
+                            class="btn btn-success btn-block"
+                          >
+                            Submit
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  <!-- /.tab-pane -->
+                </div>
+                <!-- /.tab-content -->
+              </div>
+              <!-- /.nav-tabs-custom -->
             </div>
             <!-- /.col -->
           </div>
@@ -512,6 +541,10 @@
           alt="Zubacx Logo"
         />
       </footer>
+
+      <!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+      <div class="control-sidebar-bg"></div>
     </div>
     <!-- ./wrapper -->
 
@@ -519,34 +552,11 @@
     <script src="{{ url_for('static',filename='vendor/jquery/dist/jquery.min.js') }}"></script>
     <!-- Bootstrap 3.3.7 -->
     <script src="{{ url_for('static',filename='vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-    <!-- DataTables -->
-    <script src="{{ url_for('static',filename='vendor/datatables.net/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ url_for('static',filename='vendor/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
-    <!-- Slimscroll -->
-    <script src="{{ url_for('static',filename='vendor/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
     <!-- FastClick -->
     <script src="{{ url_for('static',filename='vendor/fastclick/lib/fastclick.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ url_for('static',filename='dist/js/adminlte.min.js') }}"></script>
-    <!-- iCheck -->
-    <script src="{{ url_for('static',filename='plugins/iCheck/icheck.min.js') }}"></script>
-    <!-- Page Script -->
-    <script src="{{ url_for('static',filename='time/time.js') }}"></script>
-    <script>
-      $(function() {
-        let oTable = $("#example1").DataTable({
-          paging: true,
-          lengthChange: false,
-          searching: true,
-          ordering: false,
-          info: true,
-          autoWidth: true
-        });
-
-        $("#myInputTextFieldForSearch").keyup(function() {
-          oTable.search($(this).val()).draw();
-        });
-      });
-    </script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="{{ url_for('static',filename='dist/js/demo.js') }}"></script>
   </body>
 </html>

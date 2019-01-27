@@ -89,8 +89,9 @@ def login():
         if sha256_crypt.verify(password_candidate, password):
             session['username'] = username
             LoggedInUser1 = usersInstance.checkUserRights(username)
+            print(LoggedInUser1)
             allTheTickets = ticketInstance.view_all_tickets()
-            myTickets = ticketInstance.view_all_my_tickets()
+            myTickets = ticketInstance.view_all_my_tickets(username)
             number_of_atm_open = ticketInstance.number_of_open_atm()
             number_of_air_open = ticketInstance.number_of_open_air()
             number_of_tel_open = ticketInstance.number_of_open_tel()
@@ -279,19 +280,11 @@ def view_all_tickets():
     LoggedInUser1 = usersInstance.checkUserRights(LoggedInUser)
     allTheTickets = ticketInstance.view_all_tickets()
     myTickets = ticketInstance.view_all_my_tickets(LoggedInUser)
-    number_of_atm_open = ticketInstance.number_of_open_atm()
-    number_of_air_open = ticketInstance.number_of_open_air()
-    number_of_tel_open = ticketInstance.number_of_open_tel()
-    number_of_fle_open = ticketInstance.number_of_open_fle()
     if g.username:
-        return render_template('dashboard.html', 
+        return render_template('all_tickets.html', 
         allTheTickets=allTheTickets, 
         currentUser=LoggedInUser1,
-        myTickets=myTickets,
-        number_of_atm_open=number_of_atm_open,
-        number_of_air_open=number_of_air_open,
-        number_of_tel_open=number_of_tel_open,
-        number_of_fle_open=number_of_fle_open)
+        myTickets=myTickets)
     return redirect(url_for('index'))
 
 @app.route('/delete_tickets/<int:ticket_id>', methods=['DELETE','POST'])
@@ -301,23 +294,14 @@ def delete_ticket(ticket_id):
     ticketInstance.delete_a_ticket(ticket_id)
     allTheTickets = ticketInstance.view_all_tickets()
     myTickets = ticketInstance.view_all_my_tickets(LoggedInUser)
-    number_of_atm_open = ticketInstance.number_of_open_atm()
-    number_of_air_open = ticketInstance.number_of_open_air()
-    number_of_tel_open = ticketInstance.number_of_open_tel()
-    number_of_fle_open = ticketInstance.number_of_open_fle()
     if g.username:
-        return render_template('dashboard.html', 
+        return render_template('all_tickets.html', 
         allTheTickets=allTheTickets, 
         currentUser=LoggedInUser1,
-        myTickets=myTickets,
-        number_of_atm_open=number_of_atm_open,
-        number_of_air_open=number_of_air_open,
-        number_of_tel_open=number_of_tel_open,
-        number_of_fle_open=number_of_fle_open
+        myTickets=myTickets
         )
     return redirect(url_for('index'))
     
-
 
 @app.route('/dashboard', methods=['GET', 'POST'])
 def dashboard():
@@ -371,7 +355,6 @@ def tasks():
     Fleet_completed = ticketInstance.get_Fleet_completed_tasks()
 
     ATM_overdue = ticketInstance.get_ATM_overdue_tasks()
-    print(ATM_overdue)
     Airport_overdue = ticketInstance.get_Airport_overdue_tasks()
     Telecom_overdue = ticketInstance.get_Telecom_overdue_tasks()
     Fleet_overdue = ticketInstance.get_Fleet_overdue_tasks()
@@ -882,6 +865,14 @@ def all_work_orders_completed():
         return render_template('view_work_order.html', allTheOrders=theReturnedOrders,currentUser=LoggedInUser1)
     return redirect(url_for('index'))
 
+@app.route('/profile', methods=['GET'])
+def user_profile():
+    LoggedInUser = session['username']
+    LoggedInUser1 = usersInstance.checkUserRights(LoggedInUser)
+    if g.username:
+        return render_template('profile.html',currentUser=LoggedInUser1)
+    return redirect(url_for('index'))
+
 @app.route('/all_work_orders_pending', methods=['GET'])
 def all_work_orders_pending():
     LoggedInUser = session['username']
@@ -899,7 +890,7 @@ def all_clients():
     LoggedInUser1 = usersInstance.checkUserRights(LoggedInUser)
     theReturnedClients = custInstance.get_all_clients()
     if g.username:
-        return render_template('view_clients.html', allTheClients=theReturnedClients,currentUser=LoggedInUser1)
+        return render_template('our_clients.html', allTheClients=theReturnedClients,currentUser=LoggedInUser1)
     return redirect(url_for('index'))
 
 @app.route('/all_the_clients/<int:client_id>', methods=['POST','DELETE'])
@@ -927,7 +918,7 @@ def get_client_details_for_edit(client_id):
     LoggedInUser1 = usersInstance.checkUserRights(LoggedInUser)
     theReturnedClient = custInstance.get_client_by_Id(client_id)
     if g.username:
-        return render_template('edit_client.html', allTheClients=theReturnedClient,currentUser=LoggedInUser1)
+        return render_template('edit_customer.html', allTheClients=theReturnedClient,currentUser=LoggedInUser1)
     return redirect(url_for('index'))
 
 @app.route('/edit_client/<int:client_id>', methods=['POST'])
@@ -1027,20 +1018,20 @@ def user_is_missing_permission():
         return render_template('rights_messages.html',currentUser=LoggedInUser1)
     return redirect(url_for('index'))
 
-@app.route('/tasks', methods=['GET'])
-@cross_origin
-def get_tasks():
-    data = [{'value':12},{'value1':12},{'value2':23}]
-    return jsonify({'Data':data})
+# @app.route('/tasks', methods=['GET'])
+# @cross_origin
+# def get_tasks():
+#     data = [{'value':12},{'value1':12},{'value2':23}]
+#     return jsonify({'Data':data})
 
 @app.route('/open_and_overdue_tickets')
 def open_and_overdue_tickets():
     LoggedInUser = session['username']
     LoggedInUser1 = usersInstance.checkUserRights(LoggedInUser)
-    allTheTickets = ticketInstance.view_all_open_tickets(LoggedInUser)
+    allTheTickets = ticketInstance.view_all_open_tickets()
     if g.username:
         return render_template('open_tickets.html', 
-        currentUser=LoggedInUser1, allTheTickets=allTheTickets,)
+        currentUser=LoggedInUser1, allTheTickets=allTheTickets)
     else:
         return render_template('index.html')
 
@@ -1049,10 +1040,10 @@ def open_and_overdue_tickets():
 def closed_and_overdue_tickets():
     LoggedInUser = session['username']
     LoggedInUser1 = usersInstance.checkUserRights(LoggedInUser)
-    allTheTickets = ticketInstance.view_all_closed_tickets(LoggedInUser)
+    allTheTickets = ticketInstance.view_all_closed_tickets()
     if g.username:
         return render_template('closed_tickets.html', 
-        currentUser=LoggedInUser1, allTheTickets=allTheTickets,)
+        currentUser=LoggedInUser1, allTheTickets=allTheTickets)
     else:
         return render_template('index.html')
 
@@ -1064,7 +1055,7 @@ def low_priority_and_overdue_tickets():
     allTheTickets = ticketInstance.view_all_overdue_tickets(LoggedInUser)
     if g.username:
         return render_template('overdue_tickets.html', 
-        currentUser=LoggedInUser1, allTheTickets=allTheTickets,)
+        currentUser=LoggedInUser1, allTheTickets=allTheTickets)
     else:
         return render_template('index.html')
 
@@ -1076,7 +1067,7 @@ def my_open_and_overdue_tickets():
     allTheTickets = ticketInstance.view_all_my_open_tickets(LoggedInUser)
     if g.username:
         return render_template('my_open_tickets.html', 
-        currentUser=LoggedInUser1, allTheTickets=allTheTickets,)
+        currentUser=LoggedInUser1, allTheTickets=allTheTickets)
     else:
         return render_template('index.html')
 
@@ -1088,7 +1079,7 @@ def my_closed_and_overdue_tickets():
     allTheTickets = ticketInstance.view_all_my_closed_tickets(LoggedInUser)
     if g.username:
         return render_template('my_closed_tickets.html', 
-        currentUser=LoggedInUser1, allTheTickets=allTheTickets,)
+        currentUser=LoggedInUser1, allTheTickets=allTheTickets)
     else:
         return render_template('index.html')
 
@@ -1100,7 +1091,7 @@ def my_low_priority_and_overdue_tickets():
     allTheTickets = ticketInstance.view_all_my_overdue_tickets(LoggedInUser)
     if g.username:
         return render_template('my_overdue_tickets.html', 
-        currentUser=LoggedInUser1, allTheTickets=allTheTickets,)
+        currentUser=LoggedInUser1, allTheTickets=allTheTickets)
     else:
         return render_template('index.html')
 
@@ -1112,7 +1103,7 @@ def all_open_and_overdue_tickets():
     allTheTickets = ticketInstance.view_all_open_tickets(LoggedInUser)
     if g.username:
         return render_template('open_tickets.html', 
-        currentUser=LoggedInUser1, allTheTickets=allTheTickets,)
+        currentUser=LoggedInUser1, allTheTickets=allTheTickets)
     else:
         return render_template('index.html')
 
@@ -1120,10 +1111,10 @@ def all_open_and_overdue_tickets():
 def all_my_open_and_overdue_tickets():
     LoggedInUser = session['username']
     LoggedInUser1 = usersInstance.checkUserRights(LoggedInUser)
-    allTheTickets = ticketInstance.view_all_my_open_tickets(LoggedInUser1)
+    allTheTickets = ticketInstance.view_all_my_tickets(LoggedInUser1)
     if g.username:
         return render_template('my_tickets.html', 
-        currentUser=LoggedInUser1, allTheTickets=allTheTickets,)
+        currentUser=LoggedInUser1, allTheTickets=allTheTickets)
     else:
         return render_template('index.html')
 

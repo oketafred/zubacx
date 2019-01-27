@@ -1,34 +1,36 @@
 import psycopg2
 from flask import jsonify
 
-class DatabaseConnectivity:
-# Using MySQL Database
-    # def connectToDatabase(self):
-    #     try:
-    #         import MySQLdb
-    #         self.conn = MySQLdb.connect(host='localhost', user='root', password='mysql', db='tickets')
-    #         print("Connected Successfully")
-    #         return self.conn
-            
-    #     except:
-    #         print('Cannot connect to database')
-    #         return jsonify({'Message' : 'Cannot connect to database'})
 
-# Using PostgreSQL Database
+class DatabaseConnectivity:
+    # Using MySQL Database
     def connectToDatabase(self):
-        
         try:
-            # connectionString = "postgres://lhzxcyfuehqwcw:129faa08ef955acc4144bd7bbf2e4e697ca8faa0a4f319fa73ddeb31584fda47@ec2-54-227-241-179.compute-1.amazonaws.com:5432/d6humsp52ioadf"
-            connectionString = "host='localhost' user='postgres' password='7520060318' dbname='tickets' port='5432'"
-            self.conn = psycopg2.connect(connectionString)
-            print("Connection established")
+            import MySQLdb
+            self.conn = MySQLdb.connect(
+                host='localhost', user='root', password='mysql', db='tickets')
+            print("Connected Successfully")
             return self.conn
-            
-        except(Exception, psycopg2.DatabaseError) as e:
-            print(e)
+
+        except:
+            print('Cannot connect to database')
+            return jsonify({'Message': 'Cannot connect to database'})
+
+    # Using PostgreSQL Database
+    # def connectToDatabase(self):
+
+    #     try:
+    #         # connectionString = "postgres://lhzxcyfuehqwcw:129faa08ef955acc4144bd7bbf2e4e697ca8faa0a4f319fa73ddeb31584fda47@ec2-54-227-241-179.compute-1.amazonaws.com:5432/d6humsp52ioadf"
+    #         connectionString = "host='localhost' user='postgres' password='walter123@Andela!' dbname='tickets' port='5432'"
+    #         self.conn = psycopg2.connect(connectionString)
+    #         print("Connection established")
+    #         return self.conn
+
+    #     except(Exception, psycopg2.DatabaseError) as e:
+    #         print(e)
 
     def create_tickets_table(self):
-        sqlcommandforQuestions =(
+        sqlcommandforQuestions = (
             """
             CREATE TABLE IF NOT EXISTS tickets(ticket_id SERIAL PRIMARY KEY, ticket_assigned_to VARCHAR(250),
              ticket_status VARCHAR(250), ticket_opening_time TIMESTAMP,ticket_closing_time TIMESTAMP,ticket_overdue_time TIMESTAMP,
@@ -43,10 +45,9 @@ class DatabaseConnectivity:
         self.cur = self.conn.cursor()
         self.cur.execute(sqlcommandforQuestions)
         self.conn.commit()
-    
-    
+
     def create_users_table(self):
-        sqlcommandforUsers =(
+        sqlcommandforUsers = (
             """
             CREATE TABLE IF NOT EXISTS users(user_id SERIAL PRIMARY KEY, user_first_name VARCHAR(250), user_last_name VARCHAR(250),
             user_name VARCHAR(250),user_email VARCHAR(250), user_password VARCHAR(100), user_phone VARCHAR(250), user_status smallint DEFAULT 0, user_address VARCHAR(250),
@@ -65,9 +66,9 @@ class DatabaseConnectivity:
         self.cur = self.conn.cursor()
         self.cur.execute(sqlcommandforUsers)
         self.conn.commit()
-    
+
     def create_engineers_table(self):
-        sqlcommandforQuestions =(
+        sqlcommandforQuestions = (
             """
             CREATE TABLE IF NOT EXISTS engineers(engineer_id SERIAL, 
             engineer_first_name VARCHAR(200),engineer_last_name VARCHAR(200),
@@ -82,7 +83,7 @@ class DatabaseConnectivity:
         self.conn.commit()
 
     def create_equipments_table(self):
-        sqlcommandforEquipments =(
+        sqlcommandforEquipments = (
             """
             CREATE TABLE IF NOT EXISTS equipments(equipment_serial_number VARCHAR(100), 
             equipment_serial_id VARCHAR(200),equipment_class VARCHAR(200),
@@ -98,7 +99,7 @@ class DatabaseConnectivity:
         self.conn.commit()
 
     def create_clients_table(self):
-        sqlcommandforAnswers =(
+        sqlcommandforAnswers = (
             """
             CREATE TABLE IF NOT EXISTS customers(customer_id SERIAL PRIMARY KEY,
             customer_name VARCHAR(250),
@@ -114,7 +115,7 @@ class DatabaseConnectivity:
         self.conn.commit()
 
     def create_work_orders_table(self):
-        sqlcommandforAnswers =(
+        sqlcommandforAnswers = (
             """
             CREATE TABLE IF NOT EXISTS work_orders(work_order_id SERIAL PRIMARY KEY,
             work_order_type VARCHAR(250))
@@ -126,7 +127,7 @@ class DatabaseConnectivity:
         self.conn.commit()
 
     def drop_equipment_table(self):
-        sqlcommandforAnswers =(
+        sqlcommandforAnswers = (
             """
             DROP TABLE equipments
             """
@@ -135,4 +136,3 @@ class DatabaseConnectivity:
         self.cur = self.conn.cursor()
         self.cur.execute(sqlcommandforAnswers)
         self.conn.commit()
-    

@@ -45,6 +45,11 @@
       rel="stylesheet"
       href="{{ url_for('static',filename='dist/plugins/iCheck/flat/blue.css') }}"
     />
+    <!--Numbering CSS  -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static',filename='numbering/numbering.css') }}"
+    />
     <!-- Custom CSS -->
     <style>
       #example1_filter {
@@ -68,7 +73,7 @@
     <div class="wrapper">
       <header class="main-header">
         <!-- Logo -->
-        <a href="../../index2.html" class="logo">
+        <a href="/dashboard" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><b>Zub</b>U</span>
           <!-- logo for regular state and mobile devices -->
@@ -122,10 +127,12 @@
                   <!-- Menu Footer-->
                   <li class="user-footer">
                     <div class="pull-left">
-                      <a href="#" class="btn btn-default btn-flat">Profile</a>
+                      <a href="/profile" class="btn bg-purple btn-flat"
+                        >Profile</a
+                      >
                     </div>
                     <div class="pull-right">
-                      <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                      <a href="#" class="btn bg-maroon btn-flat">Sign out</a>
                     </div>
                   </li>
                 </ul>
@@ -219,7 +226,7 @@
               <ul class="treeview-menu">
                 {% if currentUser[16] ==1:%}
                 <li>
-                  <a href="/all_open_and_overdue_tickets"
+                  <a href="/view_all_tickets"
                     ><i class="fa fa-circle-o"></i> All Tickets</a
                   >
                 </li>
@@ -404,7 +411,7 @@
                       {% include '_messages.html'%}
                       <table
                         id="example1"
-                        class="table table-hover table-striped"
+                        class="table table-hover table-striped css-serial"
                       >
                         <thead>
                           <tr>
@@ -420,7 +427,7 @@
                         <tbody>
                           {% for eachUser in allTheUsers%}
                           <tr>
-                            <td>{{ eachUser[0] }}</td>
+                            <td></td>
                             <td>{{ eachUser[1] }} {{ eachUser[2] }}</td>
                             <td>{{ eachUser[3] }}</td>
                             <td>{{ eachUser[4] }}</td>
@@ -456,8 +463,18 @@
       </div>
       <!-- /.content-wrapper -->
       <footer class="main-footer">
-        <div class="pull-right hidden-xs"><b>Version</b> 1.0</div>
+        <div class="pull-right hidden-xs">
+          <b>Version</b> 1.0-
+          <label for="" id="developers" class="text-info">
+            Developed By: SoftEarth Technologies, Inc</label
+          >
+        </div>
         <strong>Copyright &copy; 2018. Zubacx</strong> All rights reserved.
+        <img
+          src="{{ url_for('static',filename='dist/img/ZubaCx_Logo.png') }}"
+          height="40px"
+          alt="Zubacx Logo"
+        />
       </footer>
     </div>
     <!-- ./wrapper -->

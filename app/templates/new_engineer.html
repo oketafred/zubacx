@@ -65,7 +65,7 @@
     <div class="wrapper">
       <header class="main-header">
         <!-- Logo -->
-        <a href="../../index2.html" class="logo">
+        <a href="/dashboard" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><b>Zub</b>U</span>
           <!-- logo for regular state and mobile devices -->
@@ -118,13 +118,13 @@
                   </li>
                   <!-- Menu Footer-->
                   <li class="user-footer">
-                    <div class="pull-left">
-                      <a href="#" class="btn btn-default btn-flat">Profile</a>
-                    </div>
-                    <div class="pull-right">
-                      <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                    </div>
-                  </li>
+                      <div class="pull-left">
+                        <a href="/profile" class="btn bg-purple btn-flat">Profile</a>
+                      </div>
+                      <div class="pull-right">
+                        <a href="#" class="btn bg-maroon btn-flat">Sign out</a>
+                      </div>
+                    </li>
                 </ul>
               </li>
             </ul>
@@ -192,7 +192,7 @@
                 </a>
                 <ul class="treeview-menu">
                     {% if currentUser[16] ==1:%}
-                  <li><a href="/all_open_and_overdue_tickets"><i class="fa fa-circle-o"></i> All Tickets</a></li>
+                  <li><a href="/view_all_tickets"><i class="fa fa-circle-o"></i> All Tickets</a></li>
                   <li><a href="/open_and_overdue_tickets"><i class="fa fa-circle-o"></i> Open Tickets</a></li>
                   <li><a href="/closed_and_overdue_tickets"><i class="fa fa-circle-o"></i> Closed Tickets</a></li>
                   <li><a href="/low_priority_and_overdue_tickets"><i class="fa fa-circle-o"></i> Overdue Tickets</a></li>
@@ -491,9 +491,13 @@
       <!-- /.content-wrapper -->
 
       <footer class="main-footer">
-        <div class="pull-right hidden-xs"><b>Version</b> 1.0</div>
-        <strong>Copyright &copy; 2018. Zubacx </strong> All rights reserved.
-      </footer>
+          <div class="pull-right hidden-xs">
+            <b>Version</b> 1.0-
+            <label for="" id="developers" class="text-info"> Developed By: SoftEarth Technologies, Inc</label>
+          </div>
+          <strong>Copyright &copy; 2018. Zubacx</strong> All rights reserved.
+          <img src="{{ url_for('static',filename='dist/img/ZubaCx_Logo.png') }}" height="40px" alt="Zubacx Logo">
+        </footer>
     </div>
     <!-- ./wrapper -->
 

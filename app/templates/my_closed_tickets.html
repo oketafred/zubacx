@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Zubacx | My ClosedClosed Tickets</title>
+    <title>Zubacx | My Closed Tickets</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta
       content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
@@ -35,7 +35,7 @@
       href="{{ url_for('static',filename='dist/css/AdminLTE.min.css') }}"
     />
     <!-- AdminLTE Skins. Choose a skin from the css/skins
-         folder instead of downloading all of them to reduce the load. -->
+       folder instead of downloading all of them to reduce the load. -->
     <link
       rel="stylesheet"
       href="{{ url_for('static',filename='dist/css/skins/_all-skins.min.css') }}"
@@ -43,7 +43,12 @@
     <!-- iCheck -->
     <link
       rel="stylesheet"
-      href="{{ url_for('static',filename='plugins/iCheck/flat/blue.css') }}"
+      href="{{ url_for('static',filename='dist/plugins/iCheck/flat/blue.css') }}"
+    />
+    <!--Numbering CSS  -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static',filename='numbering/numbering.css') }}"
     />
     <!-- Custom CSS -->
     <style>
@@ -68,7 +73,7 @@
     <div class="wrapper">
       <header class="main-header">
         <!-- Logo -->
-        <a href="../../index2.html" class="logo">
+        <a href="/dashboard" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><b>Zub</b>U</span>
           <!-- logo for regular state and mobile devices -->
@@ -81,215 +86,288 @@
           </span>
         </a>
 
-    <header class="main-header">
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top">
+          <!-- Sidebar toggle button-->
+          <a
+            href="#"
+            class="sidebar-toggle"
+            data-toggle="push-menu"
+            role="button"
+          >
+            <span class="sr-only">Toggle navigation</span>
+          </a>
+          <!-- Navbar Right Menu -->
+          <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+              <!-- User Account: style can be found in dropdown.less -->
+              <li class="dropdown user user-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <img
+                    src="{{ url_for('static',filename='dist/img/user2-160x160.jpg') }}"
+                    class="user-image"
+                    alt="User Image"
+                  />
+                  <span class="hidden-xs">{{ currentUser[3] }}</span>
+                </a>
+                <ul class="dropdown-menu">
+                  <!-- User image -->
+                  <li class="user-header">
+                    <img
+                      src="{{ url_for('static',filename='dist/img/user2-160x160.jpg') }}"
+                      class="img-circle"
+                      alt="User Image"
+                    />
 
-        <!-- Logo -->
-        <a href="../../index2.html" class="logo">
-         <!-- mini logo for sidebar mini 50x50 pixels -->
-         <span class="logo-mini"><b>Zub</b>U</span>
-         <!-- logo for regular state and mobile devices -->
-         <span class="logo-lg">
-           <img src="{{ url_for('static',filename='dist/img/ZubaCx_Logo.png') }}" height="40px" alt="">
-         </span>
-       </a>
-     
-         <!-- Header Navbar: style can be found in header.less -->
-         <nav class="navbar navbar-static-top">
-           <!-- Sidebar toggle button-->
-           <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-             <span class="sr-only">Toggle navigation</span>
-           </a>
-           <!-- Navbar Right Menu -->
-           <div class="navbar-custom-menu">
-             <ul class="nav navbar-nav">
-               <!-- User Account: style can be found in dropdown.less -->
-               <li class="dropdown user user-menu">
-                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                   <img src="{{ url_for('static',filename='dist/img/user2-160x160.jpg') }}" class="user-image" alt="User Image">
-                   <span class="hidden-xs">{{currentUser[3]}}</span>
-                 </a>
-                 <ul class="dropdown-menu">
-                   <!-- User image -->
-                   <li class="user-header">
-                     <img src="{{ url_for('static',filename='dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
-     
-                     <p>
-                         {{currentUser[3]}} - ({{currentUser[1]}} {{currentUser[2]}})
-                     </p>
-                   </li>
-                   <!-- Menu Footer-->
-                   <li class="user-footer">
-                     <div class="pull-left">
-                       <a href="#" class="btn btn-default btn-flat">Profile</a>
-                     </div>
-                     <div class="pull-right">
-                       <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                     </div>
-                   </li>
-                 </ul>
-               </li>
-             </ul>
-           </div>
-     
-         </nav>
-       </header>
-  <!-- Left side column. contains the logo and sidebar -->
-  <aside class="main-sidebar">
-      <!-- sidebar: style can be found in sidebar.less -->
-      <section class="sidebar">
-        <!-- Sidebar user panel -->
-        <div class="user-panel">
-          <div class="pull-left image">
-            <img src="{{ url_for('static',filename='dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
+                    <p>
+                      {{ currentUser[3] }} - ({{ currentUser[1] }}
+                      {{ currentUser[2] }})
+                    </p>
+                  </li>
+                  <!-- Menu Footer-->
+                  <li class="user-footer">
+                    <div class="pull-left">
+                      <a href="/profile" class="btn bg-purple btn-flat"
+                        >Profile</a
+                      >
+                    </div>
+                    <div class="pull-right">
+                      <a href="#" class="btn bg-maroon btn-flat">Sign out</a>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
           </div>
-          <div class="pull-left info">
-            <p>{{currentUser[3]}}</p>
-            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+        </nav>
+      </header>
+      <!-- Left side column. contains the logo and sidebar -->
+      <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+          <!-- Sidebar user panel -->
+          <div class="user-panel">
+            <div class="pull-left image">
+              <img
+                src="{{ url_for('static',filename='dist/img/user2-160x160.jpg') }}"
+                class="img-circle"
+                alt="User Image"
+              />
+            </div>
+            <div class="pull-left info">
+              <p>{{ currentUser[3] }}</p>
+              <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+            </div>
           </div>
-        </div>
-  
-        <!-- sidebar menu: : style can be found in sidebar.less -->
-        <ul class="sidebar-menu" data-widget="tree">
-          <li class="active">
-            <a href="{{ url_for('dashboard') }}">
-              <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-            </a>
-          </li>
-                  <li class="treeview">
-            <a href="#">
-              <i class="fa fa-hacker-news"></i>
-              <span>New</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-                <small class="label pull-right bg-green">new</small>
-              </span>
-            </a>
-            <ul class="treeview-menu">
+
+          <!-- sidebar menu: : style can be found in sidebar.less -->
+          <ul class="sidebar-menu" data-widget="tree">
+            <li class="active">
+              <a href="{{ url_for('dashboard') }}">
+                <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+              </a>
+            </li>
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-hacker-news"></i> <span>New</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                  <small class="label pull-right bg-green">new</small>
+                </span>
+              </a>
+              <ul class="treeview-menu">
                 {% if currentUser[9] ==0:%} {% else:%}
-              <li><a href="{{ url_for('new_users') }}"><i class="fa fa-circle-o"></i> Add New User</a></li>
-              {%endif%} {% if currentUser[13] ==0:%} {% else:%}
-              <li><a href="{{ url_for('new_ticket') }}"><i class="fa fa-circle-o"></i> Add New Ticket</a></li>
-              {%endif%} {% if currentUser[23] ==0:%} {% else:%}
-              <li><a href="{{ url_for('new_customer') }}"><i class="fa fa-circle-o"></i> Add New Customer</a></li>
-              {%endif%} {% if currentUser[24] ==0:%} {% else:%}
-              <li><a href="{{ url_for('new_engineer') }}"><i class="fa fa-circle-o"></i> Add New Engineer</a></li>
-              {%endif%} {% if currentUser[25] ==0:%} {% else:%}
-              <li><a href="{{ url_for('new_equipment') }}"><i class="fa fa-circle-o"></i> Add New Equipment</a></li>
-              {%endif%} {% if currentUser[26] ==0:%} {% else:%}
-              <li><a href="{{ url_for('new_workorder') }}"><i class="fa fa-circle-o"></i> Add New Work Order</a></li>
-              {%endif%}
-            </ul>
-          </li>
-          <li class="treeview">
-            <a href="#">
-              <i class="fa fa-street-view"></i>
-              <span>Views</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-                <small class="label pull-right bg-primary">views</small>
-              </span>
-            </a>
-            <ul class="treeview-menu">
+                <li>
+                  <a href="{{ url_for('new_users') }}"
+                    ><i class="fa fa-circle-o"></i> Add New User</a
+                  >
+                </li>
+                {%endif%} {% if currentUser[13] ==0:%} {% else:%}
+                <li>
+                  <a href="{{ url_for('new_ticket') }}"
+                    ><i class="fa fa-circle-o"></i> Add New Ticket</a
+                  >
+                </li>
+                {%endif%} {% if currentUser[23] ==0:%} {% else:%}
+                <li>
+                  <a href="{{ url_for('new_customer') }}"
+                    ><i class="fa fa-circle-o"></i> Add New Customer</a
+                  >
+                </li>
+                {%endif%} {% if currentUser[24] ==0:%} {% else:%}
+                <li>
+                  <a href="{{ url_for('new_engineer') }}"
+                    ><i class="fa fa-circle-o"></i> Add New Engineer</a
+                  >
+                </li>
+                {%endif%} {% if currentUser[25] ==0:%} {% else:%}
+                <li>
+                  <a href="{{ url_for('new_equipment') }}"
+                    ><i class="fa fa-circle-o"></i> Add New Equipment</a
+                  >
+                </li>
+                {%endif%} {% if currentUser[26] ==0:%} {% else:%}
+                <li>
+                  <a href="{{ url_for('new_workorder') }}"
+                    ><i class="fa fa-circle-o"></i> Add New Work Order</a
+                  >
+                </li>
+                {%endif%}
+              </ul>
+            </li>
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-street-view"></i> <span>Views</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                  <small class="label pull-right bg-primary">views</small>
+                </span>
+              </a>
+              <ul class="treeview-menu">
                 {% if currentUser[16] ==1:%}
-              <li><a href="/all_open_and_overdue_tickets"><i class="fa fa-circle-o"></i> All Tickets</a></li>
-              <li><a href="/open_and_overdue_tickets"><i class="fa fa-circle-o"></i> Open Tickets</a></li>
-              <li><a href="/closed_and_overdue_tickets"><i class="fa fa-circle-o"></i> Closed Tickets</a></li>
-              <li><a href="/low_priority_and_overdue_tickets"><i class="fa fa-circle-o"></i> Overdue Tickets</a></li>
-              <li><a href="/all_my_open_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Tickets</a></li>
-              <li><a href="/my_open_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Open Tickets</a></li>
-              <li><a href="/my_closed_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Closed Tickets</a></li>
-              <li><a href="/my_low_priority_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Overdue Tickets</a></li>
-              {% else:%} {% if currentUser[13] ==1:%}
-              <li><a href="/all_my_open_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Tickets</a></li>
-              <li><a href="/my_open_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Open Tickets</a></li>
-              <li><a href="/my_closed_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Closed Tickets</a></li>
-              <li><a href="/my_low_priority_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Overdue Tickets</a></li>
-              {% else:%} {%endif%} {%endif%}
-            </ul>
-          </li>
-          <li class="">
-            <a href="{{ url_for('view_all_tickets') }}">
-              <i class="fa fa-ticket"></i> <span>Tickets</span>
-            </a>
-          </li>
-          {% if currentUser[23] ==0:%}
-          <li class="">
-            <a href="/robot">
-              <i class="fa fa-user-o"></i> <span>Customers</span>
-            </a>
-            
-          </li>
-          {% else:%}
-          <li class="">
+                <li>
+                  <a href="/view_all_tickets"
+                    ><i class="fa fa-circle-o"></i> All Tickets</a
+                  >
+                </li>
+                <li>
+                  <a href="/open_and_overdue_tickets"
+                    ><i class="fa fa-circle-o"></i> Open Tickets</a
+                  >
+                </li>
+                <li>
+                  <a href="/closed_and_overdue_tickets"
+                    ><i class="fa fa-circle-o"></i> Closed Tickets</a
+                  >
+                </li>
+                <li>
+                  <a href="/low_priority_and_overdue_tickets"
+                    ><i class="fa fa-circle-o"></i> Overdue Tickets</a
+                  >
+                </li>
+                <li>
+                  <a href="/all_my_open_and_overdue_tickets"
+                    ><i class="fa fa-circle-o"></i> My Tickets</a
+                  >
+                </li>
+                <li>
+                  <a href="/my_open_and_overdue_tickets"
+                    ><i class="fa fa-circle-o"></i> My Open Tickets</a
+                  >
+                </li>
+                <li>
+                  <a href="/my_closed_and_overdue_tickets"
+                    ><i class="fa fa-circle-o"></i> My Closed Tickets</a
+                  >
+                </li>
+                <li>
+                  <a href="/my_low_priority_and_overdue_tickets"
+                    ><i class="fa fa-circle-o"></i> My Overdue Tickets</a
+                  >
+                </li>
+                {% else:%} {% if currentUser[13] ==1:%}
+                <li>
+                  <a href="/all_my_open_and_overdue_tickets"
+                    ><i class="fa fa-circle-o"></i> My Tickets</a
+                  >
+                </li>
+                <li>
+                  <a href="/my_open_and_overdue_tickets"
+                    ><i class="fa fa-circle-o"></i> My Open Tickets</a
+                  >
+                </li>
+                <li>
+                  <a href="/my_closed_and_overdue_tickets"
+                    ><i class="fa fa-circle-o"></i> My Closed Tickets</a
+                  >
+                </li>
+                <li>
+                  <a href="/my_low_priority_and_overdue_tickets"
+                    ><i class="fa fa-circle-o"></i> My Overdue Tickets</a
+                  >
+                </li>
+                {% else:%} {%endif%} {%endif%}
+              </ul>
+            </li>
+            <li class="">
+              <a href="{{ url_for('view_all_tickets') }}">
+                <i class="fa fa-ticket"></i> <span>Tickets</span>
+              </a>
+            </li>
+            {% if currentUser[23] ==0:%}
+            <li class="">
+              <a href="/robot">
+                <i class="fa fa-user-o"></i> <span>Customers</span>
+              </a>
+            </li>
+            {% else:%}
+            <li class="">
               <a href="/all_clients">
                 <i class="fa fa-user-o"></i> <span>Customers</span>
               </a>
-              
             </li>
             <li class="">
               <a href="/all_engineers">
                 <i class="fa fa-user-o"></i> <span>Engineers</span>
               </a>
-              
             </li>
             <li class="">
               <a href="/all_users">
                 <i class="fa fa-user-o"></i> <span>System Users</span>
               </a>
-              
             </li>
             {% endif%}
-          <li class="">
-            <a href="/tasks">
-              <i class="fa fa-tasks"></i> <span>Tasks</span>
-            </a>
-          </li>
-          <li class="">
-            <a href="/reports">
-              <i class="fa fa-file-pdf-o"></i> <span>Reports</span>
-            </a>
-          </li>
-          {% if currentUser[13] ==0:%}
-          <li class="">
-            <a href="/robot">
-              <i class="fa fa-ticket"></i> <span>Open Tickets</span>
-            </a>
-          </li>
-          {% else:%}
-          <li class="">
+            <li class="">
+              <a href="/tasks">
+                <i class="fa fa-tasks"></i> <span>Tasks</span>
+              </a>
+            </li>
+            <li class="">
+              <a href="/reports">
+                <i class="fa fa-file-pdf-o"></i> <span>Reports</span>
+              </a>
+            </li>
+            {% if currentUser[13] ==0:%}
+            <li class="">
+              <a href="/robot">
+                <i class="fa fa-ticket"></i> <span>Open Tickets</span>
+              </a>
+            </li>
+            {% else:%}
+            <li class="">
               <a href="{{ url_for('new_ticket') }}">
                 <i class="fa fa-ticket"></i> <span>Open Tickets</span>
               </a>
             </li>
-          {% endif%}
-          <li>
-            <a href="pages/calendar.html">
-              <i class="fa fa-calendar"></i> <span>Calendar</span>
-              <span class="pull-right-container">
-                <small class="label pull-right bg-red">3</small>
-                <small class="label pull-right bg-blue">17</small>
-              </span>
-            </a>
-          </li>
-          <li style="height:80px">
-            <a>
-              <span class="pull-right-container">
-                <small style="width:60px" class="label pull-right bg-yellow">
-                  <h1 id="s">12</h1>
-                </small>
-                <small style="width:60px" class="label pull-right bg-green">
-                  <h1 id="m">34</h1>
-                </small>
-                <small style="width:60px" class="label pull-right bg-red">
-                  <h1 id="h">23</h1>
-                </small>
-              </span>
-            </a>
-          </li>
-        </ul>
-      </section>
-      <!-- /.sidebar -->
-    </aside>
+            {% endif%}
+            <li>
+              <a href="pages/calendar.html">
+                <i class="fa fa-calendar"></i> <span>Calendar</span>
+                <span class="pull-right-container">
+                  <small class="label pull-right bg-red">3</small>
+                  <small class="label pull-right bg-blue">17</small>
+                </span>
+              </a>
+            </li>
+            <li style="height:80px">
+              <a>
+                <span class="pull-right-container">
+                  <small style="width:60px" class="label pull-right bg-yellow">
+                    <h1 id="s">12</h1>
+                  </small>
+                  <small style="width:60px" class="label pull-right bg-green">
+                    <h1 id="m">34</h1>
+                  </small>
+                  <small style="width:60px" class="label pull-right bg-red">
+                    <h1 id="h">23</h1>
+                  </small>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </section>
+        <!-- /.sidebar -->
+      </aside>
 
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
@@ -330,16 +408,17 @@
                   </div>
                   <div class="box-body padding">
                     <div class="table-responsive mailbox-messages">
+                      {% include '_messages.html'%}
                       <table
                         id="example1"
-                        class="table table-hover table-striped"
+                        class="table table-hover table-striped css-serial"
                       >
                         <thead>
                           <tr>
                             <th>#</th>
                             <th></th>
                             <th>Engineer's Name</th>
-                            <th>Client-Reason for Ticket</th>
+                            <th>Ticket-Reason for Ticket</th>
                             <th>Ticket Status</th>
                             <th>Ticket Timestamp</th>
                             <th>Ticket Type</th>
@@ -349,7 +428,7 @@
                         <tbody>
                           {% for eachTicket in allTheTickets %}
                           <tr>
-                            <td>{{ eachTicket[0] }}</td>
+                            <td></td>
                             <td class="mailbox-star">
                               <i class="fa fa-ticket text-yellow"></i>
                             </td>
@@ -390,9 +469,12 @@
                             </td>
                             {% if currentUser[14] ==1:%}
                             <td>
-                              <button class="btn btn-primary btn-sm">
+                              <a
+                                href="/edit_the_ticket/{{ eachTicket[0] }}"
+                                class="btn btn-primary btn-sm"
+                              >
                                 View Details
-                              </button>
+                              </a>
                             </td>
                             {% else:%} {% endif%}
                           </tr>
@@ -417,8 +499,18 @@
       </div>
       <!-- /.content-wrapper -->
       <footer class="main-footer">
-        <div class="pull-right hidden-xs"><b>Version</b> 1.0</div>
+        <div class="pull-right hidden-xs">
+          <b>Version</b> 1.0-
+          <label for="" id="developers" class="text-info">
+            Developed By: SoftEarth Technologies, Inc</label
+          >
+        </div>
         <strong>Copyright &copy; 2018. Zubacx</strong> All rights reserved.
+        <img
+          src="{{ url_for('static',filename='dist/img/ZubaCx_Logo.png') }}"
+          height="40px"
+          alt="Zubacx Logo"
+        />
       </footer>
     </div>
     <!-- ./wrapper -->
@@ -437,10 +529,9 @@
     <!-- AdminLTE App -->
     <script src="{{ url_for('static',filename='dist/js/adminlte.min.js') }}"></script>
     <!-- iCheck -->
-    <script src="{{ url_for('static',filename='dist/plugins/iCheck/icheck.min.js') }}"></script>
-    <script src="{{ url_for('static',filename='time/time.js') }}"></script>
+    <script src="{{ url_for('static',filename='plugins/iCheck/icheck.min.js') }}"></script>
     <!-- Page Script -->
-
+    <script src="{{ url_for('static',filename='time/time.js') }}"></script>
     <script>
       $(function() {
         let oTable = $("#example1").DataTable({
