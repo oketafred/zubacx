@@ -1,6 +1,6 @@
 from app.database.connectDB import DatabaseConnectivity
 from flask import flash
-import datetime
+from datetime import datetime
 import psycopg2
 
 dbInstance = DatabaseConnectivity()
@@ -20,8 +20,10 @@ class Tickets:
             ticket_revisited,ticket_site_id) VALUES(
             %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
             """
+            planned_vist = datetime(ticket_planned_visit_date)
+            the_planned_visit_date= planned_vist.strftime('%Y-%M-%D')
             cur.execute(sql,(ticket_assigned_to,ticket_opening_time,
-            ticket_status,ticket_overdue_time,ticket_planned_visit_date.strftime('%Y-%m-%D'),ticket_actual_visit_date,
+            ticket_status,ticket_overdue_time,the_planned_visit_date,ticket_actual_visit_date,
             ticket_client,ticket_po_number,ticket_wo_type,ticket_reason,
             ticket_priority,username,ticket_type,ticket_revisited_value,ticket_site_id))
             conn.commit()
