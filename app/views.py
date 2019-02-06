@@ -138,6 +138,7 @@ def add_ticket():
     ticket_wo_type = request.form['ticket_wo_type']
     ticket_reason = request.form['ticket_reason']
     ticket_planned_visit_date = request.form['ticket_planned_visit_date']
+    ticket_planned_visit_date_value = STR_TO_DATE(ticket_planned_visit_date,'%m-%d-%y')
     ticket_actual_visit_date = request.form['ticket_actual_visit_date']
     ticket_priority = request.form['ticket_priority']
     ticket_site_id = request.form['ticket_site_id']
@@ -175,7 +176,7 @@ def add_ticket():
     username = session['username']
 
     ticketInstance.add_ticket(ticket_assigned_to,ticket_opening_time,
-    ticket_status,ticket_overdue_time,ticket_planned_visit_date,ticket_actual_visit_date,
+    ticket_status,ticket_overdue_time,ticket_planned_visit_date_value,ticket_actual_visit_date,
     ticket_client,ticket_po_number,ticket_wo_type,ticket_reason,
     ticket_priority,username,ticket_type_value,ticket_revisited_value, ticket_site_id)
     theClients = ticketInstance.get_clients()
