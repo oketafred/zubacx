@@ -14,7 +14,7 @@ class Tickets:
             cur = conn.cursor()
             sql = """
             INSERT INTO tickets(ticket_assigned_to,ticket_opening_time,
-            ticket_status,ticket_overdue_time,STR_TO_DATE(ticket_planned_visit_date, '%m-%d-%y'),ticket_actual_visit_date,
+            ticket_status,ticket_overdue_time,STR_TO_DATE(ticket_planned_visit_date, 'mm-dd-yyyy'),ticket_actual_visit_date,
             ticket_client,ticket_po_number,ticket_wo_type,ticket_reason,
             ticket_priority,username,ticket_type,
             ticket_revisited,ticket_site_id) VALUES(
