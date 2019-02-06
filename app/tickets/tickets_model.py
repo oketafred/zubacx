@@ -20,8 +20,7 @@ class Tickets:
             ticket_revisited,ticket_site_id) VALUES(
             %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
             """
-            planned_vist = date(ticket_planned_visit_date)
-            the_planned_visit_date= planned_vist.strftime('%Y-%M-%D')
+            the_planned_visit_date= ticket_planned_visit_date.strftime('%Y-%M-%D')
             cur.execute(sql,(ticket_assigned_to,ticket_opening_time,
             ticket_status,ticket_overdue_time,the_planned_visit_date,ticket_actual_visit_date,
             ticket_client,ticket_po_number,ticket_wo_type,ticket_reason,
