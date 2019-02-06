@@ -14,14 +14,14 @@ class Tickets:
             cur = conn.cursor()
             sql = """
             INSERT INTO tickets(ticket_assigned_to,ticket_opening_time,
-            ticket_status,ticket_overdue_time,STR_TO_DATE(ticket_planned_visit_date, '%M-%D-%Y'),ticket_actual_visit_date,
+            ticket_status,ticket_overdue_time,ticket_planned_visit_date,ticket_actual_visit_date,
             ticket_client,ticket_po_number,ticket_wo_type,ticket_reason,
             ticket_priority,username,ticket_type,
             ticket_revisited,ticket_site_id) VALUES(
             %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
             """
             cur.execute(sql,(ticket_assigned_to,ticket_opening_time,
-            ticket_status,ticket_overdue_time,ticket_planned_visit_date,ticket_actual_visit_date,
+            ticket_status,ticket_overdue_time,STR_TO_DATE(ticket_planned_visit_date, '%M-%D-%Y'),STR_TO_DATE(ticket_actual_visit_date, '%M-%D-%Y'),
             ticket_client,ticket_po_number,ticket_wo_type,ticket_reason,
             ticket_priority,username,ticket_type,ticket_revisited_value,ticket_site_id))
             conn.commit()
