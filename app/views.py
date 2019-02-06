@@ -166,7 +166,7 @@ def add_ticket():
     else:
         ticket_type_value = ticket_type_value
 
-    ticket_revisited = request.form.get('Revisit')
+    ticket_revisited = request.form.get('revisit')
     if ticket_revisited:
         ticket_revisited_value = "Yes"
     else:
