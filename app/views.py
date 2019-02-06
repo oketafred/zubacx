@@ -141,7 +141,6 @@ def add_ticket():
     ticket_actual_visit_date = request.form['ticket_actual_visit_date']
     ticket_priority = request.form['ticket_priority']
     ticket_site_id = request.form['ticket_site_id']
-    ticket_part_used = request.form['ticket_part_used']
 
     ticket_type_ATM = request.form.get('ATM')
     if ticket_type_ATM:
@@ -173,21 +172,12 @@ def add_ticket():
     else:
         ticket_revisited_value = "No"
 
-
-    ticket_returned_part = request.form.get('Returned')
-    
-    if ticket_returned_part:
-        ticket_returned_part_value = "Yes"
-    else:
-        ticket_returned_part_value = "No"
-
     username = session['username']
 
     ticketInstance.add_ticket(ticket_assigned_to,ticket_opening_time,
     ticket_status,ticket_overdue_time,ticket_planned_visit_date,ticket_actual_visit_date,
     ticket_client,ticket_po_number,ticket_wo_type,ticket_reason,
-    ticket_priority,username,ticket_type_value,ticket_part_used,ticket_revisited_value,
-    ticket_returned_part_value, ticket_site_id)
+    ticket_priority,username,ticket_type_value,ticket_revisited_value, ticket_site_id)
     theClients = ticketInstance.get_clients()
     theEngineers = ticketInstance.get_engineers()
     theWorkOrderTypes = ticketInstance.get_work_order_types()
@@ -1052,7 +1042,7 @@ def closed_and_overdue_tickets():
 def low_priority_and_overdue_tickets():
     LoggedInUser = session['username']
     LoggedInUser1 = usersInstance.checkUserRights(LoggedInUser)
-    allTheTickets = ticketInstance.view_all_overdue_tickets(LoggedInUser)
+    allTheTickets = ticketInstance.view_all_overdue_tickets()
     if g.username:
         return render_template('overdue_tickets.html', 
         currentUser=LoggedInUser1, allTheTickets=allTheTickets)

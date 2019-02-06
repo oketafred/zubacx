@@ -8,7 +8,7 @@ class DatabaseConnectivity:
         try:
             import MySQLdb
             self.conn = MySQLdb.connect(
-                host='localhost', user='root', password='mysql', db='tickets')
+                host='localhost', user='root', password='walter123@Andela!', db='tickets')
             print("Connected Successfully")
             return self.conn
 

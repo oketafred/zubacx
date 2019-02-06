@@ -8,8 +8,7 @@ class Tickets:
     def add_ticket(self,ticket_assigned_to,ticket_opening_time,
         ticket_status,ticket_overdue_time,ticket_planned_visit_date,ticket_actual_visit_date,
         ticket_client,ticket_po_number,ticket_wo_type,ticket_reason,
-        ticket_priority,username,ticket_type,ticket_part_used,ticket_revisited_value,
-        ticket_returned_part_value,ticket_site_id):
+        ticket_priority,username,ticket_type,ticket_revisited_value,ticket_site_id):
         try:
             conn = dbInstance.connectToDatabase()
             cur = conn.cursor()
@@ -17,15 +16,14 @@ class Tickets:
             INSERT INTO tickets(ticket_assigned_to,ticket_opening_time,
             ticket_status,ticket_overdue_time,ticket_planned_visit_date,ticket_actual_visit_date,
             ticket_client,ticket_po_number,ticket_wo_type,ticket_reason,
-            ticket_priority,username,ticket_type,ticket_part_used,
-            ticket_revisited,ticket_part_returned,ticket_site_id) VALUES(
-            %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
+            ticket_priority,username,ticket_type,
+            ticket_revisited,ticket_site_id) VALUES(
+            %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
             """
             cur.execute(sql,(ticket_assigned_to,ticket_opening_time,
             ticket_status,ticket_overdue_time,ticket_planned_visit_date,ticket_actual_visit_date,
             ticket_client,ticket_po_number,ticket_wo_type,ticket_reason,
-            ticket_priority,username,ticket_type,ticket_part_used,ticket_revisited_value,
-            ticket_returned_part_value,ticket_site_id))
+            ticket_priority,username,ticket_type,ticket_revisited_value,ticket_site_id))
             conn.commit()
             flash('Ticket Opened Successfully','success')
         except(Exception, psycopg2.DatabaseError) as e:
@@ -246,7 +244,7 @@ class Tickets:
             print(e)
             flash('Error retrieving my tickets from database','danger')
 
-    def view_all_overdue_tickets(self,current_user):
+    def view_all_overdue_tickets(self):
         try:
             # import MySQLdb
             conn = dbInstance.connectToDatabase()
@@ -276,7 +274,7 @@ class Tickets:
 
     def view_all_my_overdue_tickets(self,current_user):
         try:
-            # import MySQLdb
+            
             conn = dbInstance.connectToDatabase()
             cur = conn.cursor()
             theSql = Tickets().sqlStatment()
@@ -568,4 +566,3 @@ class Tickets:
         except(Exception, psycopg2.DatabaseError) as e:
             print(e)
             flash('Error retrieving teh count of open tickets from database','danger')
-    
