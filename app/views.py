@@ -182,8 +182,8 @@ def add_ticket():
     theEngineers = ticketInstance.get_engineers()
     theWorkOrderTypes = ticketInstance.get_work_order_types()
     users = usersInstance.users_who_can_receive_email()
-    recipients = [users[0][0]]
-    print(users[0][0])
+    recipients = []
+    recipients.append(tuple(users[0]))
     print(recipients)
     body="""A ticket has just been opened and assigend to engineer {}, 
 the reason for this ticket is to address the issue of {}. You are receiving this notification because 
