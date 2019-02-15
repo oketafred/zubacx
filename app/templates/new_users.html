@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,10 +19,7 @@
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="{{ url_for('static',filename='dist/css/skins/_all-skins.min.css') }}">
   <!-- Parsley CSS -->
-  <link
-  rel="stylesheet"
-  href="{{ url_for('static',filename='parsley/parsley.css') }}"
-/>
+  <link rel="stylesheet" href="{{ url_for('static',filename='parsley/parsley.css') }}" />
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -32,80 +30,81 @@
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
+
 <body class="hold-transition fixed skin-blue sidebar-mini">
-<!-- Site wrapper -->
-<div class="wrapper">
+  <!-- Site wrapper -->
+  <div class="wrapper">
 
     <header class="main-header">
 
-        <!-- Logo -->
-        <a href="/dashboard" class="logo">
-         <!-- mini logo for sidebar mini 50x50 pixels -->
-         <span class="logo-mini"><b>Zub</b>U</span>
-         <!-- logo for regular state and mobile devices -->
-         <span class="logo-lg">
-           <img src="{{ url_for('static',filename='dist/img/ZubaCx_Logo.png') }}" height="40px" alt="">
-         </span>
-       </a>
-     
-         <!-- Header Navbar: style can be found in header.less -->
-         <nav class="navbar navbar-static-top">
-           <!-- Sidebar toggle button-->
-           <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-             <span class="sr-only">Toggle navigation</span>
-           </a>
-           <!-- Navbar Right Menu -->
-           <div class="navbar-custom-menu">
-             <ul class="nav navbar-nav">
-               <!-- User Account: style can be found in dropdown.less -->
-               <li class="dropdown user user-menu">
-                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                   <img src="{{ url_for('static',filename='dist/img/user2-160x160.jpg') }}" class="user-image" alt="User Image">
-                   <span class="hidden-xs">{{currentUser[3]}}</span>
-                 </a>
-                 <ul class="dropdown-menu">
-                   <!-- User image -->
-                   <li class="user-header">
-                     <img src="{{ url_for('static',filename='dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
-     
-                     <p>
-                         {{currentUser[3]}} - ({{currentUser[1]}} {{currentUser[2]}})
-                     </p>
-                   </li>
-                   <!-- Menu Footer-->
-                   <li class="user-footer">
-                      <div class="pull-left">
-                        <a href="/profile" class="btn bg-purple btn-flat">Profile</a>
-                      </div>
-                      <div class="pull-right">
-                        <a href="#" class="btn bg-maroon btn-flat">Sign out</a>
-                      </div>
-                    </li>
-                 </ul>
-               </li>
-             </ul>
-           </div>
-     
-         </nav>
-       </header>
+      <!-- Logo -->
+      <a href="/dashboard" class="logo">
+        <!-- mini logo for sidebar mini 50x50 pixels -->
+        <span class="logo-mini"><b>Zub</b>U</span>
+        <!-- logo for regular state and mobile devices -->
+        <span class="logo-lg">
+          <img src="{{ url_for('static',filename='dist/img/ZubaCx_Logo.png') }}" height="40px" alt="">
+        </span>
+      </a>
 
-  <!-- =============================================== -->
+      <!-- Header Navbar: style can be found in header.less -->
+      <nav class="navbar navbar-static-top">
+        <!-- Sidebar toggle button-->
+        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+          <span class="sr-only">Toggle navigation</span>
+        </a>
+        <!-- Navbar Right Menu -->
+        <div class="navbar-custom-menu">
+          <ul class="nav navbar-nav">
+            <!-- User Account: style can be found in dropdown.less -->
+            <li class="dropdown user user-menu">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <img src="{{ url_for('static',filename='dist/img/user2-160x160.jpg') }}" class="user-image" alt="User Image">
+                <span class="hidden-xs">{{currentUser[3]}}</span>
+              </a>
+              <ul class="dropdown-menu">
+                <!-- User image -->
+                <li class="user-header">
+                  <img src="{{ url_for('static',filename='dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
 
-  <!-- Left side column. contains the sidebar -->
-  <aside class="main-sidebar">
+                  <p>
+                    {{currentUser[3]}} - ({{currentUser[1]}} {{currentUser[2]}})
+                  </p>
+                </li>
+                <!-- Menu Footer-->
+                <li class="user-footer">
+                  <div class="pull-left">
+                    <a href="/profile" class="btn bg-purple btn-flat">Profile</a>
+                  </div>
+                  <div class="pull-right">
+                    <a href="#" class="btn bg-maroon btn-flat">Sign out</a>
+                  </div>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+      </nav>
+    </header>
+
+    <!-- =============================================== -->
+
+    <!-- Left side column. contains the sidebar -->
+    <aside class="main-sidebar">
       <!-- sidebar: style can be found in sidebar.less -->
       <section class="sidebar">
         <!-- Sidebar user panel -->
         <div class="user-panel">
           <div class="pull-left image">
-            <img src="{{ url_for('static',filename='dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
+            <img src="{{ url_for('static',filename='dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image" />
           </div>
           <div class="pull-left info">
-            <p>{{currentUser[3]}}</p>
+            <p>{{ currentUser[3] }}</p>
             <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
           </div>
         </div>
-  
+
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
           <li class="active">
@@ -113,100 +112,171 @@
               <i class="fa fa-dashboard"></i> <span>Dashboard</span>
             </a>
           </li>
-                  <li class="treeview">
+          {% if currentUser[29] ==0:%}
+          <li class="treeview">
             <a href="#">
-              <i class="fa fa-hacker-news"></i>
-              <span>New</span>
+              <i class="fa fa-hacker-news"></i> <span>New</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
                 <small class="label pull-right bg-green">new</small>
               </span>
             </a>
             <ul class="treeview-menu">
-                {% if currentUser[9] ==0:%} {% else:%}
-              <li><a href="{{ url_for('new_users') }}"><i class="fa fa-circle-o"></i> Add New User</a></li>
+              {% if currentUser[9] ==0:%} {% else:%}
+              <li>
+                <a href="{{ url_for('new_users') }}"><i class="fa fa-circle-o"></i> Add New User</a>
+              </li>
               {%endif%} {% if currentUser[13] ==0:%} {% else:%}
-              <li><a href="{{ url_for('new_ticket') }}"><i class="fa fa-circle-o"></i> Add New Ticket</a></li>
+              <li>
+                <a href="{{ url_for('new_ticket') }}"><i class="fa fa-circle-o"></i> Add New Ticket</a>
+              </li>
               {%endif%} {% if currentUser[23] ==0:%} {% else:%}
-              <li><a href="{{ url_for('new_customer') }}"><i class="fa fa-circle-o"></i> Add New Customer</a></li>
+              <li>
+                <a href="{{ url_for('new_customer') }}"><i class="fa fa-circle-o"></i> Add New Customer</a>
+              </li>
               {%endif%} {% if currentUser[24] ==0:%} {% else:%}
-              <li><a href="{{ url_for('new_engineer') }}"><i class="fa fa-circle-o"></i> Add New Engineer</a></li>
+              <li>
+                <a href="{{ url_for('new_engineer') }}"><i class="fa fa-circle-o"></i> Add New Engineer</a>
+              </li>
               {%endif%} {% if currentUser[25] ==0:%} {% else:%}
-              <li><a href="{{ url_for('new_equipment') }}"><i class="fa fa-circle-o"></i> Add New Equipment</a></li>
+              <li>
+                <a href="{{ url_for('new_equipment') }}"><i class="fa fa-circle-o"></i> Add New Equipment</a>
+              </li>
               {%endif%} {% if currentUser[26] ==0:%} {% else:%}
-              <li><a href="{{ url_for('new_workorder') }}"><i class="fa fa-circle-o"></i> Add New Work Order</a></li>
+              <li>
+                <a href="{{ url_for('new_workorder') }}"><i class="fa fa-circle-o"></i> Add New Work Order</a>
+              </li>
               {%endif%}
             </ul>
           </li>
+          {% else:%}
+          {%endif%}
+          {% if currentUser[29] == 0:%}
           <li class="treeview">
             <a href="#">
-              <i class="fa fa-street-view"></i>
-              <span>Views</span>
+              <i class="fa fa-street-view"></i> <span>Views</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
                 <small class="label pull-right bg-primary">views</small>
               </span>
             </a>
             <ul class="treeview-menu">
-                {% if currentUser[16] ==1:%}
-              <li><a href="/view_all_tickets"><i class="fa fa-circle-o"></i> All Tickets</a></li>
-              <li><a href="/open_and_overdue_tickets"><i class="fa fa-circle-o"></i> Open Tickets</a></li>
-              <li><a href="/closed_and_overdue_tickets"><i class="fa fa-circle-o"></i> Closed Tickets</a></li>
-              <li><a href="/low_priority_and_overdue_tickets"><i class="fa fa-circle-o"></i> Overdue Tickets</a></li>
-              <li><a href="/all_my_open_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Tickets</a></li>
-              <li><a href="/my_open_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Open Tickets</a></li>
-              <li><a href="/my_closed_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Closed Tickets</a></li>
-              <li><a href="/my_low_priority_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Overdue Tickets</a></li>
+              {% if currentUser[16] ==1:%}
+              <li>
+                <a href="/view_all_tickets"><i class="fa fa-circle-o"></i> All Tickets</a>
+              </li>
+              <li>
+                <a href="/open_and_overdue_tickets"><i class="fa fa-circle-o"></i> Open Tickets</a>
+              </li>
+              <li>
+                <a href="/closed_and_overdue_tickets"><i class="fa fa-circle-o"></i> Closed Tickets</a>
+              </li>
+              <li>
+                <a href="/low_priority_and_overdue_tickets"><i class="fa fa-circle-o"></i> Overdue Tickets</a>
+              </li>
+              <li>
+                <a href="/all_my_open_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Tickets</a>
+              </li>
+              <li>
+                <a href="/my_open_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Open Tickets</a>
+              </li>
+              <li>
+                <a href="/my_closed_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Closed Tickets</a>
+              </li>
+              <li>
+                <a href="/my_low_priority_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Overdue Tickets</a>
+              </li>
               {% else:%} {% if currentUser[13] ==1:%}
-              <li><a href="/all_my_open_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Tickets</a></li>
-              <li><a href="/my_open_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Open Tickets</a></li>
-              <li><a href="/my_closed_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Closed Tickets</a></li>
-              <li><a href="/my_low_priority_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Overdue Tickets</a></li>
+              <li>
+                <a href="/all_my_open_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Tickets</a>
+              </li>
+              <li>
+                <a href="/my_open_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Open Tickets</a>
+              </li>
+              <li>
+                <a href="/my_closed_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Closed Tickets</a>
+              </li>
+              <li>
+                <a href="/my_low_priority_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Overdue Tickets</a>
+              </li>
               {% else:%} {%endif%} {%endif%}
             </ul>
           </li>
+          {%else:%}
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-street-view"></i> <span>Views</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+                <small class="label pull-right bg-primary">views</small>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li>
+                <a href="/view_all_tickets"><i class="fa fa-circle-o"></i> My Tickets</a>
+              </li>
+              <li>
+                <a href="/open_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Open Tickets</a>
+              </li>
+              <li>
+                <a href="/closed_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Closed Tickets</a>
+              </li>
+              <li>
+                <a href="/low_priority_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Overdue Tickets</a>
+              </li>
+            </ul>
+          </li>
+          {%endif%}
           <li class="">
             <a href="{{ url_for('view_all_tickets') }}">
               <i class="fa fa-ticket"></i> <span>Tickets</span>
             </a>
           </li>
           {% if currentUser[23] ==0:%}
+          {% if currentUser[29] ==0:%}
           <li class="">
             <a href="/robot">
               <i class="fa fa-user-o"></i> <span>Customers</span>
             </a>
-            
           </li>
           {% else:%}
+          {%endif%}
+
+          {% else:%}
+          {% if currentUser[29] ==0:%}
           <li class="">
-              <a href="/all_clients">
-                <i class="fa fa-user-o"></i> <span>Customers</span>
-              </a>
-              
-            </li>
-            <li class="">
-              <a href="/all_engineers">
-                <i class="fa fa-user-o"></i> <span>Engineers</span>
-              </a>
-              
-            </li>
-            <li class="">
-              <a href="/all_users">
-                <i class="fa fa-user-o"></i> <span>System Users</span>
-              </a>
-              
-            </li>
-            {% endif%}
+            <a href="/all_clients">
+              <i class="fa fa-user-o"></i> <span>Customers</span>
+            </a>
+          </li>
+          <li class="">
+            <a href="/all_engineers">
+              <i class="fa fa-user-o"></i> <span>Engineers</span>
+            </a>
+          </li>
+          <li class="">
+            <a href="/all_users">
+              <i class="fa fa-user-o"></i> <span>System Users</span>
+            </a>
+          </li>
+          {% else:%}
+          {%endif%}
+          {% endif%}
           <li class="">
             <a href="/tasks">
               <i class="fa fa-tasks"></i> <span>Tasks</span>
             </a>
           </li>
+          {% if currentUser[29] == 0:%}
           <li class="">
             <a href="/reports">
               <i class="fa fa-file-pdf-o"></i> <span>Reports</span>
             </a>
           </li>
+          {%else:%}
+          {%endif%}
+
+
           {% if currentUser[13] ==0:%}
           <li class="">
             <a href="/robot">
@@ -214,11 +284,14 @@
             </a>
           </li>
           {% else:%}
+          {% if currentUser[29] ==0:%}
           <li class="">
-              <a href="{{ url_for('new_ticket') }}">
-                <i class="fa fa-ticket"></i> <span>Open Tickets</span>
-              </a>
-            </li>
+            <a href="{{ url_for('new_ticket') }}">
+              <i class="fa fa-ticket"></i> <span>Open Tickets</span>
+            </a>
+          </li>
+          {% else:%}
+          {%endif%}
           {% endif%}
           <li>
             <a href="pages/calendar.html">
@@ -249,254 +322,283 @@
       <!-- /.sidebar -->
     </aside>
 
-  <!-- =============================================== -->
+    <!-- =============================================== -->
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        New Users
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">New Users</li>
-      </ol>
-    </section>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <h1>
+          New Users
+        </h1>
+        <ol class="breadcrumb">
+          <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+          <li class="active">New Users</li>
+        </ol>
+      </section>
 
-    <!-- Main content -->
-    <section class="content">
+      <!-- Main content -->
+      <section class="content">
 
-      <!-- Default box -->
-      <div class="box box-primary">
-        <div class="box-header with-border">
-          <h3 class="box-title">New User Information</h3>
+        <!-- Default box -->
+        <div class="box box-primary">
+          <div class="box-header with-border">
+            <h3 class="box-title">New User Information</h3>
+          </div>
+          <div class="box-body">
+            <form id="add-user-form" action="/add_user" method="POST" data-parsley-validate>
+              <div class="box-body">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="FirstName">First Name</label>
+                      <input type="text" required name="user_first_name" class="form-control" placeholder="Enter First Name">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="LastName">Last Name</label>
+                      <input type="text" required name="user_last_name" class="form-control" placeholder="Enter Last Name">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="EmailAddress">Email Address</label>
+                      <input type="email" required name="user_email" class="form-control" placeholder="Enter Email Address">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="PhysicalAddress">Physical Address</label>
+                      <input type="text" required class="form-control" name="user_physical_address" placeholder="Enter Physical Address">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="PhoneNumber">Phone Number</label>
+                      <input type="text" required data-parsley-type="number" class="form-control" name="user_phone"
+                        placeholder="Enter Phone Number">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="Username">Username</label>
+                      <input type="text" required class="form-control" name="user_name" placeholder="Enter Username">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-3">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" name="client_account" class="custom-control-input" id="client_account">
+                      <label class="custom-control-label text-info" for="client_account">Client Account</label>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" name="zubacx_account" class="custom-control-input" id="zubacx_account">
+                      <label class="custom-control-label text-info" for="zubacx_account">Zubacx Account</label>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="CustomerLastName">Name of Client</label>
+                      <select class="form-control" name="user_client">
+                        {% for eachClient in theClients%}
+                        <option>{{ eachClient[1] }}</option>
+                        {% endfor%}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="Password">Password</label>
+                      <input type="password" id="password" required class="form-control" name="user_password"
+                        placeholder="Password">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="ConfirmPassword">Confirm Password</label>
+                      <input type="password" required data-parsley-equalto="#password" class="form-control" name="user_confirm_password"
+                        placeholder="Confirm Password">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="form-row">
+                    <div class="col-md-4">
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" name="can_add_user" class="custom-control-input" id="customCheck1">
+                        <label class="custom-control-label text-info" for="customCheck1">Can Add User</label>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" name="can_delete_user" class="custom-control-input" id="customCheck2">
+                        <label class="custom-control-label text-info" for="customCheck2">Can Delete User</label>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" name="can_edit_user" class="custom-control-input" id="customCheck3">
+                        <label class="custom-control-label text-info" for="customCheck3">Can Edit User</label>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="form-row">
+                    <div class="col-md-4">
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" name="can_edit_his_info" class="custom-control-input" id="customCheck4">
+                        <label class="custom-control-label text-info" for="customCheck4">Can Edit His/Her Info</label>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" name="can_open_tickets" class="custom-control-input" id="customCheck5">
+                        <label class="custom-control-label text-info" for="customCheck5">Can Open Tickets</label>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" name="can_edit_tickets" class="custom-control-input" id="customCheck6">
+                        <label class="custom-control-label text-info" for="customCheck6">Can Edit Tickets</label>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="form-row">
+                    <div class="col-md-4">
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" name="can_delete_tickets" class="custom-control-input" id="customCheck7">
+                        <label class="custom-control-label text-info" for="customCheck7">Can delete Ticket</label>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" name="can_view_all_tickets" class="custom-control-input" id="customCheck8">
+                        <label class="custom-control-label text-info" for="customCheck8">Can View All Tickets</label>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" name="can_view_his_tickets" class="custom-control-input" id="customCheck9">
+                        <label class="custom-control-label text-info" for="customCheck9">Can View His/Her Tickets</label>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="form-row">
+                    <div class="col-md-4">
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" name="can_edit_his_tickets" class="custom-control-input" id="customCheck10">
+                        <label class="custom-control-label text-info" for="customCheck10">Can Edit His/Her Tickets</label>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" name="can_view_his_tasks" class="custom-control-input" id="customCheck11">
+                        <label class="custom-control-label text-info" for="customCheck11">Can View His/Her Tasks</label>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" name="can_view_all_tasks" class="custom-control-input" id="customCheck12">
+                        <label class="custom-control-label text-info" for="customCheck12">Can View All Tasks</label>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="form-row">
+                    <div class="col-md-4">
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" name="can_view_reports" class="custom-control-input" id="customCheck13">
+                        <label class="custom-control-label text-info" for="customCheck13">Can View His/Her Reports</label>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" name="can_view_all_reports" class="custom-control-input" id="customCheck14">
+                        <label class="custom-control-label text-info" for="customCheck14">Can View All Reports</label>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" name="can_add_delete_edit_clients" class="custom-control-input" id="customCheck15">
+                        <label class="custom-control-label text-info" for="customCheck15">Can Add,Delete,Edit Clients</label>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="form-row">
+                    <div class="col-md-4">
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" name="can_add_delete_edit_engineers" class="custom-control-input" id="customCheck16">
+                        <label class="custom-control-label text-info" for="customCheck16">Can Add,Delete,Edit Engineers</label>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" name="can_add_delete_edit_equipment" class="custom-control-input" id="customCheck17">
+                        <label class="custom-control-label text-info" for="customCheck17">Can Add,Delete,Edit Equipment</label>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" name="can_add_delete_edit_workorder" class="custom-control-input" id="customCheck18">
+                        <label class="custom-control-label text-info" for="customCheck18">Can Add,Delete,Edit Work
+                          Order</label>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="form-row">
+                    <div class="col-md-4">
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" name="can_receive_email_alerts" class="custom-control-input" id="can_receive_email_alerts">
+                        <label class="custom-control-label text-info" for="can_receive_email_alerts">Can Receive Email
+                          Alerts</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <!-- /.box-body -->
+              <div class="box-footer">
+                <div class="row">
+                  <div class="col-md-3">
+                    <button type="submit" class="btn btn-success btn-block">Submit</button>
+                  </div>
+                  <div class="col-md-3">
+                    <button type="submit" class="btn btn-default btn-block" formnovalidate formaction="/dashboard">Cancel</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <!-- /.box-body -->
         </div>
-        <div class="box-body">
-          <form id="add-user-form" action="/add_user" method="POST" data-parsley-validate>
-            <div class="box-body">
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="FirstName">First Name</label>
-                    <input type="text" required name="user_first_name" class="form-control" placeholder="Enter First Name">
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="LastName">Last Name</label>
-                    <input type="text" required name="user_last_name" class="form-control" placeholder="Enter Last Name">
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="EmailAddress">Email Address</label>
-                    <input type="email" required name="user_email" class="form-control" placeholder="Enter Email Address">
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="PhysicalAddress">Physical Address</label>
-                    <input type="text" required class="form-control" name="user_physical_address" placeholder="Enter Physical Address">
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="PhoneNumber">Phone Number</label>
-                    <input type="text" required data-parsley-type="number" class="form-control" name="user_phone" placeholder="Enter Phone Number">
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="Username">Username</label>
-                    <input type="text" required class="form-control" name="user_name" placeholder="Enter Username">
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="Password">Password</label>
-                    <input type="password" id="password" required class="form-control" name="user_password" placeholder="Password">
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="ConfirmPassword">Confirm Password</label>
-                    <input type="password" required data-parsley-equalto="#password" class="form-control" name="user_confirm_password" placeholder="Confirm Password">
-                  </div>
-                </div>
-              </div>
+        <!-- /.box -->
 
-              <div class="row">
-                <div class="form-row">
-                    <div class="col-md-4">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="can_add_user" class="custom-control-input" id="customCheck1">
-                            <label class="custom-control-label text-info" for="customCheck1">Can Add User</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="can_delete_user" class="custom-control-input" id="customCheck2">
-                            <label class="custom-control-label text-info" for="customCheck2">Can Delete User</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="can_edit_user" class="custom-control-input" id="customCheck3">
-                            <label class="custom-control-label text-info" for="customCheck3">Can Edit User</label>
-                        </div>
-                    </div>
+      </section>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
 
-                </div>
-
-                <div class="form-row">
-                    <div class="col-md-4">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="can_edit_his_info" class="custom-control-input" id="customCheck4">
-                            <label class="custom-control-label text-info" for="customCheck4">Can Edit His/Her Info</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="can_open_tickets" class="custom-control-input" id="customCheck5">
-                            <label class="custom-control-label text-info" for="customCheck5">Can Open Tickets</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="can_edit_tickets" class="custom-control-input" id="customCheck6">
-                            <label class="custom-control-label text-info" for="customCheck6">Can Edit Tickets</label>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="form-row">
-                    <div class="col-md-4">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="can_delete_tickets" class="custom-control-input" id="customCheck7">
-                            <label class="custom-control-label text-info" for="customCheck7">Can delete Ticket</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="can_view_all_tickets" class="custom-control-input" id="customCheck8">
-                            <label class="custom-control-label text-info" for="customCheck8">Can View All Tickets</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="can_view_his_tickets" class="custom-control-input" id="customCheck9">
-                            <label class="custom-control-label text-info" for="customCheck9">Can View His/Her Tickets</label>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="form-row">
-                    <div class="col-md-4">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="can_edit_his_tickets" class="custom-control-input" id="customCheck10">
-                            <label class="custom-control-label text-info" for="customCheck10">Can Edit His/Her Tickets</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="can_view_his_tasks" class="custom-control-input" id="customCheck11">
-                            <label class="custom-control-label text-info" for="customCheck11">Can View His/Her Tasks</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="can_view_all_tasks" class="custom-control-input" id="customCheck12">
-                            <label class="custom-control-label text-info" for="customCheck12">Can View All Tasks</label>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="form-row">
-                    <div class="col-md-4">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="can_view_reports" class="custom-control-input" id="customCheck13">
-                            <label class="custom-control-label text-info" for="customCheck13">Can View His/Her Reports</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="can_view_all_reports" class="custom-control-input" id="customCheck14">
-                            <label class="custom-control-label text-info" for="customCheck14">Can View All Reports</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="can_add_delete_edit_clients" class="custom-control-input" id="customCheck15">
-                            <label class="custom-control-label text-info" for="customCheck15">Can Add,Delete,Edit Clients</label>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="form-row">
-                    <div class="col-md-4">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="can_add_delete_edit_engineers" class="custom-control-input" id="customCheck16">
-                            <label class="custom-control-label text-info" for="customCheck16">Can Add,Delete,Edit Engineers</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="can_add_delete_edit_equipment" class="custom-control-input" id="customCheck17">
-                            <label class="custom-control-label text-info" for="customCheck17">Can Add,Delete,Edit Equipment</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="can_add_delete_edit_workorder" class="custom-control-input" id="customCheck18">
-                            <label class="custom-control-label text-info" for="customCheck18">Can Add,Delete,Edit Work Order</label>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="form-row">
-                    <div class="col-md-4">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="can_receive_email_alerts" class="custom-control-input" id="can_receive_email_alerts">
-                            <label class="custom-control-label text-info" for="can_receive_email_alerts">Can Receive Email Alerts</label>
-                        </div>
-                    </div>
-                </div>
-              </div>
-
-            </div>
-            <!-- /.box-body -->
-            <div class="box-footer">
-              <div class="row">
-                <div class="col-md-3">
-                  <button type="submit" class="btn btn-success btn-block">Submit</button>
-                </div>
-                <div class="col-md-3">
-                  <button type="submit" class="btn btn-default btn-block" formnovalidate formaction="/dashboard">Cancel</button>
-                </div>
-              </div>
-            </div>
-          </form>
-        </div>
-        <!-- /.box-body -->
-      </div>
-      <!-- /.box -->
-
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-
-  <footer class="main-footer">
+    <footer class="main-footer">
       <div class="pull-right hidden-xs">
         <b>Version</b> 1.0-
         <label for="" id="developers" class="text-info"> Developed By: SoftEarth Technologies, Inc</label>
@@ -505,27 +607,28 @@
       <img src="{{ url_for('static',filename='dist/img/ZubaCx_Logo.png') }}" height="40px" alt="Zubacx Logo">
     </footer>
 
-</div>
-<!-- ./wrapper -->
+  </div>
+  <!-- ./wrapper -->
 
-<!-- jQuery 3 -->
-<script src="{{ url_for('static',filename='vendor/jquery/dist/jquery.min.js') }}"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="{{ url_for('static',filename='vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-<!-- SlimScroll -->
-<script src="{{ url_for('static',filename='vendor/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
-<!-- FastClick -->
-<script src="{{ url_for('static',filename='vendor/fastclick/lib/fastclick.js') }}"></script>
-<!-- AdminLTE App -->
-<script src="{{ url_for('static',filename='dist/js/adminlte.min.js') }}"></script>
-<!-- Parsely JS -->
-<script src="{{ url_for('static',filename='parsley/parsley.min.js') }}"></script>
-<script src="{{ url_for('static',filename='time/time.js') }}"></script>
-<script>
-  $(document).ready(function () {
-    $('.sidebar-menu').tree()
-  })
+  <!-- jQuery 3 -->
+  <script src="{{ url_for('static',filename='vendor/jquery/dist/jquery.min.js') }}"></script>
+  <!-- Bootstrap 3.3.7 -->
+  <script src="{{ url_for('static',filename='vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+  <!-- SlimScroll -->
+  <script src="{{ url_for('static',filename='vendor/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
+  <!-- FastClick -->
+  <script src="{{ url_for('static',filename='vendor/fastclick/lib/fastclick.js') }}"></script>
+  <!-- AdminLTE App -->
+  <script src="{{ url_for('static',filename='dist/js/adminlte.min.js') }}"></script>
+  <!-- Parsely JS -->
+  <script src="{{ url_for('static',filename='parsley/parsley.min.js') }}"></script>
+  <script src="{{ url_for('static',filename='time/time.js') }}"></script>
+  <script>
+    $(document).ready(function () {
+      $('.sidebar-menu').tree()
+    })
 
-</script>
+  </script>
 </body>
+
 </html>

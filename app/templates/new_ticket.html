@@ -112,6 +112,7 @@
               <i class="fa fa-dashboard"></i> <span>Dashboard</span>
             </a>
           </li>
+          {% if currentUser[29] ==0:%}
           <li class="treeview">
             <a href="#">
               <i class="fa fa-hacker-news"></i> <span>New</span>
@@ -148,6 +149,9 @@
               {%endif%}
             </ul>
           </li>
+          {% else:%}
+          {%endif%}
+          {% if currentUser[29] == 0:%}
           <li class="treeview">
             <a href="#">
               <i class="fa fa-street-view"></i> <span>Views</span>
@@ -198,18 +202,48 @@
               {% else:%} {%endif%} {%endif%}
             </ul>
           </li>
+          {%else:%}
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-street-view"></i> <span>Views</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+                <small class="label pull-right bg-primary">views</small>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li>
+                <a href="/view_all_tickets"><i class="fa fa-circle-o"></i> My Tickets</a>
+              </li>
+              <li>
+                <a href="/open_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Open Tickets</a>
+              </li>
+              <li>
+                <a href="/closed_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Closed Tickets</a>
+              </li>
+              <li>
+                <a href="/low_priority_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Overdue Tickets</a>
+              </li>
+            </ul>
+          </li>
+          {%endif%}
           <li class="">
             <a href="{{ url_for('view_all_tickets') }}">
               <i class="fa fa-ticket"></i> <span>Tickets</span>
             </a>
           </li>
           {% if currentUser[23] ==0:%}
+          {% if currentUser[29] ==0:%}
           <li class="">
             <a href="/robot">
               <i class="fa fa-user-o"></i> <span>Customers</span>
             </a>
           </li>
           {% else:%}
+          {%endif%}
+
+          {% else:%}
+          {% if currentUser[29] ==0:%}
           <li class="">
             <a href="/all_clients">
               <i class="fa fa-user-o"></i> <span>Customers</span>
@@ -225,17 +259,24 @@
               <i class="fa fa-user-o"></i> <span>System Users</span>
             </a>
           </li>
+          {% else:%}
+          {%endif%}
           {% endif%}
           <li class="">
             <a href="/tasks">
               <i class="fa fa-tasks"></i> <span>Tasks</span>
             </a>
           </li>
+          {% if currentUser[29] == 0:%}
           <li class="">
             <a href="/reports">
               <i class="fa fa-file-pdf-o"></i> <span>Reports</span>
             </a>
           </li>
+          {%else:%}
+          {%endif%}
+
+
           {% if currentUser[13] ==0:%}
           <li class="">
             <a href="/robot">
@@ -243,11 +284,14 @@
             </a>
           </li>
           {% else:%}
+          {% if currentUser[29] ==0:%}
           <li class="">
             <a href="{{ url_for('new_ticket') }}">
               <i class="fa fa-ticket"></i> <span>Open Tickets</span>
             </a>
           </li>
+          {% else:%}
+          {%endif%}
           {% endif%}
           <li>
             <a href="pages/calendar.html">
