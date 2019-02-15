@@ -31,72 +31,72 @@ class Tickets:
             flash('Error submiting the data to database','danger')
 
     def sqlStatment(self):
-            # self.sql = """
-            # SELECT ticket_id,ticket_reason,ticket_assigned_to,ticket_client,
-            # CASE WHEN TIMESTAMPDIFF(MINUTE,ticket_overdue_time,NOW())>0 
-            # THEN CONCAT('Expired at ','',ticket_overdue_time) ELSE 
-            # CONCAT('Expires at ','',ticket_overdue_time) END AS Overdue,
-            # CASE WHEN ticket_status='Closed' 
-            # THEN CONCAT(ticket_status,' (',ticket_closing_time,')') 
-            # WHEN ticket_status='Open' AND TIMESTAMPDIFF(MINUTE,ticket_overdue_time,NOW())>0 AND TIMESTAMPDIFF(MINUTE,ticket_overdue_time,NOW())<60 
-            # THEN CONCAT('Overdue ','( Late By ',TIMESTAMPDIFF(MINUTE,ticket_overdue_time,NOW()),' Minutes)') 
-            
-            # WHEN ticket_status='Open' AND TIMESTAMPDIFF(MINUTE,ticket_overdue_time,NOW())>59 AND TIMESTAMPDIFF(MINUTE,ticket_overdue_time,NOW())<1440 
-            # THEN CONCAT('Overdue ','( Late By ',TIMESTAMPDIFF(HOUR,ticket_overdue_time,NOW()),' Hours ',TIMESTAMPDIFF(MINUTE,ticket_overdue_time,NOW())%60, ' Minutes)')
-
-            # WHEN ticket_status='Open' AND TIMESTAMPDIFF(MINUTE,ticket_overdue_time,NOW())>1439 
-            # THEN CONCAT('Overdue ','( Late By ',TIMESTAMPDIFF(DAY,ticket_overdue_time,NOW()),' Days ',TIMESTAMPDIFF(HOUR,ticket_overdue_time,NOW())%24, ' Hours ',TIMESTAMPDIFF(MINUTE,ticket_overdue_time,NOW())%60, ' Minutes)')
-
-            # ELSE ticket_status END AS Ticket, ticket_priority, CASE WHEN ticket_type=1 THEN 'ATM Ticket' WHEN ticket_type=2 THEN 'Airport Ticket' WHEN ticket_type=3 THEN 'Telecom Ticket' WHEN ticket_type=4 
-            # THEN 'Fleet Ticket' ELSE 'Unknown Ticket' END AS ticket_types from tickets
-            # """
-
             self.sql = """
             SELECT ticket_id,ticket_reason,ticket_assigned_to,ticket_client,
-            
-            CASE WHEN (DATE_PART('day', now()::timestamp - ticket_overdue_time::timestamp) * 24 + 
-            DATE_PART('hour', now()::timestamp - ticket_overdue_time::timestamp)) * 60 +
-            DATE_PART('minute', now()::timestamp - ticket_overdue_time::timestamp)>0 
-            
-            THEN CONCAT('Expired at',' ',ticket_overdue_time) 
-
-            WHEN ticket_status='Closed' AND ((DATE_PART('day', now()::timestamp - ticket_overdue_time::timestamp) * 24 + 
-            DATE_PART('hour', now()::timestamp - ticket_overdue_time::timestamp)) * 60 +
-            DATE_PART('minute', now()::timestamp - ticket_overdue_time::timestamp)<0 OR (DATE_PART('day', now()::timestamp - ticket_overdue_time::timestamp) * 24 + 
-            DATE_PART('hour', now()::timestamp - ticket_overdue_time::timestamp)) * 60 +
-            DATE_PART('minute', now()::timestamp - ticket_overdue_time::timestamp)>0) 
-            
-            THEN CONCAT('Would expire at',' ',ticket_overdue_time) 
-
-            ELSE CONCAT('Shall expire at ', ticket_overdue_time) END AS Overdue,
-            
+            CASE WHEN TIMESTAMPDIFF(MINUTE,ticket_overdue_time,NOW())>0 
+            THEN CONCAT('Expired at ','',ticket_overdue_time) ELSE 
+            CONCAT('Expires at ','',ticket_overdue_time) END AS Overdue,
             CASE WHEN ticket_status='Closed' 
             THEN CONCAT(ticket_status,' (',ticket_closing_time,')') 
+            WHEN ticket_status='Open' AND TIMESTAMPDIFF(MINUTE,ticket_overdue_time,NOW())>0 AND TIMESTAMPDIFF(MINUTE,ticket_overdue_time,NOW())<60 
+            THEN CONCAT('Overdue ','( Late By ',TIMESTAMPDIFF(MINUTE,ticket_overdue_time,NOW()),' Minutes)') 
             
-            WHEN ticket_status='Open' AND (DATE_PART('day', now()::timestamp - ticket_overdue_time::timestamp) * 24 + 
-            DATE_PART('hour', now()::timestamp - ticket_overdue_time::timestamp)) * 60 +
-            DATE_PART('minute', now()::timestamp - ticket_overdue_time::timestamp)>0 AND 
-            (DATE_PART('day', now()::timestamp - ticket_overdue_time::timestamp) * 24 + 
-            DATE_PART('hour', now()::timestamp - ticket_overdue_time::timestamp)) * 60 +
-            DATE_PART('minute', now()::timestamp - ticket_overdue_time::timestamp)<60 
-            
-            THEN CONCAT('Overdue (Late By ',(DATE_PART('day', now()::timestamp - ticket_overdue_time::timestamp) * 24 + 
-            DATE_PART('hour', now()::timestamp - ticket_overdue_time::timestamp)) * 60 +
-            DATE_PART('minute', now()::timestamp - ticket_overdue_time::timestamp),' Minutes)') 
+            WHEN ticket_status='Open' AND TIMESTAMPDIFF(MINUTE,ticket_overdue_time,NOW())>59 AND TIMESTAMPDIFF(MINUTE,ticket_overdue_time,NOW())<1440 
+            THEN CONCAT('Overdue ','( Late By ',TIMESTAMPDIFF(HOUR,ticket_overdue_time,NOW()),' Hours ',TIMESTAMPDIFF(MINUTE,ticket_overdue_time,NOW())%60, ' Minutes)')
 
-            WHEN ticket_status='Open' AND (DATE_PART('day', now()::timestamp - ticket_overdue_time::timestamp) * 24 + 
-            DATE_PART('hour', now()::timestamp - ticket_overdue_time::timestamp)) * 60 +
-            DATE_PART('minute', now()::timestamp - ticket_overdue_time::timestamp)>59 AND 
-            (DATE_PART('day', now()::timestamp - ticket_overdue_time::timestamp) * 24 + 
-            DATE_PART('hour', now()::timestamp - ticket_overdue_time::timestamp)) * 60 +
-            DATE_PART('minute', now()::timestamp - ticket_overdue_time::timestamp)<1440 
+            WHEN ticket_status='Open' AND TIMESTAMPDIFF(MINUTE,ticket_overdue_time,NOW())>1439 
+            THEN CONCAT('Overdue ','( Late By ',TIMESTAMPDIFF(DAY,ticket_overdue_time,NOW()),' Days ',TIMESTAMPDIFF(HOUR,ticket_overdue_time,NOW())%24, ' Hours ',TIMESTAMPDIFF(MINUTE,ticket_overdue_time,NOW())%60, ' Minutes)')
 
-            THEN CONCAT('Overdue ','( Late By ',DATE_PART('day', now()::timestamp - ticket_overdue_time::timestamp) * 24 + 
-            DATE_PART('hour', now()::timestamp - ticket_overdue_time::timestamp),' Hours)')
-            
-            ELSE ticket_status END AS Ticket,
-            ticket_priority, CASE WHEN ticket_type=1 THEN 'ATM Ticket' WHEN ticket_type=2 THEN 'Airport Ticket' WHEN ticket_type=3 THEN 'Telecom Ticket' WHEN ticket_type=4 THEN 'Fleet Ticket' ELSE 'Unknown Ticket' END AS ticket_types from tickets
+            ELSE ticket_status END AS Ticket, ticket_priority, CASE WHEN ticket_type=1 THEN 'ATM Ticket' WHEN ticket_type=2 THEN 'Airport Ticket' WHEN ticket_type=3 THEN 'Telecom Ticket' WHEN ticket_type=4 
+            THEN 'Fleet Ticket' ELSE 'Unknown Ticket' END AS ticket_types from tickets
             """
+
+            # self.sql = """
+            # SELECT ticket_id,ticket_reason,ticket_assigned_to,ticket_client,
+            
+            # CASE WHEN (DATE_PART('day', now()::timestamp - ticket_overdue_time::timestamp) * 24 + 
+            # DATE_PART('hour', now()::timestamp - ticket_overdue_time::timestamp)) * 60 +
+            # DATE_PART('minute', now()::timestamp - ticket_overdue_time::timestamp)>0 
+            
+            # THEN CONCAT('Expired at',' ',ticket_overdue_time) 
+
+            # WHEN ticket_status='Closed' AND ((DATE_PART('day', now()::timestamp - ticket_overdue_time::timestamp) * 24 + 
+            # DATE_PART('hour', now()::timestamp - ticket_overdue_time::timestamp)) * 60 +
+            # DATE_PART('minute', now()::timestamp - ticket_overdue_time::timestamp)<0 OR (DATE_PART('day', now()::timestamp - ticket_overdue_time::timestamp) * 24 + 
+            # DATE_PART('hour', now()::timestamp - ticket_overdue_time::timestamp)) * 60 +
+            # DATE_PART('minute', now()::timestamp - ticket_overdue_time::timestamp)>0) 
+            
+            # THEN CONCAT('Would expire at',' ',ticket_overdue_time) 
+
+            # ELSE CONCAT('Shall expire at ', ticket_overdue_time) END AS Overdue,
+            
+            # CASE WHEN ticket_status='Closed' 
+            # THEN CONCAT(ticket_status,' (',ticket_closing_time,')') 
+            
+            # WHEN ticket_status='Open' AND (DATE_PART('day', now()::timestamp - ticket_overdue_time::timestamp) * 24 + 
+            # DATE_PART('hour', now()::timestamp - ticket_overdue_time::timestamp)) * 60 +
+            # DATE_PART('minute', now()::timestamp - ticket_overdue_time::timestamp)>0 AND 
+            # (DATE_PART('day', now()::timestamp - ticket_overdue_time::timestamp) * 24 + 
+            # DATE_PART('hour', now()::timestamp - ticket_overdue_time::timestamp)) * 60 +
+            # DATE_PART('minute', now()::timestamp - ticket_overdue_time::timestamp)<60 
+            
+            # THEN CONCAT('Overdue (Late By ',(DATE_PART('day', now()::timestamp - ticket_overdue_time::timestamp) * 24 + 
+            # DATE_PART('hour', now()::timestamp - ticket_overdue_time::timestamp)) * 60 +
+            # DATE_PART('minute', now()::timestamp - ticket_overdue_time::timestamp),' Minutes)') 
+
+            # WHEN ticket_status='Open' AND (DATE_PART('day', now()::timestamp - ticket_overdue_time::timestamp) * 24 + 
+            # DATE_PART('hour', now()::timestamp - ticket_overdue_time::timestamp)) * 60 +
+            # DATE_PART('minute', now()::timestamp - ticket_overdue_time::timestamp)>59 AND 
+            # (DATE_PART('day', now()::timestamp - ticket_overdue_time::timestamp) * 24 + 
+            # DATE_PART('hour', now()::timestamp - ticket_overdue_time::timestamp)) * 60 +
+            # DATE_PART('minute', now()::timestamp - ticket_overdue_time::timestamp)<1440 
+
+            # THEN CONCAT('Overdue ','( Late By ',DATE_PART('day', now()::timestamp - ticket_overdue_time::timestamp) * 24 + 
+            # DATE_PART('hour', now()::timestamp - ticket_overdue_time::timestamp),' Hours)')
+            
+            # ELSE ticket_status END AS Ticket,
+            # ticket_priority, CASE WHEN ticket_type=1 THEN 'ATM Ticket' WHEN ticket_type=2 THEN 'Airport Ticket' WHEN ticket_type=3 THEN 'Telecom Ticket' WHEN ticket_type=4 THEN 'Fleet Ticket' ELSE 'Unknown Ticket' END AS ticket_types from tickets
+            # """
             return self.sql
 
 
@@ -120,10 +120,10 @@ class Tickets:
             conn = dbInstance.connectToDatabase()
             cur = conn.cursor()
             theSql = Tickets().sqlStatment()
-            # theWhere = """ Where username="{}" ORDER BY ticket_id DESC""".format(current_user)
-            theWhere = """ Where username=%s ORDER BY ticket_id DESC"""
-            # cur.execute(theSql+theWhere)
-            cur.execute(theSql+theWhere, [current_user])
+            theWhere = """ Where username="{}" ORDER BY ticket_id DESC""".format(current_user)
+            # theWhere = """ Where username=%s ORDER BY ticket_id DESC"""
+            cur.execute(theSql+theWhere)
+            # cur.execute(theSql+theWhere, [current_user])
             self.theTickets = cur.fetchall()
             return self.theTickets
         except(Exception, psycopg2.DatabaseError) as e:
@@ -140,10 +140,10 @@ class Tickets:
             cur = conn.cursor()
             theSql = Tickets().sqlStatment()
             theStatus = "Closed"
-            # theWhere = """ Where ticket_status="{}" ORDER BY ticket_id DESC""".format(theStatus)
-            theWhere = """ Where ticket_status=%s ORDER BY ticket_id DESC"""
-            # cur.execute(theSql+theWhere)
-            cur.execute(theSql+theWhere, theStatus)
+            theWhere = """ Where ticket_status="{}" ORDER BY ticket_id DESC""".format(theStatus)
+            # theWhere = """ Where ticket_status=%s ORDER BY ticket_id DESC"""
+            cur.execute(theSql+theWhere)
+            # cur.execute(theSql+theWhere, theStatus)
 
             self.theTickets = cur.fetchall()
             return self.theTickets
@@ -158,10 +158,10 @@ class Tickets:
             cur = conn.cursor()
             theSql = Tickets().sqlStatment()
             theStatus = "Closed"
-            # theWhere = """ Where ticket_status="{}" AND username="{}" ORDER BY ticket_id DESC""".format(theStatus,current_user)
-            theWhere = """ Where ticket_status=%s AND username=%s ORDER BY ticket_id DESC"""
-            # cur.execute(theSql+theWhere)
-            cur.execute(theSql+theWhere, [theStatus, current_user])
+            theWhere = """ Where ticket_status="{}" AND username="{}" ORDER BY ticket_id DESC""".format(theStatus,current_user)
+            # theWhere = """ Where ticket_status=%s AND username=%s ORDER BY ticket_id DESC"""
+            cur.execute(theSql+theWhere)
+            # cur.execute(theSql+theWhere, [theStatus, current_user])
             self.theTickets = cur.fetchall()
             return self.theTickets
         except(Exception, psycopg2.DatabaseError) as e:
@@ -175,10 +175,10 @@ class Tickets:
             cur = conn.cursor()
             theSql = Tickets().sqlStatment()
             theStatus = "Open"
-            # theWhere = """ Where ticket_status="{}" ORDER BY ticket_id DESC""".format(theStatus)
-            theWhere = """ Where ticket_status=%s ORDER BY ticket_id DESC"""
-            # cur.execute(theSql+theWhere)
-            cur.execute(theSql+theWhere, theStatus)
+            theWhere = """ Where ticket_status="{}" ORDER BY ticket_id DESC""".format(theStatus)
+            # theWhere = """ Where ticket_status=%s ORDER BY ticket_id DESC"""
+            cur.execute(theSql+theWhere)
+            # cur.execute(theSql+theWhere, theStatus)
             self.theTickets = cur.fetchall()
             return self.theTickets
         except(Exception, psycopg2.DatabaseError) as e:
@@ -191,10 +191,10 @@ class Tickets:
             cur = conn.cursor()
             theSql = Tickets().sqlStatment()
             theStatus = "Open"
-            # theWhere = """ Where ticket_status="{}" AND username="{}" ORDER BY ticket_id DESC""".format(theStatus,current_user)
-            theWhere = """ Where ticket_status=%s AND username=%s ORDER BY ticket_id DESC"""
-            # cur.execute(theSql+theWhere)
-            cur.execute(theSql+theWhere, [theStatus, current_user])
+            theWhere = """ Where ticket_status="{}" AND username="{}" ORDER BY ticket_id DESC""".format(theStatus,current_user)
+            # theWhere = """ Where ticket_status=%s AND username=%s ORDER BY ticket_id DESC"""
+            cur.execute(theSql+theWhere)
+            # cur.execute(theSql+theWhere, [theStatus, current_user])
             self.theTickets = cur.fetchall()
             return self.theTickets
         except(Exception, psycopg2.DatabaseError) as e:
@@ -206,8 +206,8 @@ class Tickets:
             conn = dbInstance.connectToDatabase()
             cur = conn.cursor()
             theSql = Tickets().sqlStatment()
-            # theWhere = " Where TIMESTAMPDIFF(HOUR,ticket_overdue_time,NOW())<2 AND TIMESTAMPDIFF(HOUR,ticket_overdue_time,NOW())>0 ORDER BY ticket_id DESC"
-            theWhere = "Where DATE_PART('hour', now()::timestamp - ticket_overdue_time::timestamp)<2 AND DATE_PART('hour', now()::timestamp - ticket_overdue_time::timestamp)>0 ORDER BY ticket_id DESC"
+            theWhere = " Where TIMESTAMPDIFF(HOUR,ticket_overdue_time,NOW())<2 AND TIMESTAMPDIFF(HOUR,ticket_overdue_time,NOW())>0 ORDER BY ticket_id DESC"
+            # theWhere = "Where DATE_PART('hour', now()::timestamp - ticket_overdue_time::timestamp)<2 AND DATE_PART('hour', now()::timestamp - ticket_overdue_time::timestamp)>0 ORDER BY ticket_id DESC"
             cur.execute(theSql+theWhere)
             self.theTickets = cur.fetchall()
             return self.theTickets
@@ -221,10 +221,10 @@ class Tickets:
             conn = dbInstance.connectToDatabase()
             cur = conn.cursor()
             theSql = Tickets().sqlStatment()
-            # theWhere = """ Where TIMESTAMPDIFF(HOUR,ticket_overdue_time,NOW())<2 AND TIMESTAMPDIFF(HOUR,ticket_overdue_time,NOW())>0 AND username="{}" ORDER BY ticket_id DESC""".format(current_user)
-            theWhere = """Where DATE_PART('hour', now()::timestamp - ticket_overdue_time::timestamp)<2 AND DATE_PART('hour', now()::timestamp - ticket_overdue_time::timestamp)>0 AND username=%s ORDER BY ticket_id DESC"""
-            # cur.execute(theSql+theWhere)
-            cur.execute(theSql+theWhere, current_user)
+            theWhere = """ Where TIMESTAMPDIFF(HOUR,ticket_overdue_time,NOW())<2 AND TIMESTAMPDIFF(HOUR,ticket_overdue_time,NOW())>0 AND username="{}" ORDER BY ticket_id DESC""".format(current_user)
+            # theWhere = """Where DATE_PART('hour', now()::timestamp - ticket_overdue_time::timestamp)<2 AND DATE_PART('hour', now()::timestamp - ticket_overdue_time::timestamp)>0 AND username=%s ORDER BY ticket_id DESC"""
+            cur.execute(theSql+theWhere)
+            # cur.execute(theSql+theWhere, current_user)
             self.theTickets = cur.fetchall()
             return self.theTickets
         except(Exception, psycopg2.DatabaseError) as e:
@@ -236,8 +236,8 @@ class Tickets:
             conn = dbInstance.connectToDatabase()
             cur = conn.cursor()
             theSql = Tickets().sqlStatment()
-            # theWhere = " Where TIMESTAMPDIFF(HOUR,ticket_overdue_time,NOW())<1 AND TIMESTAMPDIFF(HOUR,ticket_overdue_time,NOW())>0 ORDER BY ticket_id DESC"
-            theWhere = "Where DATE_PART('hour', now()::timestamp - ticket_overdue_time::timestamp)<1 AND DATE_PART('hour', now()::timestamp - ticket_overdue_time::timestamp)>0 ORDER BY ticket_id DESC"            
+            theWhere = " Where TIMESTAMPDIFF(HOUR,ticket_overdue_time,NOW())<1 AND TIMESTAMPDIFF(HOUR,ticket_overdue_time,NOW())>0 ORDER BY ticket_id DESC"
+            # theWhere = "Where DATE_PART('hour', now()::timestamp - ticket_overdue_time::timestamp)<1 AND DATE_PART('hour', now()::timestamp - ticket_overdue_time::timestamp)>0 ORDER BY ticket_id DESC"            
             cur.execute(theSql+theWhere)
             self.theTickets = cur.fetchall()
             return self.theTickets
@@ -251,10 +251,10 @@ class Tickets:
             conn = dbInstance.connectToDatabase()
             cur = conn.cursor()
             theSql = Tickets().sqlStatment()
-            # theWhere = " Where TIMESTAMPDIFF(HOUR,ticket_overdue_time,NOW())<1 AND TIMESTAMPDIFF(HOUR,ticket_overdue_time,NOW())>0 AND username="{}" ORDER BY ticket_id DESC".format(current_user)
-            theWhere = """Where DATE_PART('hour', now()::timestamp - ticket_overdue_time::timestamp)<1 AND DATE_PART('hour', now()::timestamp - ticket_overdue_time::timestamp)>0 AND username=%s ORDER BY ticket_id DESC"""
-            # cur.execute(theSql+theWhere)
-            cur.execute(theSql+theWhere,current_user)
+            theWhere = """ Where TIMESTAMPDIFF(HOUR,ticket_overdue_time,NOW())<1 AND TIMESTAMPDIFF(HOUR,ticket_overdue_time,NOW())>0 AND username="{}" ORDER BY ticket_id DESC""".format(current_user)
+            # theWhere = """Where DATE_PART('hour', now()::timestamp - ticket_overdue_time::timestamp)<1 AND DATE_PART('hour', now()::timestamp - ticket_overdue_time::timestamp)>0 AND username=%s ORDER BY ticket_id DESC"""
+            cur.execute(theSql+theWhere)
+            # cur.execute(theSql+theWhere,current_user)
             self.theTickets = cur.fetchall()
             return self.theTickets
         except(Exception, psycopg2.DatabaseError) as e:
@@ -267,8 +267,8 @@ class Tickets:
             conn = dbInstance.connectToDatabase()
             cur = conn.cursor()
             theSql = Tickets().sqlStatment()
-            # theWhere = " Where TIMESTAMPDIFF(HOUR,ticket_overdue_time,NOW())<0 AND ticket_complete_time IS NULL ORDER BY ticket_id DESC"
-            theWhere = "Where DATE_PART('hour', now()::timestamp - ticket_overdue_time::timestamp)<0 AND ticket_complete_time IS NULL ORDER BY ticket_id DESC"
+            theWhere = " Where TIMESTAMPDIFF(HOUR,ticket_overdue_time,NOW())<0 AND ticket_complete_time IS NULL ORDER BY ticket_id DESC"
+            # theWhere = "Where DATE_PART('hour', now()::timestamp - ticket_overdue_time::timestamp)<0 AND ticket_complete_time IS NULL ORDER BY ticket_id DESC"
             cur.execute(theSql+theWhere)
             self.theTickets = cur.fetchall()
             return self.theTickets
@@ -296,10 +296,10 @@ class Tickets:
             conn = dbInstance.connectToDatabase()
             cur = conn.cursor()
             theSql = Tickets().sqlStatment()
-            # theWhere = """ Where TIMESTAMPDIFF(HOUR,ticket_overdue_time,NOW())<0 AND ticket_complete_time IS NULL AND username="{}" ORDER BY ticket_id DESC""".format(current_user)
-            theWhere = """Where DATE_PART('hour', now()::timestamp - ticket_overdue_time::timestamp)<0 AND ticket_complete_time IS NULL AND username=%s ORDER BY ticket_id DESC"""
-            # cur.execute(theSql+theWhere)
-            cur.execute(theSql+theWhere, current_user)
+            theWhere = """ Where TIMESTAMPDIFF(HOUR,ticket_overdue_time,NOW())<0 AND ticket_complete_time IS NULL AND username="{}" ORDER BY ticket_id DESC""".format(current_user)
+            # theWhere = """Where DATE_PART('hour', now()::timestamp - ticket_overdue_time::timestamp)<0 AND ticket_complete_time IS NULL AND username=%s ORDER BY ticket_id DESC"""
+            cur.execute(theSql+theWhere)
+            # cur.execute(theSql+theWhere, current_user)
             self.theTickets = cur.fetchall()
             return self.theTickets
         except(Exception, psycopg2.DatabaseError) as e:
