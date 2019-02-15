@@ -188,7 +188,7 @@ def add_ticket():
     body="""A ticket has just been opened and assigend to engineer {}, 
 the reason for this ticket is to address the issue of {}. You are receiving this notification because 
 your account with Zubacx call-center system is configured to receive these alerts.""".format(ticket_assigned_to,ticket_reason)
-    send_email_alerts('Ticket Opened',recipients,body)
+    send_email_alerts('Ticket Opened',users[0][0],body)
     if g.username:
         return render_template('new_ticket.html',theWorkOrderTypes=theWorkOrderTypes, theEngineers=theEngineers, theClients=theClients,currentUser=LoggedInUser1)
     return render_template('index.html')
