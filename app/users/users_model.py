@@ -1,5 +1,5 @@
 from app.database.connectDB import DatabaseConnectivity
-from flask import flash
+from flask import flash, session
 import psycopg2
 
 dbInstance = DatabaseConnectivity()
@@ -12,7 +12,7 @@ class Users:
                  user_can_view_his_tickets, user_can_edit_his_tickets, user_can_view_his_tasks, user_can_view_all_tasks,
                  user_can_view_his_reports, user_can_view_all_reports, user_can_add_delete_edit_client,
                  user_can_add_delete_edit_engineer, user_can_add_delete_edit_equipment, user_can_add_delete_edit_workorder,
-                 user_can_receive_email_alerts):
+                 user_can_receive_email_alerts, user_roles, user_client):
         try:
             conn = dbInstance.connectToDatabase()
             cur = conn.cursor()
@@ -23,8 +23,8 @@ class Users:
             user_can_view_his_tickets,user_can_edit_his_tickets,user_can_view_his_tasks,user_can_view_all_tasks,
             user_can_view_his_reports,user_can_view_all_reports,user_can_add_delete_edit_client_info,
             user_can_add_delete_edit_engineer_info,user_can_add_delete_edit_equipment_info,user_can_add_delete_edit_workorder_info,
-            user_can_receive_email_alerts) 
-            VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
+            user_can_receive_email_alerts,user_roles,user_client)
+            VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
             """
             cur.execute(sql,
                         (first_name, last_name, email, address, user_phone, username, password,
@@ -33,7 +33,7 @@ class Users:
                          user_can_view_his_tickets, user_can_edit_his_tickets, user_can_view_his_tasks, user_can_view_all_tasks,
                          user_can_view_his_reports, user_can_view_all_reports, user_can_add_delete_edit_client,
                          user_can_add_delete_edit_engineer, user_can_add_delete_edit_equipment, user_can_add_delete_edit_workorder,
-                         user_can_receive_email_alerts))
+                         user_can_receive_email_alerts, user_roles, user_client))
             conn.commit()
             flash('User {} Added Successfully'.format(first_name), 'success')
         except(Exception, psycopg2.DatabaseError) as e:
@@ -51,12 +51,12 @@ class Users:
         except:
             flash('Error retrieving users from database', 'danger')
 
-    def users_who_can_receive_email(self):
+    def users_who_can_receive_email(self, user_client):
         try:
             conn = dbInstance.connectToDatabase()
             cur = conn.cursor()
-            sql = """SELECT GROUP_CONCAT(user_email) FROM users WHERE user_can_receive_email_alerts=1
-            """
+            sql = """SELECT GROUP_CONCAT(CONCAT('''', user_email, '''' )) FROM users WHERE user_can_receive_email_alerts=1 
+            AND (user_roles=0 OR user_client="{}" """.format(user_client)
             cur.execute(sql)
             self.theUsers = cur.fetchall()
             return self.theUsers
@@ -103,7 +103,7 @@ class Users:
                     user_can_view_his_tickets, user_can_edit_his_tickets, user_can_view_his_tasks, user_can_view_all_tasks,
                     user_can_view_his_reports, user_can_view_all_reports, user_can_add_delete_edit_client,
                     user_can_add_delete_edit_engineer, user_can_add_delete_edit_equipment, user_can_add_delete_edit_workorder,
-                    user_can_receive_email_alerts):
+                    user_can_receive_email_alerts, user_roles, user_client):
         try:
             conn = dbInstance.connectToDatabase()
             cur = conn.cursor()
@@ -114,7 +114,7 @@ class Users:
             user_can_view_his_tickets=%s,user_can_edit_his_tickets=%s,user_can_view_his_tasks=%s,user_can_view_all_tasks=%s,
             user_can_view_his_reports=%s,user_can_view_all_reports=%s,user_can_add_delete_edit_client_info=%s,
             user_can_add_delete_edit_engineer_info=%s,user_can_add_delete_edit_equipment_info=%s,user_can_add_delete_edit_workorder_info=%s,
-            user_can_receive_email_alerts=%s WHERE user_id=%s
+            user_can_receive_email_alerts=%s user_roles=%s, user_client=%s WHERE user_id=%s
             """
             cur.execute(sql, [user_first_name, user_last_name, user_email, user_phone, user_address, user_name, user_password,
                               user_can_add_user, user_can_delete_user, user_can_edit_user, user_can_edit_his_info,
@@ -122,11 +122,11 @@ class Users:
                               user_can_view_his_tickets, user_can_edit_his_tickets, user_can_view_his_tasks, user_can_view_all_tasks,
                               user_can_view_his_reports, user_can_view_all_reports, user_can_add_delete_edit_client,
                               user_can_add_delete_edit_engineer, user_can_add_delete_edit_equipment, user_can_add_delete_edit_workorder,
-                              user_can_receive_email_alerts, user_id])
+                              user_can_receive_email_alerts, user_roles, user_client, user_id])
             conn.commit()
             flash('User Edited Successfully', 'success')
         except:
-            flash('Error deleteing user from database', 'danger')
+            flash('Error editing user info', 'danger')
 
     def get_user_by_Id(self, user_id):
         try:
@@ -149,3 +149,29 @@ class Users:
             return self.theUser
         except:
             flash('Error retrieving the user from database', 'danger')
+
+    def checkUserAccount(self, current_user):
+        try:
+            conn = dbInstance.connectToDatabase()
+            cur = conn.cursor()
+            sql = """SELECT user_roles,user_client FROM users WHERE user_name="{}" """.format(
+                current_user)
+            cur.execute(sql)
+            self.theUser = cur.fetchone()
+            return self.theUser
+        except:
+            flash('Error retrieving the user from database', 'danger')
+
+    def edit_user_profile(self, user_first_name, user_last_name, user_email, user_name, user_password):
+        try:
+            conn = dbInstance.connectToDatabase()
+            cur = conn.cursor()
+            sql = """
+            UPDATE users SET user_first_name=%s, user_last_name=%s, user_email=%s, user_name=%s, user_password=%s WHERE user_name=%s
+            """
+            cur.execute(sql, [user_first_name, user_last_name, user_email,
+                              user_name, user_password, session['username']])
+            conn.commit()
+            flash('Profile Updated Successfully', 'success')
+        except:
+            flash('Error updating user profile', 'danger')
