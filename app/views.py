@@ -181,6 +181,12 @@ def add_ticket():
     theClients = ticketInstance.get_clients()
     theEngineers = ticketInstance.get_engineers()
     theWorkOrderTypes = ticketInstance.get_work_order_types()
+    users = usersInstance.users_who_can_receive_email()
+    recipients = [users]
+    body="""A ticket has just been opened and assigend to engineer {}, 
+the reason for this ticket is to address the issue of {}. You are receiving this notification because 
+your account with Zubacx call-center system is configured to receive these alerts.""".format(ticket_assigned_to,ticket_reason)
+    send_email_alerts('Ticket Opened',recipients,body)
     if g.username:
         return render_template('new_ticket.html',theWorkOrderTypes=theWorkOrderTypes, theEngineers=theEngineers, theClients=theClients,currentUser=LoggedInUser1)
     return render_template('index.html')
@@ -543,13 +549,20 @@ def add_user():
     else:
         can_add_delete_edit_workorder_value = 0
 
+    user_can_receive_email_alerts = request.form.get('can_receive_email_alerts')
+    if user_can_receive_email_alerts:
+        user_can_receive_email_alerts_value = 1
+    else:
+        user_can_receive_email_alerts_value = 0
+
     encryptedPassword = sha256_crypt.encrypt(str(userPassword))
     usersInstance.add_user(firstName,lastName,email,userAddress,userPhone,userName,encryptedPassword,
     can_add_user_value,can_delete_user_value,can_edit_user_value,can_edit_his_info_value,
     can_open_tickets_value,can_edit_tickets_value,can_delete_tickets_value,can_view_all_tickets_value,
     can_view_his_tickets_value,can_edit_his_tickets_value,can_view_his_tasks_value,can_view_all_tasks_value,
     can_view_his_reports_value,can_view_all_reports_value,can_add_delete_edit_client_value,
-    can_add_delete_edit_engineer_value,can_add_delete_edit_equipment_value,can_add_delete_edit_workorder_value)
+    can_add_delete_edit_engineer_value,can_add_delete_edit_equipment_value,can_add_delete_edit_workorder_value,
+    user_can_receive_email_alerts_value)
     theReturnedUsers = usersInstance.view_all_users()
     if g.username:
         return render_template('view_users.html', allTheUsers=theReturnedUsers,currentUser=LoggedInUser1)
@@ -782,13 +795,20 @@ def edit_user(user_id):
     else:
         can_add_delete_edit_workorder_value = 0
 
+    user_can_receive_email_alerts = request.form.get('can_receive_email_alerts_edit')
+    if user_can_receive_email_alerts:
+        user_can_receive_email_alerts_value = 1
+    else:
+        user_can_receive_email_alerts_value = 0
+
     encryptedPassword = sha256_crypt.encrypt(str(userPassword))
     usersInstance.edit_a_user(user_id,firstName, lastName,email,userPhone,userAddress,userName,encryptedPassword,
     can_add_user_value,can_delete_user_value,can_edit_user_value,can_edit_his_info_value,
     can_open_tickets_value,can_edit_tickets_value,can_delete_tickets_value,can_view_all_tickets_value,
     can_view_his_tickets_value,can_edit_his_tickets_value,can_view_his_tasks_value,can_view_all_tasks_value,
     can_view_his_reports_value,can_view_all_reports_value,can_add_delete_edit_client_value,
-    can_add_delete_edit_engineer_value,can_add_delete_edit_equipment_value,can_add_delete_edit_workorder_value)
+    can_add_delete_edit_engineer_value,can_add_delete_edit_equipment_value,can_add_delete_edit_workorder_value,
+    user_can_receive_email_alerts_value)
     theReturnedUsers = usersInstance.view_all_users()
     if g.username:
         return render_template('view_users.html', allTheUsers=theReturnedUsers,currentUser=LoggedInUser1)
@@ -1090,7 +1110,7 @@ def my_low_priority_and_overdue_tickets():
 def all_open_and_overdue_tickets():
     LoggedInUser = session['username']
     LoggedInUser1 = usersInstance.checkUserRights(LoggedInUser)
-    allTheTickets = ticketInstance.view_all_open_tickets(LoggedInUser)
+    allTheTickets = ticketInstance.view_all_open_tickets()
     if g.username:
         return render_template('open_tickets.html', 
         currentUser=LoggedInUser1, allTheTickets=allTheTickets)
@@ -1222,24 +1242,11 @@ def upload_equipments():
        return render_template('new_equipment.html',currentUser=LoggedInUser1)
    return redirect(url_for('index'))
 
-
-
-
-
-cron = Scheduler(daemon=True)
-# Explicitly kick off the background thread
-cron.start()
-
-@cron.interval_schedule(seconds=5)
-def job_function():
-    pass
-    # try:
-    #     msg = Message('The Subject', sender='nyekowalter69@gmail.com', recipients=['sandieo.2020@gmail.com'], body='Just testing')
-    #     mail.send(msg)
-    #     print("Message Sent Successfully")
-    # except Exception as e:
-    #     print(e)
-
-
-# Shutdown your cron thread if the web process is stopped
-atexit.register(lambda: cron.shutdown(wait=False))
+def send_email_alerts(subject,recipients,body):
+    with app.app_context():
+        pass
+        try:
+            msg = Message(subject=subject, sender='nyekowalter69@gmail.com', recipients=recipients, body=body)
+            mail.send(msg)
+        except Exception as e:
+            print(e)
