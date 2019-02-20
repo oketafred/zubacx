@@ -170,11 +170,7 @@ def add_ticket():
     theClients = ticketInstance.get_clients()
     theEngineers = ticketInstance.get_engineers()
     theWorkOrderTypes = ticketInstance.get_work_order_types()
-<<<<<<< HEAD
-    users = usersInstance.users_who_can_receive_email()
-=======
     users = usersInstance.users_who_can_receive_email(ticket_client)
->>>>>>> fix-email-alerts
     body="""A ticket has just been opened and assigend to engineer {}, 
 the reason for this ticket is to address the issue of {}. You are receiving this notification because 
 your account with Zubacx call-center system is configured to receive these alerts.""".format(ticket_assigned_to,ticket_reason)
@@ -1246,12 +1242,9 @@ def send_email_alerts(subject,recipients,body):
     with app.app_context():
         pass
         try:
-<<<<<<< HEAD
 
             msg = Message(subject=subject, sender='nyekowalter69@gmail.com', recipients=recipients, body=body)
-=======
-            msg = Message(subject=subject, sender='nyekowalter69@gmail.com', recipients=[recipients], body=body)
->>>>>>> fix-email-alerts
+
             print(recipients)
             mail.send(msg)
         except Exception as e:
