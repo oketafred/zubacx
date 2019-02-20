@@ -20,9 +20,8 @@ class DatabaseConnectivity:
 
     def connectToDatabase(self):
         try:
-            import MySQLdb
-            self.conn = MySQLdb.connect(
-                host='localhost', user='root', password='walter123@Andela!', db='tickets')
+            self.conn = pymysql.connect(
+                "localhost", "root", "walter123@Andela!", "tickets")
             print("Connected Successfully")
             return self.conn
 

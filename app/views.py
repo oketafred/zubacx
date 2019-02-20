@@ -1242,7 +1242,8 @@ def send_email_alerts(subject,recipients,body):
     with app.app_context():
         pass
         try:
-            msg = Message(subject=subject, sender='nyekowalter69@gmail.com', recipients=[recipients], body=body)
+            msg = Message(subject=subject, sender='nyekowalter69@gmail.com', recipients=recipients, body=body)
+
             print(recipients)
             mail.send(msg)
         except Exception as e:
