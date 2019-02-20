@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Zubacx | Our Tickets</title>
+    <title>Zubacx | Our Equipments</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
     <!-- Bootstrap 3.3.7 -->
@@ -66,7 +66,8 @@
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="{{ url_for('static',filename='dist/img/NCR.png') }}" class="user-image" alt="User Image" />
+                                <img src="{{ url_for('static',filename='dist/img/NCR.png') }}" class="user-image"
+                                    alt="User Image" />
                                 <span class="hidden-xs">{{ currentUser[3] }}</span>
                             </a>
                             <ul class="dropdown-menu">
@@ -347,87 +348,30 @@
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">
-                <h1><i class="fa fa-dashboard"></i> Dashboard</h1>
+                <h1><i class="fa fa-ticket"></i> Our Equipments</h1>
                 <ol class="breadcrumb">
                     <li>
                         <a href="#"><i class="fa fa-dashboard"></i> Home</a>
                     </li>
-                    <li class="active">Dashboard</li>
+                    <li class="active">Our Equipments</li>
                 </ol>
             </section>
 
             <!-- Main content -->
             <section class="content">
-                <div class="row">
-                    <div class="col-md-3 col-sm-6 col-xs-12">
-                        <div class="info-box">
-                            <span class="info-box-icon bg-aqua"><i class="fa fa-bank"></i></span>
 
-                            <div class="info-box-content">
-                                <span class="info-box-text">ATM Open Tasks</span>
-                                <span class="info-box-number">{{number_of_atm_open[0][0]}}</span>
-                            </div>
-                            <!-- /.info-box-content -->
-                        </div>
-                        <!-- /.info-box -->
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-md-3 col-sm-6 col-xs-12">
-                        <div class="info-box">
-                            <span class="info-box-icon bg-red"><i class="fa fa-phone-square"></i></span>
-
-                            <div class="info-box-content">
-                                <span class="info-box-text">Telecom Open Task</span>
-                                <span class="info-box-number">{{number_of_tel_open[0][0]}}</span>
-                            </div>
-                            <!-- /.info-box-content -->
-                        </div>
-                        <!-- /.info-box -->
-                    </div>
-                    <!-- /.col -->
-
-                    <!-- fix for small devices only -->
-                    <div class="clearfix visible-sm-block"></div>
-
-                    <div class="col-md-3 col-sm-6 col-xs-12">
-                        <div class="info-box">
-                            <span class="info-box-icon bg-green"><i class="fa fa-plane"></i></span>
-
-                            <div class="info-box-content">
-                                <span class="info-box-text">Airport Open Tasks</span>
-                                <span class="info-box-number">{{number_of_air_open[0][0]}}</span>
-                            </div>
-                            <!-- /.info-box-content -->
-                        </div>
-                        <!-- /.info-box -->
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-md-3 col-sm-6 col-xs-12">
-                        <div class="info-box">
-                            <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
-
-                            <div class="info-box-content">
-                                <span class="info-box-text">Fleet Open Tasks</span>
-                                <span class="info-box-number">{{number_of_fle_open[0][0]}}</span>
-                            </div>
-                            <!-- /.info-box-content -->
-                        </div>
-                        <!-- /.info-box -->
-                    </div>
-                    <!-- /.col -->
-                </div>
                 <div class="row">
                     <!-- /.col -->
                     <div class="col-md-12">
                         <div class="box box-primary">
                             <div class="box">
                                 <div class="box-header with-border">
-                                    <h3 class="box-title">Our Tickets</h3>
+                                    <h3 class="box-title">Our Equipments</h3>
 
                                     <div class="box-tools pull-right">
                                         <div class="has-feedback">
                                             <input id="myInputTextFieldForSearch" type="text" class="form-control input-sm"
-                                                placeholder="Search Tickets" />
+                                                placeholder="Search Equipments" />
                                             <span class="glyphicon glyphicon-search form-control-feedback"></span>
                                         </div>
                                     </div>
@@ -440,11 +384,11 @@
                                                 <tr>
                                                     <th>#</th>
                                                     <th></th>
-                                                    <th>Engineer's Name</th>
-                                                    <th>Ticket-Reason for Ticket</th>
-                                                    <th>Ticket Status</th>
-                                                    <th>Ticket Timestamp</th>
-                                                    <th>Ticket Type</th>
+                                                    <th>Equipment Category</th>
+                                                    <th>Equipment Supplier ~ Class</th>
+                                                    <th>Equipments Installation Address</th>
+                                                    <th>Equipment Model</th>
+                                                    <th>Equipment Type</th>
                                                     {% if currentUser[29] ==0:%}
                                                     <th></th>
                                                     {%else:%}
@@ -452,51 +396,31 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {% for eachTicket in allTheTickets %}
+                                                {% for eachEquipment in allTheEquipments %}
                                                 <tr>
                                                     <td></td>
                                                     <td class="mailbox-star">
                                                         <i class="fa fa-ticket text-yellow"></i>
                                                     </td>
-                                                    <td class="mailbox-name">{{ eachTicket[2] }}</td>
+                                                    <td class="mailbox-name">{{ eachEquipment[4] }}</td>
                                                     <td class="mailbox-subject">
-                                                        <b>{{ eachTicket[3] }}</b> - {{ eachTicket[1] }}
+                                                        <b>{{ eachEquipment[11] }}</b> ~ {{ eachEquipment[2] }}
                                                     </td>
-                                                    {% if "Closed" in eachTicket[5]:%}
-                                                    <td>
-                                                        <span class="label label-success">{{
-                                                            eachTicket[5]
-                                                            }}</span>
-                                                    </td>
-                                                    {% elif eachTicket[5] =="Pending":%}
                                                     <td>
                                                         <span class="label label-primary">{{
-                                                            eachTicket[5]
+                                                            eachEquipment[9]
                                                             }}</span>
                                                     </td>
-                                                    {% elif eachTicket[5] =="Open":%}
-                                                    <td>
-                                                        <span class="label label-warning">{{
-                                                            eachTicket[5]
-                                                            }}</span>
-                                                    </td>
-                                                    {% else:%}
-                                                    <td>
-                                                        <span class="label label-danger">{{
-                                                            eachTicket[5]
-                                                            }}</span>
-                                                    </td>
-                                                    {% endif%}
-                                                    <td class="mailbox-date">{{ eachTicket[4] }}</td>
+                                                    <td class="mailbox-date">{{ eachEquipment[3] }}</td>
                                                     <td>
                                                         <span class="mailbox-name">{{
-                                                            eachTicket[7]
+                                                            eachEquipment[5]
                                                             }}</span>
                                                     </td>
                                                     {% if currentUser[29] ==0:%}
                                                     {% if currentUser[14] ==1:%}
                                                     <td>
-                                                        <a href="/edit_the_ticket/{{eachTicket[0]}}" class="btn btn-primary btn-sm">
+                                                        <a href="#" class="btn btn-primary btn-sm">
                                                             View Details
                                                         </a>
                                                     </td>

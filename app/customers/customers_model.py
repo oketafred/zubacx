@@ -48,13 +48,13 @@ class Customers:
         except:
             flash('Error deleteing client from database', 'danger')
 
-    def edit_a_client(self, client_id, customer_name, customer_product, customer_address, customer_phone, customer_email):
+    def edit_a_client(self, client_id, customer_name, customer_product, customer_address, customer_phone, customer_email, customer_contact_person):
         try:
             conn = dbInstance.connectToDatabase()
             cur = conn.cursor()
-            sql = "UPDATE customers SET customer_name=%s, customer_product=%s,customer_address=%s,customer_phone=%s,customer_email=%s WHERE customer_id=%s"
+            sql = "UPDATE customers SET customer_name=%s, customer_product=%s,customer_address=%s,customer_phone=%s,customer_email=%s, customer_contact_person=%s WHERE customer_id=%s"
             cur.execute(sql, [customer_name, customer_product,
-                              customer_address, customer_phone, customer_email, client_id])
+                              customer_address, customer_phone, customer_email, customer_contact_person, client_id])
             conn.commit()
             flash('Client Edited Successfully', 'success')
         except:

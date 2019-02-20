@@ -40,12 +40,13 @@ jwt = JWTManager(app)
 
 app.config['JWT_ACCESS_TOKEN_EXPIRES'] = datetime.timedelta(days=1)
 
-
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USE_SSL'] = True
-app.config['MAIL_USERNAME'] = 'nyekowalter69@gmail.com'
-app.config['MAIL_PASSWORD'] = 'CATRINAH'
+app.config['MAIL_USERNAME'] = 'zubacx.alerts@gmail.com'
+app.config['MAIL_PASSWORD'] = 'password123alerts'
+
+mail = Mail(app)
 
 app.config['UPLOAD_FOLDER'] = '/Users/walternyeko/Desktop/Tests/uploads/'
 
@@ -58,6 +59,7 @@ def before_request():
 
 @app.route('/login')
 def index():
+    session.pop('username', None)
     return render_template('index.html')
 
 
@@ -171,10 +173,13 @@ def add_ticket():
     theEngineers = ticketInstance.get_engineers()
     theWorkOrderTypes = ticketInstance.get_work_order_types()
     users = usersInstance.users_who_can_receive_email(ticket_client)
-    body="""A ticket has just been opened and assigend to engineer {}, 
+    recipients = []
+    for email in users[0]:
+        recipients = email.split(',')
+    message="""A ticket has just been opened and assigend to engineer {}, 
 the reason for this ticket is to address the issue of {}. You are receiving this notification because 
 your account with Zubacx call-center system is configured to receive these alerts.""".format(ticket_assigned_to,ticket_reason)
-    send_email_alerts('Ticket Opened',str([users[0][0]]).replace('"',''),body)
+    send_email_alerts('Ticket Opened',recipients,body=message)
     if g.username:
         return render_template('new_ticket.html',theWorkOrderTypes=theWorkOrderTypes, theEngineers=theEngineers, theClients=theClients,currentUser=LoggedInUser1)
     return render_template('index.html')
@@ -252,6 +257,14 @@ def edit_ticket(ticket_id):
     ticket_action_taken,ticket_pending_reason,ticket_additional_note,ticket_site_id,ticket_closing_time,
     ticket_dispatch_time,ticket_arrival_time,ticket_start_time,ticket_complete_time,
     ticket_return_time,ticket_type_value,ticket_id)
+    if ticket_status == "Closed":
+        users = usersInstance.users_who_can_receive_email(ticket_client)
+        recipients = []
+        for email in users[0]:
+            recipients = email.split(',')
+        message="""The ticket regarding the issue of {} has just been closed by engineer {}. You are receiving this notification because 
+your account with Zubacx call-center system is configured to receive these alerts.""".format(ticket_reason,ticket_assigned_to)
+        send_email_alerts('Ticket Closed',recipients,body=message)
     theClients = ticketInstance.get_clients()
     theEngineers = ticketInstance.get_engineers()
     theWorkOrderTypes = ticketInstance.get_work_order_types()
@@ -664,8 +677,10 @@ def get_user_details_for_edit(user_id):
     LoggedInUser = session['username']
     LoggedInUser1 = usersInstance.checkUserRights(LoggedInUser)
     theReturnedUser = usersInstance.get_user_by_Id(user_id)
+    theClients = ticketInstance.get_clients()
     if g.username:
-        return render_template('edit_user.html', allTheUsers=theReturnedUser,currentUser=LoggedInUser1)
+        return render_template('edit_user.html', allTheUsers=theReturnedUser,
+        currentUser=LoggedInUser1,theClients=theClients)
     return redirect(url_for('index'))
 
 @app.route('/edit_user/<int:user_id>', methods=['POST'])
@@ -679,7 +694,13 @@ def edit_user(user_id):
     userAddress = request.form['user_address_edit']
     userPhone = request.form['user_phone_edit']
     userPassword = request.form['user_password_edit']
+    userClient = request.form['user_client_edit']
 
+    user_role = request.form.get('client_account_edit')
+    if user_role:
+        user_role_value = 1
+    else:
+        user_role_value = 0
 
     can_add_user = request.form.get('can_add_user_edit')
     if can_add_user:
@@ -804,7 +825,7 @@ def edit_user(user_id):
     can_view_his_tickets_value,can_edit_his_tickets_value,can_view_his_tasks_value,can_view_all_tasks_value,
     can_view_his_reports_value,can_view_all_reports_value,can_add_delete_edit_client_value,
     can_add_delete_edit_engineer_value,can_add_delete_edit_equipment_value,can_add_delete_edit_workorder_value,
-    user_can_receive_email_alerts_value)
+    user_can_receive_email_alerts_value,user_role_value, userClient)
     theReturnedUsers = usersInstance.view_all_users()
     if g.username:
         return render_template('view_users.html', allTheUsers=theReturnedUsers,currentUser=LoggedInUser1)
@@ -829,7 +850,7 @@ def add_work_order():
     ordersInstance.add_work_order(work_order_type)
     theReturnedOrders = ordersInstance.view_all_work_orders()
     if g.username:
-        return render_template('view_work_order.html', allTheOrders=theReturnedOrders,currentUser=LoggedInUser1)
+        return render_template('new_workorder.html', allTheOrders=theReturnedOrders,currentUser=LoggedInUser1)
     return redirect(url_for('index'))
 
 @app.route('/edit_the_work_order/<int:work_order_id>', methods=['POST'])
@@ -888,6 +909,17 @@ def all_work_orders_pending():
         return render_template('view_work_order.html', allTheOrders=theReturnedOrders,currentUser=LoggedInUser1)
     return redirect(url_for('index'))
 
+# OUR EQUIPMENTS
+
+@app.route('/all_equipments', methods=['GET'])
+def all_equipments():
+    LoggedInUser = session['username']
+    LoggedInUser1 = usersInstance.checkUserRights(LoggedInUser)
+    theReturnedEquipments = equipmentInstance.get_all_equipments()
+    if g.username:
+        return render_template('our_equipments.html', allTheEquipments=theReturnedEquipments,currentUser=LoggedInUser1)
+    return redirect(url_for('index'))
+
 # OUR CLIENTS
 
 @app.route('/all_clients', methods=['GET'])
@@ -937,12 +969,11 @@ def edit_client(client_id):
     clientPhone = request.form['customer_phone_edit']
     clientEmail = request.form['customer_email_edit']
     customer_contact_person = request.form['customer_contact_person_edit']
-    customer_contact_person_phone = request.form['customer_contact_person_phone_edit']
    
-    custInstance.edit_a_client(client_id,clientName, clientProduct,clientAddress,clientPhone,clientEmail,customer_contact_person,customer_contact_person_phone)
+    custInstance.edit_a_client(client_id,clientName, clientProduct,clientAddress,clientPhone,clientEmail,customer_contact_person)
     theReturnedClients = custInstance.get_all_clients()
     if g.username:
-        return render_template('view_clients.html', allTheClients=theReturnedClients,currentUser=LoggedInUser1)
+        return render_template('our_clients.html', allTheClients=theReturnedClients,currentUser=LoggedInUser1)
     return redirect(url_for('index'))
 # OUR ENGINEERS
 
@@ -1240,12 +1271,10 @@ def upload_equipments():
 
 def send_email_alerts(subject,recipients,body):
     with app.app_context():
-        pass
         try:
-            msg = Message(subject=subject, sender='nyekowalter69@gmail.com', recipients=recipients, body=body)
-
-            print(recipients)
-            mail.send(msg)
+            message = Message(subject=subject, sender=("Zubacx Call-Center", "zubacx.alerts@gmail.com"), recipients=recipients, body=body)
+            mail.send(message)
+            print("Message sent successfully")
         except Exception as e:
             print(e)
 

@@ -12,8 +12,8 @@ class DatabaseConnectivity:
     #         print("Connected Successfully")
     #         return self.conn
 
-    #     except:
-    #         print('Cannot connect to database')
+    #     except pymysql.Error as e:
+    #         print(e)
     #         return jsonify({'Message': 'Cannot connect to database'})
 
     # Using MySQLdb from the server

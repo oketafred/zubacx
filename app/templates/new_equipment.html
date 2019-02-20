@@ -61,13 +61,13 @@
             <!-- User Account: style can be found in dropdown.less -->
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <img src="{{ url_for('static',filename='dist/img/user2-160x160.jpg') }}" class="user-image" alt="User Image" />
+                <img src="{{ url_for('static',filename='dist/img/NCR.png') }}" class="user-image" alt="User Image" />
                 <span class="hidden-xs">{{ currentUser[3] }}</span>
               </a>
               <ul class="dropdown-menu">
                 <!-- User image -->
                 <li class="user-header">
-                  <img src="{{ url_for('static',filename='dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image" />
+                  <img src="{{ url_for('static',filename='dist/img/NCR.png') }}" class="img-circle" alt="User Image" />
 
                   <p>
                     {{ currentUser[3] }} - ({{ currentUser[1] }}
@@ -80,7 +80,7 @@
                     <a href="/profile" class="btn bg-purple btn-flat">Profile</a>
                   </div>
                   <div class="pull-right">
-                    <a href="#" class="btn bg-maroon btn-flat">Sign out</a>
+                    <a href="/login" class="btn bg-maroon btn-flat">Sign out</a>
                   </div>
                 </li>
               </ul>
@@ -96,233 +96,249 @@
     <aside class="main-sidebar">
       <!-- sidebar: style can be found in sidebar.less -->
       <section class="sidebar">
-        <!-- Sidebar user panel -->
-        <div class="user-panel">
-          <div class="pull-left image">
-            <img src="{{ url_for('static',filename='dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image" />
+          <!-- Sidebar user panel -->
+          <div class="user-panel">
+              <div class="pull-left image">
+                  <img src="{{ url_for('static',filename='dist/img/NCR.png') }}" class="img-circle" alt="User Image" />
+              </div>
+              <div class="pull-left info">
+                  <p>{{ currentUser[3] }}</p>
+                  <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+              </div>
           </div>
-          <div class="pull-left info">
-            <p>{{ currentUser[3] }}</p>
-            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-          </div>
-        </div>
 
-        <!-- sidebar menu: : style can be found in sidebar.less -->
-        <ul class="sidebar-menu" data-widget="tree">
-          <li class="active">
-            <a href="{{ url_for('dashboard') }}">
-              <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-            </a>
-          </li>
-          {% if currentUser[29] ==0:%}
-          <li class="treeview">
-            <a href="#">
-              <i class="fa fa-hacker-news"></i> <span>New</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-                <small class="label pull-right bg-green">new</small>
-              </span>
-            </a>
-            <ul class="treeview-menu">
-              {% if currentUser[9] ==0:%} {% else:%}
-              <li>
-                <a href="{{ url_for('new_users') }}"><i class="fa fa-circle-o"></i> Add New User</a>
+          <!-- sidebar menu: : style can be found in sidebar.less -->
+          <ul class="sidebar-menu" data-widget="tree">
+              <li class="active">
+                  <a href="{{ url_for('dashboard') }}">
+                      <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                  </a>
               </li>
-              {%endif%} {% if currentUser[13] ==0:%} {% else:%}
-              <li>
-                <a href="{{ url_for('new_ticket') }}"><i class="fa fa-circle-o"></i> Add New Ticket</a>
+              {% if currentUser[29] ==0:%}
+              <li class="treeview">
+                  <a href="#">
+                      <i class="fa fa-hacker-news"></i> <span>New</span>
+                      <span class="pull-right-container">
+                          <i class="fa fa-angle-left pull-right"></i>
+                          <small class="label pull-right bg-green">new</small>
+                      </span>
+                  </a>
+                  <ul class="treeview-menu">
+                      {% if currentUser[9] ==0:%} {% else:%}
+                      <li>
+                          <a href="{{ url_for('new_users') }}"><i class="fa fa-circle-o"></i> Add New User</a>
+                      </li>
+                      {%endif%} {% if currentUser[13] ==0:%} {% else:%}
+                      <li>
+                          <a href="{{ url_for('new_ticket') }}"><i class="fa fa-circle-o"></i> Add New Ticket</a>
+                      </li>
+                      {%endif%} {% if currentUser[23] ==0:%} {% else:%}
+                      <li>
+                          <a href="{{ url_for('new_customer') }}"><i class="fa fa-circle-o"></i> Add New Customer</a>
+                      </li>
+                      {%endif%} {% if currentUser[24] ==0:%} {% else:%}
+                      <li>
+                          <a href="{{ url_for('new_engineer') }}"><i class="fa fa-circle-o"></i> Add New Engineer</a>
+                      </li>
+                      {%endif%} {% if currentUser[25] ==0:%} {% else:%}
+                      <li>
+                          <a href="{{ url_for('new_equipment') }}"><i class="fa fa-circle-o"></i> Add New
+                              Equipment</a>
+                      </li>
+                      {%endif%} {% if currentUser[26] ==0:%} {% else:%}
+                      <li>
+                          <a href="{{ url_for('new_workorder') }}"><i class="fa fa-circle-o"></i> Add New Work
+                              Order</a>
+                      </li>
+                      {%endif%}
+                  </ul>
               </li>
-              {%endif%} {% if currentUser[23] ==0:%} {% else:%}
-              <li>
-                <a href="{{ url_for('new_customer') }}"><i class="fa fa-circle-o"></i> Add New Customer</a>
+              {% else:%}
+              {%endif%}
+              {% if currentUser[29] == 0:%}
+              <li class="treeview">
+                  <a href="#">
+                      <i class="fa fa-street-view"></i> <span>Views</span>
+                      <span class="pull-right-container">
+                          <i class="fa fa-angle-left pull-right"></i>
+                          <small class="label pull-right bg-primary">views</small>
+                      </span>
+                  </a>
+                  <ul class="treeview-menu">
+                      {% if currentUser[16] ==1:%}
+                      <li>
+                          <a href="/view_all_tickets"><i class="fa fa-circle-o"></i> All Tickets</a>
+                      </li>
+                      <li>
+                          <a href="/open_and_overdue_tickets"><i class="fa fa-circle-o"></i> Open Tickets</a>
+                      </li>
+                      <li>
+                          <a href="/closed_and_overdue_tickets"><i class="fa fa-circle-o"></i> Closed Tickets</a>
+                      </li>
+                      <li>
+                          <a href="/low_priority_and_overdue_tickets"><i class="fa fa-circle-o"></i> Overdue
+                              Tickets</a>
+                      </li>
+                      <li>
+                          <a href="/all_my_open_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Tickets</a>
+                      </li>
+                      <li>
+                          <a href="/my_open_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Open Tickets</a>
+                      </li>
+                      <li>
+                          <a href="/my_closed_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Closed
+                              Tickets</a>
+                      </li>
+                      <li>
+                          <a href="/my_low_priority_and_overdue_tickets"><i class="fa fa-circle-o"></i> My
+                              Overdue Tickets</a>
+                      </li>
+                      {% else:%} {% if currentUser[13] ==1:%}
+                      <li>
+                          <a href="/all_my_open_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Tickets</a>
+                      </li>
+                      <li>
+                          <a href="/my_open_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Open Tickets</a>
+                      </li>
+                      <li>
+                          <a href="/my_closed_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Closed
+                              Tickets</a>
+                      </li>
+                      <li>
+                          <a href="/my_low_priority_and_overdue_tickets"><i class="fa fa-circle-o"></i> My
+                              Overdue Tickets</a>
+                      </li>
+                      {% else:%} {%endif%} {%endif%}
+                  </ul>
               </li>
-              {%endif%} {% if currentUser[24] ==0:%} {% else:%}
-              <li>
-                <a href="{{ url_for('new_engineer') }}"><i class="fa fa-circle-o"></i> Add New Engineer</a>
-              </li>
-              {%endif%} {% if currentUser[25] ==0:%} {% else:%}
-              <li>
-                <a href="{{ url_for('new_equipment') }}"><i class="fa fa-circle-o"></i> Add New Equipment</a>
-              </li>
-              {%endif%} {% if currentUser[26] ==0:%} {% else:%}
-              <li>
-                <a href="{{ url_for('new_workorder') }}"><i class="fa fa-circle-o"></i> Add New Work Order</a>
+              {%else:%}
+              <li class="treeview">
+                  <a href="#">
+                      <i class="fa fa-street-view"></i> <span>Views</span>
+                      <span class="pull-right-container">
+                          <i class="fa fa-angle-left pull-right"></i>
+                          <small class="label pull-right bg-primary">views</small>
+                      </span>
+                  </a>
+                  <ul class="treeview-menu">
+                      <li>
+                          <a href="/view_all_tickets"><i class="fa fa-circle-o"></i> My Tickets</a>
+                      </li>
+                      <li>
+                          <a href="/open_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Open Tickets</a>
+                      </li>
+                      <li>
+                          <a href="/closed_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Closed Tickets</a>
+                      </li>
+                      <li>
+                          <a href="/low_priority_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Overdue
+                              Tickets</a>
+                      </li>
+                  </ul>
               </li>
               {%endif%}
-            </ul>
-          </li>
-          {% else:%}
-          {%endif%}
-          {% if currentUser[29] == 0:%}
-          <li class="treeview">
-            <a href="#">
-              <i class="fa fa-street-view"></i> <span>Views</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-                <small class="label pull-right bg-primary">views</small>
-              </span>
-            </a>
-            <ul class="treeview-menu">
-              {% if currentUser[16] ==1:%}
-              <li>
-                <a href="/view_all_tickets"><i class="fa fa-circle-o"></i> All Tickets</a>
+              <li class="">
+                  <a href="{{ url_for('view_all_tickets') }}">
+                      <i class="fa fa-ticket"></i> <span>Tickets</span>
+                  </a>
               </li>
-              <li>
-                <a href="/open_and_overdue_tickets"><i class="fa fa-circle-o"></i> Open Tickets</a>
+              {% if currentUser[23] ==0:%}
+              {% if currentUser[29] ==0:%}
+              <li class="">
+                  <a href="/robot">
+                      <i class="fa fa-user-o"></i> <span>Customers</span>
+                  </a>
               </li>
-              <li>
-                <a href="/closed_and_overdue_tickets"><i class="fa fa-circle-o"></i> Closed Tickets</a>
-              </li>
-              <li>
-                <a href="/low_priority_and_overdue_tickets"><i class="fa fa-circle-o"></i> Overdue Tickets</a>
-              </li>
-              <li>
-                <a href="/all_my_open_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Tickets</a>
-              </li>
-              <li>
-                <a href="/my_open_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Open Tickets</a>
-              </li>
-              <li>
-                <a href="/my_closed_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Closed Tickets</a>
-              </li>
-              <li>
-                <a href="/my_low_priority_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Overdue Tickets</a>
-              </li>
-              {% else:%} {% if currentUser[13] ==1:%}
-              <li>
-                <a href="/all_my_open_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Tickets</a>
-              </li>
-              <li>
-                <a href="/my_open_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Open Tickets</a>
-              </li>
-              <li>
-                <a href="/my_closed_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Closed Tickets</a>
-              </li>
-              <li>
-                <a href="/my_low_priority_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Overdue Tickets</a>
-              </li>
-              {% else:%} {%endif%} {%endif%}
-            </ul>
-          </li>
-          {%else:%}
-          <li class="treeview">
-            <a href="#">
-              <i class="fa fa-street-view"></i> <span>Views</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-                <small class="label pull-right bg-primary">views</small>
-              </span>
-            </a>
-            <ul class="treeview-menu">
-              <li>
-                <a href="/view_all_tickets"><i class="fa fa-circle-o"></i> My Tickets</a>
-              </li>
-              <li>
-                <a href="/open_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Open Tickets</a>
-              </li>
-              <li>
-                <a href="/closed_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Closed Tickets</a>
-              </li>
-              <li>
-                <a href="/low_priority_and_overdue_tickets"><i class="fa fa-circle-o"></i> My Overdue Tickets</a>
-              </li>
-            </ul>
-          </li>
-          {%endif%}
-          <li class="">
-            <a href="{{ url_for('view_all_tickets') }}">
-              <i class="fa fa-ticket"></i> <span>Tickets</span>
-            </a>
-          </li>
-          {% if currentUser[23] ==0:%}
-          {% if currentUser[29] ==0:%}
-          <li class="">
-            <a href="/robot">
-              <i class="fa fa-user-o"></i> <span>Customers</span>
-            </a>
-          </li>
-          {% else:%}
-          {%endif%}
+              {% else:%}
+              {%endif%}
 
-          {% else:%}
-          {% if currentUser[29] ==0:%}
-          <li class="">
-            <a href="/all_clients">
-              <i class="fa fa-user-o"></i> <span>Customers</span>
-            </a>
-          </li>
-          <li class="">
-            <a href="/all_engineers">
-              <i class="fa fa-user-o"></i> <span>Engineers</span>
-            </a>
-          </li>
-          <li class="">
-            <a href="/all_users">
-              <i class="fa fa-user-o"></i> <span>System Users</span>
-            </a>
-          </li>
-          {% else:%}
-          {%endif%}
-          {% endif%}
-          <li class="">
-            <a href="/tasks">
-              <i class="fa fa-tasks"></i> <span>Tasks</span>
-            </a>
-          </li>
-          {% if currentUser[29] == 0:%}
-          <li class="">
-            <a href="/reports">
-              <i class="fa fa-file-pdf-o"></i> <span>Reports</span>
-            </a>
-          </li>
-          {%else:%}
-          {%endif%}
+              {% else:%}
+              {% if currentUser[29] ==0:%}
+              <li class="">
+                  <a href="/all_clients">
+                      <i class="fa fa-user-o"></i> <span>Customers</span>
+                  </a>
+              </li>
+              <li class="">
+                  <a href="/all_engineers">
+                      <i class="fa fa-user-o"></i> <span>Engineers</span>
+                  </a>
+              </li>
+              <li class="">
+                  <a href="/all_equipments">
+                      <i class="fa fa-ticket"></i> <span>Equipments</span>
+                  </a>
+              </li>
+              <li class="">
+                  <a href="/all_users">
+                      <i class="fa fa-user-o"></i> <span>System Users</span>
+                  </a>
+              </li>
+              {% else:%}
+              {%endif%}
+              {% endif%}
+              <li class="">
+                  <a href="/tasks">
+                      <i class="fa fa-tasks"></i> <span>Tasks</span>
+                  </a>
+              </li>
+              {% if currentUser[29] == 0:%}
+              <li class="">
+                  <a href="/reports">
+                      <i class="fa fa-file-pdf-o"></i> <span>Reports</span>
+                  </a>
+              </li>
+              {%else:%}
+              {%endif%}
 
 
-          {% if currentUser[13] ==0:%}
-          <li class="">
-            <a href="/robot">
-              <i class="fa fa-ticket"></i> <span>Open Tickets</span>
-            </a>
-          </li>
-          {% else:%}
-          {% if currentUser[29] ==0:%}
-          <li class="">
-            <a href="{{ url_for('new_ticket') }}">
-              <i class="fa fa-ticket"></i> <span>Open Tickets</span>
-            </a>
-          </li>
-          {% else:%}
-          {%endif%}
-          {% endif%}
-          <li>
-            <a href="pages/calendar.html">
-              <i class="fa fa-calendar"></i> <span>Calendar</span>
-              <span class="pull-right-container">
-                <small class="label pull-right bg-red">3</small>
-                <small class="label pull-right bg-blue">17</small>
-              </span>
-            </a>
-          </li>
-          <li style="height:80px">
-            <a>
-              <span class="pull-right-container">
-                <small style="width:60px" class="label pull-right bg-yellow">
-                  <h1 id="s">12</h1>
-                </small>
-                <small style="width:60px" class="label pull-right bg-green">
-                  <h1 id="m">34</h1>
-                </small>
-                <small style="width:60px" class="label pull-right bg-red">
-                  <h1 id="h">23</h1>
-                </small>
-              </span>
-            </a>
-          </li>
-        </ul>
+              {% if currentUser[13] ==0:%}
+              {% if currentUser[29] ==0:%}
+              <li class="">
+                  <a href="/robot">
+                      <i class="fa fa-ticket"></i> <span>Open Tickets</span>
+                  </a>
+              </li>
+              {% else:%}
+              {%endif%}
+              {% else:%}
+              {% if currentUser[29] ==0:%}
+              <li class="">
+                  <a href="{{ url_for('new_ticket') }}">
+                      <i class="fa fa-ticket"></i> <span>Open Tickets</span>
+                  </a>
+              </li>
+              {% else:%}
+              {%endif%}
+              {% endif%}
+              <li>
+                  <a href="#">
+                      <i class="fa fa-calendar"></i> <span>Calendar</span>
+                      <span class="pull-right-container">
+                          <small class="label pull-right bg-red">3</small>
+                          <small class="label pull-right bg-blue">17</small>
+                      </span>
+                  </a>
+              </li>
+              <li style="height:80px">
+                  <a>
+                      <span class="pull-right-container">
+                          <small style="width:60px" class="label pull-right bg-yellow">
+                              <h1 id="s">12</h1>
+                          </small>
+                          <small style="width:60px" class="label pull-right bg-green">
+                              <h1 id="m">34</h1>
+                          </small>
+                          <small style="width:60px" class="label pull-right bg-red">
+                              <h1 id="h">23</h1>
+                          </small>
+                      </span>
+                  </a>
+              </li>
+          </ul>
       </section>
       <!-- /.sidebar -->
-    </aside>
+  </aside>
     <!-- =============================================== -->
 
     <!-- Content Wrapper. Contains page content -->
@@ -353,13 +369,13 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="EquipmentSerialNumber">Equipment Serial Number</label>
-                      <input type="text" required name="equipment_serial" class="form-control" placeholder="Equipment Serial Number" />
+                      <input type="text"  name="equipment_serial" class="form-control" placeholder="Equipment Serial Number" />
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="EquipmentID">Equipment ID</label>
-                      <input type="text" required name="equipment_serial_id" class="form-control" placeholder="Equipment ID" />
+                      <input type="text"  name="equipment_serial_id" class="form-control" placeholder="Equipment ID" />
                     </div>
                   </div>
                 </div>
@@ -367,13 +383,13 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="EquipmentClass">Equipment Class</label>
-                      <input type="text" required name="equipment_class" class="form-control" placeholder="Equipment Class" />
+                      <input type="text"  name="equipment_class" class="form-control" placeholder="Equipment Class" />
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="EquipmentModel">Equipment Model</label>
-                      <input type="text" required name="equipment_model" class="form-control" placeholder="Equipment Model" />
+                      <input type="text"  name="equipment_model" class="form-control" placeholder="Equipment Model" />
                     </div>
                   </div>
                 </div>
@@ -381,13 +397,13 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="EquipmentCategory">Equipment Category</label>
-                      <input type="text" required name="equipment_category" class="form-control" placeholder="Equipment Category" />
+                      <input type="text"  name="equipment_category" class="form-control" placeholder="Equipment Category" />
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="EquipmentType">Equipment Type</label>
-                      <input type="text" required name="equipment_type" class="form-control" placeholder="Equipment Type" />
+                      <input type="text"  name="equipment_type" class="form-control" placeholder="Equipment Type" />
                     </div>
                   </div>
                 </div>
@@ -395,13 +411,13 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="EquipmentResolution">Equipment Resolution</label>
-                      <input type="text" required name="equipment_resolution" class="form-control" placeholder="Equipment Resolution" />
+                      <input type="text"  name="equipment_resolution" class="form-control" placeholder="Equipment Resolution" />
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="EquipmentResponse">Equipment Response</label>
-                      <input type="text" required name="equipment_response" class="form-control" placeholder="Equipment Response" />
+                      <input type="text"  name="equipment_response" class="form-control" placeholder="Equipment Response" />
                     </div>
                   </div>
                 </div>
@@ -413,7 +429,7 @@
                         <div class="input-group-addon">
                           <i class="fa fa-calendar"></i>
                         </div>
-                        <input type="text" required name="equipment_installation_date" class="form-control pull-right"
+                        <input type="text"  name="equipment_installation_date" class="form-control pull-right"
                           id="datepicker" />
                       </div>
                     </div>
@@ -421,7 +437,7 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="EquipmentInstallationAddress">Equipment Installation Address</label>
-                      <input type="text" required name="equipment_installation_address" class="form-control"
+                      <input type="text"  name="equipment_installation_address" class="form-control"
                         placeholder="Equipment Installation Address" />
                     </div>
                   </div>
@@ -430,13 +446,13 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="EquipmentInstallationCity">Equipment Installation City</label>
-                      <input type="text" required name="equipment_installation_city" class="form-control" placeholder="Equipment Installation City" />
+                      <input type="text"  name="equipment_installation_city" class="form-control" placeholder="Equipment Installation City" />
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="EquipmentSupplier">Equipment Supplier</label>
-                      <input type="text" required name="equipment_supplier" class="form-control" placeholder="Equipment Supplier" />
+                      <input type="text"  name="equipment_supplier" class="form-control" placeholder="Equipment Supplier" />
                     </div>
                   </div>
                 </div>

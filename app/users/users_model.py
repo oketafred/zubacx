@@ -55,8 +55,8 @@ class Users:
         try:
             conn = dbInstance.connectToDatabase()
             cur = conn.cursor()
-            sql = """SELECT GROUP_CONCAT(CONCAT('''', user_email, '''' )) FROM users WHERE user_can_receive_email_alerts=1 
-            AND (user_roles=0 OR user_client="{}" """.format(user_client)
+            sql = """SELECT GROUP_CONCAT(user_email) FROM users WHERE user_can_receive_email_alerts=1 
+            AND (user_roles=0 OR user_client="{}") """.format(user_client)
             cur.execute(sql)
             self.theUsers = cur.fetchall()
             return self.theUsers
