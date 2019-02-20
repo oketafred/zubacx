@@ -21,7 +21,6 @@ from flask_mail import Mail, Message
 from flask_cors import CORS, cross_origin
 from app.equipments.equipments_model import Equipments
 from werkzeug import secure_filename
-
 dbInstance = DatabaseConnectivity()
 usersInstance = Users()
 custInstance = Customers()
@@ -48,16 +47,7 @@ app.config['MAIL_USE_SSL'] = True
 app.config['MAIL_USERNAME'] = 'nyekowalter69@gmail.com'
 app.config['MAIL_PASSWORD'] = 'CATRINAH'
 
-mail = Mail(app)
-
 app.config['UPLOAD_FOLDER'] = '/Users/walternyeko/Desktop/Tests/uploads/'
-
-# @jwt.unauthorized_loader
-# def unauthorized_response(callback):
-#     return jsonify({
-#         'Message': 'Missing Authorization Header'
-#     }), 401
-
 
 @app.before_request
 def before_request():
@@ -89,7 +79,6 @@ def login():
         if sha256_crypt.verify(password_candidate, password):
             session['username'] = username
             LoggedInUser1 = usersInstance.checkUserRights(username)
-            print(LoggedInUser1)
             allTheTickets = ticketInstance.view_all_tickets()
             myTickets = ticketInstance.view_all_my_tickets(username)
             number_of_atm_open = ticketInstance.number_of_open_atm()
@@ -181,7 +170,11 @@ def add_ticket():
     theClients = ticketInstance.get_clients()
     theEngineers = ticketInstance.get_engineers()
     theWorkOrderTypes = ticketInstance.get_work_order_types()
+<<<<<<< HEAD
     users = usersInstance.users_who_can_receive_email()
+=======
+    users = usersInstance.users_who_can_receive_email(ticket_client)
+>>>>>>> fix-email-alerts
     body="""A ticket has just been opened and assigend to engineer {}, 
 the reason for this ticket is to address the issue of {}. You are receiving this notification because 
 your account with Zubacx call-center system is configured to receive these alerts.""".format(ticket_assigned_to,ticket_reason)
@@ -303,7 +296,7 @@ def dashboard():
     LoggedInUser = session['username']
     LoggedInUser1 = usersInstance.checkUserRights(LoggedInUser)
     allTheTickets = ticketInstance.view_all_tickets()
-    myTickets = ticketInstance.view_all_tickets()
+    myTickets = ticketInstance.view_all_my_tickets(LoggedInUser)
     number_of_atm_open = ticketInstance.number_of_open_atm()
     number_of_air_open = ticketInstance.number_of_open_air()
     number_of_tel_open = ticketInstance.number_of_open_tel()
@@ -399,9 +392,10 @@ def new_customer():
 def new_users():
     LoggedInUser = session['username']
     LoggedInUser1 = usersInstance.checkUserRights(LoggedInUser)
+    theClients = custInstance.get_all_clients()
     theReturnedUser = usersInstance.get_no_user()
     if g.username:
-        return render_template('new_users.html', allTheUsers=theReturnedUser,currentUser=LoggedInUser1)
+        return render_template('new_users.html', allTheUsers=theReturnedUser,currentUser=LoggedInUser1, theClients=theClients)
     return redirect(url_for('index'))
 @app.route('/engineer')
 def new_engineer():
@@ -438,11 +432,19 @@ def add_user():
     userAddress = request.form['user_physical_address']
     userPhone = request.form['user_phone']
     userPassword = request.form['user_password']
+    user_client = request.form.get('user_client')
+
     can_add_user = request.form.get('can_add_user')
     if can_add_user:
         can_add_user_value = 1
     else:
         can_add_user_value = 0
+
+    client_account = request.form.get('client_account')
+    if client_account:
+        client_account_value = 1
+    else:
+        client_account_value = 0
 
     can_delete_user = request.form.get('can_delete_user')
     if can_delete_user:
@@ -561,7 +563,7 @@ def add_user():
     can_view_his_tickets_value,can_edit_his_tickets_value,can_view_his_tasks_value,can_view_all_tasks_value,
     can_view_his_reports_value,can_view_all_reports_value,can_add_delete_edit_client_value,
     can_add_delete_edit_engineer_value,can_add_delete_edit_equipment_value,can_add_delete_edit_workorder_value,
-    user_can_receive_email_alerts_value)
+    user_can_receive_email_alerts_value,client_account_value,user_client)
     theReturnedUsers = usersInstance.view_all_users()
     if g.username:
         return render_template('view_users.html', allTheUsers=theReturnedUsers,currentUser=LoggedInUser1)
@@ -577,9 +579,8 @@ def add_client():
     customer_address = request.form['customer_address']
     customer_product = request.form['customer_product']
     customer_contact_person = request.form['customer_contact_person']
-    customer_contact_person_phone = request.form['customer_contact_person_phone']
     custInstance.add_client(customer_name,customer_phone,customer_email,
-    customer_address,customer_product,customer_contact_person,customer_contact_person_phone)
+    customer_address,customer_product,customer_contact_person)
     if g.username:
         return render_template('new_customer.html',currentUser=LoggedInUser1)
     return redirect(url_for('index'))
@@ -1245,9 +1246,30 @@ def send_email_alerts(subject,recipients,body):
     with app.app_context():
         pass
         try:
+<<<<<<< HEAD
 
             msg = Message(subject=subject, sender='nyekowalter69@gmail.com', recipients=recipients, body=body)
+=======
+            msg = Message(subject=subject, sender='nyekowalter69@gmail.com', recipients=[recipients], body=body)
+>>>>>>> fix-email-alerts
             print(recipients)
             mail.send(msg)
         except Exception as e:
             print(e)
+
+@app.route('/user/profile', methods=['POST'])
+def update_user_profile():
+    LoggedInUser = session['username']
+    LoggedInUser1 = usersInstance.checkUserRights(LoggedInUser)
+    user_first_name = request.form['user_first_name_profile']
+    user_last_name = request.form['user_last_name_profile']
+    user_email = request.form['user_email_profile']
+    user_name = request.form['user_name_profile']
+    user_password = request.form['user_password_profile']
+    encryptedPassword =  sha256_crypt.encrypt(str(user_password))
+    usersInstance.edit_user_profile(user_first_name,user_last_name,user_email,
+    user_name,encryptedPassword)
+    if g.username:
+        return render_template('profile.html',currentUser=LoggedInUser1)
+    return redirect(url_for('index'))
+    

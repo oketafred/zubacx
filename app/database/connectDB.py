@@ -1,14 +1,14 @@
 import psycopg2
 from flask import jsonify
+import pymysql
 
 
 class DatabaseConnectivity:
     # Using MySQL Database
     def connectToDatabase(self):
         try:
-            import MySQLdb
-            self.conn = MySQLdb.connect(
-                host='localhost', user='root', password='walter123@Andela!', db='tickets')
+            self.conn = pymysql.connect(
+                "localhost", "root", "walter123@Andela!", "tickets")
             print("Connected Successfully")
             return self.conn
 
@@ -59,7 +59,7 @@ class DatabaseConnectivity:
             user_can_view_all_reports smallint DEFAULT 0,user_can_view_his_reports smallint DEFAULT 0,
             user_can_add_delete_edit_client_info smallint DEFAULT 0,user_can_add_delete_edit_engineer_info smallint DEFAULT 0,
             user_can_add_delete_edit_equipment_info smallint DEFAULT 0,user_can_add_delete_edit_workorder_info smallint DEFAULT 0,
-            user_photo BYTEA)
+            user_photo LONGBLOB)
             """
         )
         self.conn = self.connectToDatabase()

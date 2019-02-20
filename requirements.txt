@@ -8,6 +8,7 @@ Flask-Cors==3.0.6
 Flask-JWT-Extended==3.13.1
 Flask-Login==0.4.1
 Flask-Mail==0.9.1
+Flask-MySQL==1.4.0
 gunicorn==19.9.0
 itsdangerous==0.24
 Jinja2==2.10
@@ -16,6 +17,7 @@ passlib==1.7.1
 psycopg2==2.7.5
 psycopg2-binary==2.7.5
 PyJWT==1.6.4
+PyMySQL==0.9.3
 python-dateutil==2.7.3
 pytz==2018.5
 six==1.11.0
